@@ -12,10 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 85c418a8-6177-4833-bb8d-ff4ce2233c1a
-ms.openlocfilehash: f5a88012b21e814262436a864b13f053d836cf07
-ms.sourcegitcommit: bcf93ad8ed8802072249cd8187cd4420da89b4c6
+ms.openlocfilehash: 0f8e494ffdd73c666b8361488db0966af01d6876
+ms.sourcegitcommit: 66d997a5afcf32143a4d4817ec1608cbdf58a59f
 ms.translationtype: HT
 ms.contentlocale: sv-SE
+ms.lasthandoff: 05/11/2017
 ---
 # <a name="get-started-with-azure-cli-20"></a>Kom igång med Azure CLI 2.0
 
@@ -45,7 +46,7 @@ Nu när du har installerat Azure CLI 2.0 är nästa steg att ansluta det säkert
 
 1. Kör följande kommando från kommandoraden.
 
-   ```azurecli
+   ```azurecli-interactive
    az login
    ```
    
@@ -65,7 +66,7 @@ Skapa först en resursgrupp.  Resursgrupper i Azure ger ett sätt att hantera fl
 
 Vi ska skapa en resursgrupp med namnet "MyResourceGroup" i regionen *westus2* för Azure.  Ange följande kommando:
 
-```azurecli
+```azurecli-interactive
 az group create -n MyResourceGroup -l westus2 
 ```
 
@@ -90,13 +91,13 @@ Nu när vi har en resursgrupp kan vi skapa en virtuell Linux-dator i den.
 
 Du kan skapa en virtuell Linux-dator med den populära UbuntuTLS-avbildningen med två anslutna lagringsdiskar på 10 och 20 GB med följande kommando:
 
-```azurecli
+```azurecli-interactive
 az vm create -n MyLinuxVM -g MyResourceGroup --image UbuntuLTS --data-disk-sizes-gb 10 20
 ```
 
 När du kör föregående kommando letar Azure CLI 2.0 efter ett SSH-nyckelpar som är lagrat under katalogen ~/.ssh.  Om du inte redan har ett SSH-nyckelpar lagrat där kan du be att Azure CLI automatiskt skapar en åt dig genom att skicka parametern --generate-ssh-keys:
 
-```azurecli
+```azurecli-interactive
 az vm create -n MyLinuxVM -g MyResourceGroup --image UbuntuLTS --generate-ssh-keys
 ```
 
@@ -117,7 +118,7 @@ Kommandot `az vm create` ger resultat när den virtuella datorn har skapats fär
 
 Nu när den virtuella datorn har skapats kan du logga in på den nya virtuella Linux-datorn med hjälp av **SSH** med den offentliga IP-adressen för den virtuella dator du skapade:
 
-```azurecli
+```azurecli-interactive
 ssh xx.xxx.xxx.xxx
 ```
 
@@ -161,7 +162,7 @@ Azure kräver att du undviker att använda användarnamn/lösenord som är lätt
 > [!NOTE]
 > Du ombeds ange ditt användarnamn och lösenord när du kör det här kommandot.
 
-```azurecli
+```azurecli-interactive
 az vm create -n MyWinVM -g MyResourceGroup --image Win2016Datacenter
 ```
 
@@ -183,7 +184,7 @@ Kommandot `az vm create` ger resultat när den virtuella datorn har skapats fär
 Logga nu in på den virtuella Windows Server-dator som har skapats med hjälp av Fjärrskrivbord och den virtuella datorns offentliga IP-adress (som returneras i resultatet från `az vm create`).  
 Om du använder ett Windows-baserat system kan du göra detta från kommandoraden med `mstsc`-kommandot:
 
-```azurecli
+```azurecli-interactive
 mstsc /v:xx.xxx.xx.xxx
 ```
 
@@ -195,13 +196,13 @@ Vi har nu gått igenom hur du skapar en resursgrupp, en virtuell Linux-dator och
 
 Alla nya resurser skapas med ett konsekvent `az <resource type name> create`-namngivningsmönster.  Om du till exempel vill skapa en belastningsutjämnare för Azure-nätverk som vi sedan kan koppla till de virtuella datorer vi precis har skapat kan vi använda följande kommando för att skapa:
 
-```azurecli
+```azurecli-interactive
 az network lb create -n MyLoadBalancer -g MyResourceGroup
 ```
 
 Vi kan också skapa ett nytt privat virtuellt nätverk (som ofta kallas ett "VNet" i Azure) för infrastrukturen med följande kommando för skapande:
 
-```azurecli
+```azurecli-interactive
 az network vnet create -n MyVirtualNetwork -g MyResourceGroup --address-prefix 10.0.0.0/16
 ```
 
@@ -209,13 +210,13 @@ Det som gör Azure och Azure CLI så kraftfulla är att vi kan använda dem inte
 
 Du kan till exempel använda Azure CLI för att skapa en Azure AppService.  Azure AppService är en hanterad plattformstjänst som ger ett utmärkt sätt att agera värd för webbappar utan att behöva bekymra sig över infrastruktur.  När du har skapat Azure AppService kan du skapa två nya Azure-webbappar i AppService med hjälp av följande kommandon för skapande:
 
-```azurecli
+```azurecli-interactive
 # Create an Azure AppService that we can host any number of web apps within
 az appservice plan create -n MyAppServicePlan -g MyResourceGroup
 
 # Create Two Web Apps within the AppService (note: name param must be a unique DNS entry)
-az appservice web create -n MyWebApp43432 -g MyResourceGroup --plan MyAppServicePlan 
-az appservice web create -n MyWebApp43433 -g MyResourceGroup --plan MyAppServicePlan 
+az webapp create -n MyWebApp43432 -g MyResourceGroup --plan MyAppServicePlan 
+az webapp create -n MyWebApp43433 -g MyResourceGroup --plan MyAppServicePlan 
 ```
 
 När du förstår grunderna i `az <resource type name> create`-mönstret blir det lätt att skapa vad som helst. Här följer några populära Azure-resurstyper och motsvarande Azure CLI-create-kommandon för att skapa dem:
@@ -231,7 +232,7 @@ Managed Disk                az disk create
 Storage account             az storage account create
 Virtual Machine Scale Set   az vmss create
 Azure Container Service     az acs create
-Web App                     az appservice web create
+Web App                     az webapp create
 SQL Database Server         az sql server create
 Document DB                 az documentdb create
 ```
@@ -248,7 +249,7 @@ Om du inte behöver vänta på att skapa en resurs innan du fortsätter kan du a
 
 Till exempel startar följande användning av `az vm create` en VM-distribution och returnerar sedan mycket snabbare (och innan den virtuella datorn har startats fullständigt):
 
-```azurecli
+```azurecli-interactive
 az vm create -n MyLinuxVM2 -g MyResourceGroup --image UbuntuLTS --no-wait
 ```
 
@@ -262,7 +263,7 @@ Precis som med kommandot create kan du lista resurser med Azure CLI 2.0 med ett 
 
 Till exempel visar `az vm list` listan över alla virtuella datorer du har.   
 
-```azurecli
+```azurecli-interactive
 az vm list 
 ```
 Värdena som returneras är som standard i JSON (visar endast partiella utdata för att hålla det kortfattat).
@@ -297,7 +298,7 @@ Värdena som returneras är som standard i JSON (visar endast partiella utdata f
 
 Du kan ändra utdataformat med alternativet `--output`.  Kör kommandot `az vm list` för att se både virtuella Linux- och Windows Server-datorer som skapats tidigare, tillsammans med de vanligaste egenskaperna hos en virtuell dator, med det lättlästa *tabellformatalternativet*:
 
-```azurecli
+```azurecli-interactive
 az vm list --output table
 ```
 
@@ -310,7 +311,7 @@ MyWinVM    MyResourceGroup  westus2
 
 Utdataalternativet *tsv* kan användas för att få textbaserade, tabbavgränsade utdata utan rubriker.  Det här formatet är praktiskt när du vill skicka utdata till något annat textbaserat verktyg som grep. 
 
-```azurecli
+```azurecli-interactive
 az vm list --output tsv
 ```
 
@@ -326,8 +327,9 @@ Ofta vill du kunna skicka frågor endast för de resurser som uppfyller ett viss
 
 Kommandot `list` har inbyggd support som gör det enkelt att filtrera resurser efter namnet på resursgruppen.  Du kan exempelvis skicka antingen en `--ResourceGroup`- eller `-g`-parameter till ett `list`-kommando för att endast hämta de resurserna i en specifik resursgrupp:
 
+
 ```azurecli
-az vm list -g MyResouceGroup --output table
+az vm list -g MyResourceGroup --output table
 ```
 
 ```Output
@@ -341,7 +343,7 @@ För ännu kraftfullare frågesupport kan du använda parametern `--query` för 
 
 Utför till exempel följande kommando för att söka efter en VM-resurs i en resursgrupp som innehåller bokstäverna "My":
 
-```azurecli
+```azurecli-interactive
 az vm list --output table --query "[?contains(resourceGroup,'MY')]" 
 ```
 
@@ -354,7 +356,7 @@ MYRESOURCEGROUP  Succeeded            MyWinVM    westus2     XXXXXXXX-XXXX-XXXX-
 
 Vi kan sedan välja att förfina utdata genom att använda formningsfunktionerna för JMESPath-frågor för att också generera olika värden.  Till exempel hämtar följande kommando den typ av OS-disk som den virtuella datorn använder för att fastställa om operativsystemet är Linux- eller Windows-baserat:
 
-```azurecli
+```azurecli-interactive
 az vm list --output table --query "[?contains(resourceGroup,'MY')].{ VMName:name,OSType:storageProfile.osDisk.osType }" 
 ```
 
@@ -371,7 +373,7 @@ JMESPath-stödet i Azure CLI är kraftfullt.  Mer information om hur du använde
 
 Du kan använda kommandona `delete` med Azure CLI för att ta bort de resurser du inte längre behöver. Du kan använda kommandot `delete` med vilken resurs som helst, precis som du kan med kommandot `create`.
 
-```azurecli
+```azurecli-interactive
 az vm delete -n MyLinuxVM -g MyResourceGroup
 ```
 
@@ -386,7 +388,7 @@ EndTime                           Name                                  StartTim
 
 Du kan också ta bort många resurser i taget med kommandot `delete`.  Följande kommando tar till exempel bort alla resurser i resursgruppen "MyResourceGroup" som vi har använt för alla exempel i denna handledning.
 
-```azurecli
+```azurecli-interactive
 az group delete -n MyResourceGroup
 ```
 
@@ -406,19 +408,19 @@ Om du vill lära dig mer om att använda Azure CLI kan du ta en titt på våra v
 
 Azure CLI har inbyggd hjälpdokumentation som matchar vår webbdokumentation som du kan köra från kommandoraden:
 
-```azurecli
+```azurecli-interactive
 az [command-group [command]] -h
 ```
 
 Om du till exempel vill se vilka kommandon och undergrupper som är tillgängliga för virtuella datorer använder du:
 
-```azurecli
+```azurecli-interactive
 az vm -h
 ```
 
 Om du vill få hjälp med kommandot för att skapa en virtuell dator använder du:
 
-```azurecli
+```azurecli-interactive
 az vm create -h
 ```
 
@@ -430,6 +432,6 @@ För att hjälpa dig att växla från Azure CLI 1.0 till Azure CLI 2.0 har vi st
 
 ## <a name="send-us-your-feedback"></a>Skicka feedback
 
-```azurecli
+```azurecli-interactive
 az feedback
 ```
