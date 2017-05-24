@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 85c418a8-6177-4833-bb8d-ff4ce2233c1a
-ms.openlocfilehash: 0f8e494ffdd73c666b8361488db0966af01d6876
-ms.sourcegitcommit: 66d997a5afcf32143a4d4817ec1608cbdf58a59f
+ms.openlocfilehash: 45e51918ec95494699bf781f66e4cd57bd06fbad
+ms.sourcegitcommit: b4cb5c910b2238cba342f70122feb158c4036844
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 05/11/2017
+ms.lasthandoff: 05/18/2017
 ---
 # <a name="get-started-with-azure-cli-20"></a>Kom igång med Azure CLI 2.0
 
@@ -40,6 +40,9 @@ Du bör se versionsnumret för Azure CLI och andra beroende bibliotek som är in
   
 Om du får ett felmeddelande uppstod det troligen ett problem vid CLI-installationen. Läs avsnittet "Installation Troubleshooting" (Felsökning vid installation) i artikeln [Azure CLI 2.0 installation](install-azure-cli.md#troubleshooting) (Azure CLI 2.0-installation) för att få hjälp, eller publicera en kommentar längst ned på sidan.
 
+> [!Note]
+> Om du inte vill installera Azure CLI 2.0 kan du använda [Cloud Shell](/azure/cloud-shell/overview) för att köra CLI i webbläsaren.
+
 ## <a name="log-in-to-azure"></a>Logga in på Azure
 
 Nu när du har installerat Azure CLI 2.0 är nästa steg att ansluta det säkert med Azure-kontot. Gör det via kommandot `az login`.
@@ -62,7 +65,7 @@ Du kan nu köra kommandon från Azure CLI 2.0 på Azure-resurserna och -tjänste
 
 Nu när allt har konfigurerats ska vi använda Azure CLI för att skapa resurser i Azure.
 
-Skapa först en resursgrupp.  Resursgrupper i Azure ger ett sätt att hantera flera resurser som du vill gruppera logiskt.  Du kan till exempel skapa en resursgrupp för ett program eller projekt och lägga till en virtuell dator, en databas och en CDN-tjänst inom den.
+Skapa först en resursgrupp.  Resursgrupper i Azure är ett sätt att hantera flera logiskt grupperade resurser.  Du kan till exempel skapa en resursgrupp för ett program eller projekt och lägga till en virtuell dator, en databas och en CDN-tjänst inom den.
 
 Vi ska skapa en resursgrupp med namnet "MyResourceGroup" i regionen *westus2* för Azure.  Ange följande kommando:
 
@@ -89,7 +92,7 @@ När resursgruppen har skapas ger kommandot `az group create` flera egenskaper f
 
 Nu när vi har en resursgrupp kan vi skapa en virtuell Linux-dator i den.
 
-Du kan skapa en virtuell Linux-dator med den populära UbuntuTLS-avbildningen med två anslutna lagringsdiskar på 10 och 20 GB med följande kommando:
+Du kan skapa en virtuell Linux-dator med den populära UbuntuTLS-avbildningen med två anslutna lagringsdiskar på 10 GB och 20 GB med följande kommando:
 
 ```azurecli-interactive
 az vm create -n MyLinuxVM -g MyResourceGroup --image UbuntuLTS --data-disk-sizes-gb 10 20
@@ -155,7 +158,7 @@ my-login@MyLinuxVM:~$
 
 ## <a name="create-a-windows-server-virtual-machine"></a>Skapa en virtuell Windows Server-dator
 
-Nu ska vi skapa en virtuell dator som baseras på Windows Server 2016-datacenter med kommandot `az vm create` och lägga till det till samma resursgrupp, "MyResourceGroup", som vi använde för vår virtuella Linux-dator.  Precis som i exemplet med den virtuella Linux-datorn bifogar vi två lagringsdiskar med parmetern `--data-disk-sizes-gb`.
+Nu ska vi skapa en Windows Server 2016 Datacenter-baserad virtuell dator med kommandot `az vm create` och lägga till den i samma ”MyResourceGroup”-resursgrupp som vi använde för vår virtuella Linux-dator.  Precis som i exemplet med den virtuella Linux-datorn ansluter vi två lagringsdiskar med parmetern `--data-disk-sizes-gb`.
 
 Azure kräver att du undviker att använda användarnamn/lösenord som är lätta att lista ut. Det finns särskilda regler för vilka tecken som kan användas och minimilängd för både användarnamn och lösenord.  
 
@@ -237,7 +240,7 @@ SQL Database Server         az sql server create
 Document DB                 az documentdb create
 ```
 
-Besök [Referensdokumentation](/azure/doc-ref-autogen) för att läsa om de ytterligare resursspecifika parametrarna du kan skicka till vart och ett av de föregående kommandona och resurstyperna du kan skapa. 
+Besök [Referensdokumentation](/cli/azure) för att läsa om de ytterligare resursspecifika parametrarna du kan skicka till vart och ett av de föregående kommandona och resurstyperna du kan skapa. 
 
 ## <a name="useful-tip-optimizing-create-operations-using---no-wait"></a>Användbart tips: Optimera skapandeåtgärder med hjälp av --no-wait
 

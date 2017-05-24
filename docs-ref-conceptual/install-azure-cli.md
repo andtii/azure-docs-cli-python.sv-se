@@ -12,10 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 664535701ad814f8ff85fefe8ecc45772777d0ba
-ms.sourcegitcommit: ec22ff07aedb5c47e5f636f2a9a341c3edbe7ca1
+ms.openlocfilehash: 7065ed5270ef9bfc70beea81d0bc442a7b4df38c
+ms.sourcegitcommit: c077bd5cbe07f7225714c41714d3981fa0d9928f
 ms.translationtype: HT
 ms.contentlocale: sv-SE
+ms.lasthandoff: 05/16/2017
 ---
 # <a name="install-azure-cli-20"></a>Installera Azure CLI 2.0
 
@@ -51,10 +52,19 @@ Information om den senaste versionen finns i [viktig information](release-notes-
 
 ## <a name="windows"></a>Windows
 
-Azure CLI 2.0 stöder Bash-kommandosyntax, vilket innebär att Bash på Ubuntu i Windows är ett bra sätt att använda CLI.
-Om du inte använder Bash kan du installera och använda CLI i Windows-kommandotolken.
+Du kan installera CLI med MSI och använda det på kommandoraden i Windows, eller så kan du installera CLI med apt-get i Bash i Ubuntu för Windows.
 
-### <a name="bash-on-ubuntu-on-windows"></a>Bash på Ubuntu i Windows
+### <a name="msi-for-the-windows-command-line"></a>MSI för Windows-kommandoraden 
+
+Om du vill installera CLI i Windows och använda det på Windows-kommandoraden laddar du ned och kör [msi](https://aka.ms/InstallAzureCliWindows).
+
+> [!NOTE]
+> `az component` stöds inte om du installerar med msi.
+> Om du vill uppdatera till den senaste versionen av CLI kör du [msi](https://aka.ms/InstallAzureCliWindows) igen.
+> 
+> Om du vill avinstallera CLI kör du [msi](https://aka.ms/InstallAzureCliWindows) igen och väljer Avinstallera.
+
+### <a name="apt-get-for-bash-on-ubuntu-on-windows"></a>apt-get för Bash i Ubuntu för Windows
 
 1. Om du inte har Bash på Windows [installerar du det](https://msdn.microsoft.com/commandline/wsl/install_guide).
 
@@ -80,38 +90,6 @@ Om du inte använder Bash kan du installera och använda CLI i Windows-kommandot
 > Om du vill uppdatera CLI kör du `sudo apt-get update && sudo apt-get install azure-cli` igen.
 > 
 > Kör `sudo apt-get remove azure-cli` för att avinstallera.
-
-### <a name="windows-command-line"></a>Windows-kommandorad 
-
-1. Gå till Python-webbplatsen och [ladda ned Python](https://www.python.org/downloads/) för Windows.
-   Se till att installera Pip-komponenten när du installerar Python.
-   När installationen är klar kan du lägga till Python i miljövariabeln PATH (installationsprogrammet uppmanar dig).
-
-2. Kontrollera Python-installationen från kommandotolken.
-
-   ```bash
-   python --version
-   ```
-
-3. Installera Azure CLI 2.0 med `pip`.
-
-   ```bash
-   pip install --user azure-cli
-   ```
-
-4. Lägg till mappen som innehåller az.bat till sökvägen.
-   CLI `az.bat` kan installeras i `%USERPROFILE%\AppData\Roaming\Python\Scripts` eller `%USERPROFILE%\AppData\Roaming\Python\PythonXY\Scripts` där `XY` är Python-versionen (till exempel `%USERPROFILE%\AppData\Roaming\Python\Python27\Scripts`).
-   Lägg till mappen som innehåller `az.bat` till sökvägen.
-   
-4. Kör Azure CLI 2.0 från kommandotolken med `az`-kommandot.
-
-> [!NOTE]
-> Om du redan har installerat Azure CLI 2.0 och du vill se om du har den senaste versionen kan du använda `az --version` för att se vilken version du har.
-> Jämför med den senaste versionen som är tillgänglig på [https://pypi.python.org/pypi/azure-cli](https://pypi.python.org/pypi/azure-cli).
-> 
-> Kör `az component update` för att uppdatera till den senaste versionen av CLI.
-> 
-> Kör `pip uninstall azure-cli` för att avinstallera CLI.
 
 ## <a name="linux"></a>Linux
 
@@ -213,7 +191,6 @@ Du kan installera Azure CLI 2.0 via `apt-get` på Debian/Ubuntu-baserade system.
    ```
 
 ## <a name="troubleshooting"></a>Felsökning
--------------------------------
 
 ### <a name="errors-with-curl-redirection"></a>Fel vid omdirigering av curl
 
@@ -232,70 +209,6 @@ bash: line 1: syntax error near unexpected token `<'
 curl https://azurecliprod.blob.core.windows.net/install | bash
 ```
 
-
-### <a name="errors-on-install-with-cffi-or-cryptography"></a>Fel vid installation med `cffi` eller kryptografi
-
-Om fel uppstår vid installation på OS X bör du uppgradera `pip`.
-
-```bash
-pip install --upgrade --force-reinstall pip
-```
-
-Om fel uppstår vid installation på **Debian** eller **Ubuntu**, som dessa exempel, kan du installera `libssl-dev` och `libffi-dev`.
-
-```bash
-sudo apt-get update
-sudo apt-get install -y libssl-dev libffi-dev
-```
-
-Installera även Python Dev för din version av Python.
-
-Python 2:
-
-```bash
-sudo apt-get install -y python-dev
-```
-
-Python 3:
-
-```bash
-sudo apt-get install -y python3-dev
-```
-
-Ubuntu 15 kanske även kräver `build-essential`:
-
-```bash
-sudo apt-get install -y build-essential
-```
-
-### <a name="example-errors"></a>Exempelfel
-
-```
-Downloading cffi-1.5.2.tar.gz (388kB)
-    100% |################################| 389kB 3.9MB/s
-    Complete output from command python setup.py egg_info:
-
-        No working compiler found, or bogus compiler options
-        passed to the compiler from Python's distutils module.
-        See the error messages above.
-        (If they are about -mno-fused-madd and you are on OS/X 10.8,
-        see http://stackoverflow.com/questions/22313407/ .)
-
-    ----------------------------------------
-Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-77i2fido/cffi/
-```
-
-```
-#include <openssl/e_os2.h>
-                            ^
-compilation terminated.
-error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
-
-Failed building wheel for cryptography
-```
-
-Se fråga om Stack Overflow – [Det gick inte att installera kryptografipaketet för Python med PIP och setup.py](http://stackoverflow.com/questions/22073516/failed-to-install-python-cryptography-package-with-pip-and-setup-py)
-
 ## <a name="uninstall"></a>Avinstallera
 
 Om du använder skriptet på https://aka.ms/InstallAzureCli för att installera CLI kan du avinstallera det med dessa anvisningar.
@@ -312,7 +225,7 @@ Om du använder skriptet på https://aka.ms/InstallAzureCli för att installera 
 > [!Note]
 > Standardplatsen för installation är `/Users/<username>`.
 
-Om du använde pip, apt-get eller Docker för att installera CLI så kan du använda samma verktyg för att avinstallera.
+Om du använde apt-get, Docker eller msi för att installera CLI använder du samma verktyg för att avinstallera det.
 
 ## <a name="reporting-issues-and-feedback"></a>Rapportera problem och feedback
 
