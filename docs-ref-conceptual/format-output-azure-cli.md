@@ -12,10 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 74bdb727-481d-45f7-a44e-15d18dc55483
-ms.openlocfilehash: de37b1ad6aa55c9ac73b5b6b89d9507c86cc1245
-ms.sourcegitcommit: bcf93ad8ed8802072249cd8187cd4420da89b4c6
+ms.openlocfilehash: d1440cc1e99ccddb18d23306cc0fcdb4b8babf14
+ms.sourcegitcommit: 4fd631a58cf19c494162510d073fbbbdf0524d16
 ms.translationtype: HT
 ms.contentlocale: sv-SE
+ms.lasthandoff: 06/05/2017
 ---
 # <a name="output-formats-for-azure-cli-20-commands"></a>Utdataformat för Azure CLI 2.0-kommandon
 
@@ -28,11 +29,13 @@ Azure CLI 2.0 använder json som standardalternativ för utdata, men erbjuder ol
 `table`  | tabell med kolumnrubriker.
 `tsv`    | tabbavgränsade värden.
 
+[!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
+
 ## <a name="using-the-json-option"></a>Använda json-alternativet
 
 Följande exempel visar en lista över virtuella datorer i dina prenumerationer i standardformatet json.
 
-```azurecli
+```azurecli-interactive
 az vm list --output json
 ```
 
@@ -70,7 +73,7 @@ Resultatet är i det här formuläret (visar endast partiella utdata för att h�
 
 Tabellalternativet ger en lättläst uppsättning utdata, men tänk på att kapslade objekt inte ingår i utdata med enkla `--output table`, till skillnad från föregående .json-exempel.  Om du använder samma exempel med ”tabell”-utdataformat får du en granskad lista över de vanligaste egenskapsvärdena.
 
-```azurecli
+```azurecli-interactive
 az vm list --out table
 ```
 
@@ -86,7 +89,7 @@ KBDemo020    RGDEMO001        westus
 
 Du kan använda parametern `--query` för att anpassa egenskaperna och kolumnerna du vill visa i bland listans utdata. I följande exempel visas hur du ska välja bara VM-namnets och resursgruppens namn i kommandot `list`.
 
-```azurecli
+```azurecli-interactive
 az vm list --query "[].{ resource: resourceGroup, name: name }" -o table
 ```
 
@@ -104,7 +107,7 @@ RGDEMO001   KBDemo020
 
 ”Tsv”-utdataformatet returnerar enkla, textbaserade och tabbavgränsade utdata utan rubriker och bindestreck. I det här formatet är det enkelt att använda utdata i andra kommandon och verktyg som behöver bearbeta texten i någon form. Om du använder följande exempel med alternativet `tsv` matas det tabbavgränsade resultatet ut.
 
-```azurecli
+```azurecli-interactive
 az vm list --out tsv
 ```
 
