@@ -12,13 +12,87 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: e893b99349bbf2a5eec8af254158eb07001f1da7
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: ad30efeb7efafcc5816160ee130665d37adb62c6
+ms.sourcegitcommit: e866977985ba0286fa05f41729dd7e7d9ce86f8e
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 09/13/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
+
+## <a name="september-11-2017"></a>11 september 2017
+
+Version 2.0.17
+
+### <a name="core"></a>Kärna
+
+* Kommandomodulen kan ange eget korrelations-ID i telemetri
+* Åtgärdat JSON-dumpproblem när telemetri är angivet till diagnostikläge
+
+### <a name="acs"></a>Acs
+
+* Kommandot `acs list-locations` har lagts till
+* Fick `ssh-key-file` att leverera förväntat standardvärde
+
+### <a name="appservice"></a>App Service
+
+* Möjlighet att skapa en webbapp i en annan resursgrupp än den som hör till den aktiva tjänstens plan har lagts till
+
+### <a name="cdn"></a>CDN
+
+* "CustomDomain is not interable"-bugg för `cdn custom-domain create` har åtgärdats.
+
+### <a name="extension"></a>Anknytning
+
+* Första versionen.
+
+### <a name="keyvault"></a>KeyVault
+
+* Problem där behörigheter var skifteslägeskänsliga för `keyvault set-policy` har åtgärdats.
+
+### <a name="network"></a>Nätverk
+
+* `vnet list-private-access-services` har bytt namn till `vnet list-endpoint-services`
+* Namn på `--private-access-services`-argument har bytts till `--service-endpoints` för `vnet subnet create/update`
+* Stöd för flera IP- och portintervall har lagts till för `nsg rule create/update`
+* SKU-stöd har lagts till för `lb create`
+* SKU-stöd har lagts till för `public-ip create`
+
+### <a name="resource"></a>Resurs
+
+* Tillåt att definitioner för resursprincipparametern anges i `policy definition create` och `policy definition update`
+* Tillåt att parametervärden anges för `policy assignment create`
+* Tillåt att JSON eller fil för alla parametrar anges
+* API-versionen har utökats
+
+### <a name="sql"></a>SQL
+
+* `sql server vnet-rule`-kommandon har lagts till
+
+### <a name="vm"></a>Virtuell dator
+
+* Åtgärdat: Tilldela inte åtkomst om inte `--scope` har angetts
+* Åtgärdat: Använd samma tilläggsnamn som portalen gör
+* `subscription` har tagits bort från `[vm|vmss] create`-utmatningen
+* Åtgärdat: SKU:n för `[vm|vmss] create`-lagring tillämpas inte på datadiskar med en avbildning
+* Åtgärdat: `vm format-secret --secrets` accepterade inte ID:n som skildes åt med ny rad
+
+## <a name="august-31-2017"></a>31 augusti 2017
+
+Version 2.0.16
+
+### <a name="keyvault"></a>KeyVault
+
+* Bugg vid försök att automatiskt lösa hemlig kodning med `secret download` har åtgärdats
+
+### <a name="sf"></a>Sf
+
+* Avveckla alla kommandon till förmån för Service Fabric CLI (sfctl)
+
+### <a name="storage"></a>Lagring
+
+* Problem där lagringskonton inte kunde skapas i regioner som inte stöder NetworkACLs-funktionen har åtgärdats
+* Fastställ innehållstyp och innehållskodning under blob- och filuppladdning om varken innehållstyp eller innehållskodning har angetts
 
 ## <a name="august-28-2017"></a>28 augusti 2017
 

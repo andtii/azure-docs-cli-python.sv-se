@@ -1,7 +1,7 @@
 ---
 title: Installera Azure CLI 2.0
 description: "Referensdokument för installation av Azure CLI 2.0"
-keywords: Azure CLI 2.0, Azure CLI 2.0-referens, Installera Azure CLI 2.0, Azure Python CLI, Avinstallera Azure CLI 2.0, Azure CLI, Installera Azure CLI, Azure CLI-referens
+keywords: Azure CLI,Install Azure CLI,Azure Python CLI,Azure CLI Reference
 author: sptramer
 ms.author: sttramer
 manager: routlaw
@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 00d5b555975007d7e57f04ce5d69f4f29e6d0219
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: a61f47076854d0ff0a7056f82240794b7533fe3e
+ms.sourcegitcommit: 3db5fb207db551a0d3fe0a88fe09e8f5e2ec184d
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 09/14/2017
 ---
 # <a name="install-azure-cli-20"></a>Installera Azure CLI 2.0
 
@@ -79,7 +79,7 @@ Om du vill installera CLI i Windows och använda det på Windows-kommandoraden l
 
 Du kan installera Azure CLI 2.0 via `apt-get` på Debian/Ubuntu-baserade system.
 
-1. Ändra listan med källor.
+1. Ändra listan med källor:
  
    - 32-bitarssystem
 
@@ -105,15 +105,63 @@ Du kan installera Azure CLI 2.0 via `apt-get` på Debian/Ubuntu-baserade system.
 
 3.  Kör CLI från kommandotolken med kommandot `az`.
 
+## <a name="install-on-rhel-fedora-and-centos-with-yum"></a>Installera på RHEL, Fedora och CentOS med yum
+
+För distributioner som bygger på RedHat och innehåller `yum`-pakethanteraren kan du installera Azure CLI 2.0 via `yum`.
+
+1. Importera nyckeln för Microsoft-lagringsplatsen:
+
+   ```bash
+   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+   ```
+
+2. Skapa information om lokal `azure-cli`-lagringsplats:
+
+   ```bash
+   sudo sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+   ```
+
+3. Uppdatera `yum`-paketindexet och installera:
+
+   ```bash
+   yum check-update
+   sudo yum install azure-cli
+   ```
+
+4. Kör CLI från kommandotolken med kommandot `az`.
+
+## <a name="install-on-opensuse-and-sle-with-zypper"></a>Installera på openSUSE och SLE med zypper
+
+1. Importera nyckeln för Microsoft-lagringsplatsen:
+
+   ```bash
+   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+   ```
+
+2. Skapa information om lokal `azure-cli`-lagringsplats:
+
+   ```bash
+   sudo sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/azure-cli.repo'
+   ```
+
+3. Uppdatera `zypper`-paketindexet och installera:
+
+   ```bash
+   sudo zypper refresh
+   sudo zypper install azure-cli
+   ```
+
+4. Kör CLI från kommandotolken med kommandot `az`.
+
 ## <a name="install-with-docker"></a>Installera med Docker
 
 Vi tillhandahåller en Docker-avbildning som är förkonfigurerad med Azure CLI 2.0.
 
 Installera CLI med `docker run`.
 
-  ```bash
-  docker run azuresdk/azure-cli-python:<version>
-  ```
+   ```bash
+   docker run azuresdk/azure-cli-python:<version>
+   ```
 
 Se våra [Docker-taggar](https://hub.docker.com/r/azuresdk/azure-cli-python/tags/) för tillgängliga versioner.
 
@@ -128,7 +176,7 @@ CLI installeras i avbildningen som `az`-kommandot i `/usr/local/bin`.
 
 ## <a name="a-namelinuxinstall-on-linux-without-apt-get"></a><a name="Linux"/>Installera i Linux utan apt-get
 
-Vi rekommenderar att du installerar CLI med `apt-get` om möjligt. För distributioner som inte använder `apt`-pakethanteraren kan du installera manuellt.
+Om det är möjligt rekommenderar vi att du installerar CLI med en pakethanterare. För distributioner som inte har någon pakethanterare kan du installera manuellt.
 
 1. Kontrollera att din Linux-distribution uppfyller alla förhandskrav.
 
@@ -289,26 +337,26 @@ Om du installerade en Docker-avbildning måste du ta bort eventuella behållare 
 
 1. Hämta behållarna som kör azure-cli-avbildningen.
 
-  ```bash
-  docker container ls -a --filter 'ancestor=azuresdk/azure-cli-python'
-  ```
+   ```bash
+   docker container ls -a --filter 'ancestor=azuresdk/azure-cli-python'
+   ```
 
-  ```output
-  CONTAINER ID        IMAGE                              COMMAND             CREATED             STATUS                        PORTS               NAMES
-  34a868beb2ab        azuresdk/azure-cli-python:latest      "/bin/sh -c bash"   8 minutes ago       Exited (0) 8 minutes ago                       inspiring_benz
-  ```
+   ```output
+   CONTAINER ID        IMAGE                              COMMAND             CREATED             STATUS                        PORTS               NAMES
+   34a868beb2ab        azuresdk/azure-cli-python:latest      "/bin/sh -c bash"   8 minutes ago       Exited (0) 8 minutes ago                       inspiring_benz
+   ```
 
 2. Ta bort alla behållare som kör CLI-avbildningen.
 
-  ```bash
-  docker rm 34a868beb2ab
-  ```
+   ```bash
+   docker rm 34a868beb2ab
+   ```
 
 3. Ta bort den lokalt installerade CLI-avbildningen.
 
-  ```bash
-  docker rmi azuresdk/azure-cli-python
-  ```
+   ```bash
+   docker rmi azuresdk/azure-cli-python
+   ```
 
 > [!NOTE]
 > Om du installerade en specifik version av avbildningen måste du lägga till `:<version>` i slutet av avbildningens namn.
