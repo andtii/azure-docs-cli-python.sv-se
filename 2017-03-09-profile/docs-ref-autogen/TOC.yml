@@ -60,6 +60,22 @@
         - name: Uppdatering
           uid: az_component_update
           displayName: az component update
+    - name: Anknytning
+      uid: az_extension
+      displayName: az extension
+      items:
+        - name: Lägg till
+          uid: az_extension_add
+          displayName: az extension add
+        - name: Visa lista
+          uid: az_extension_list
+          displayName: az extension list
+        - name: Ta bort
+          uid: az_extension_remove
+          displayName: az extension remove
+        - name: Visa
+          uid: az_extension_show
+          displayName: az extension show
     - name: Key Vault
       uid: az_keyvault
       displayName: az keyvault
@@ -1318,6 +1334,13 @@
                 - name: Ta bort
                   uid: az_network_vnet_gateway_root_cert_delete
                   displayName: az network vnet-gateway root-cert delete
+            - name: Vpn-Client
+              uid: az_network_vnet_gateway_vpn_client
+              displayName: az network vnet-gateway vpn-client
+              items:
+                - name: Generera
+                  uid: az_network_vnet_gateway_vpn_client_generate
+                  displayName: az network vnet-gateway vpn-client generate
         - name: Bevakare
           uid: az_network_watcher
           displayName: az network watcher
