@@ -12,77 +12,13 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: e893b99349bbf2a5eec8af254158eb07001f1da7
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: 39e4710a29ac57730919b82ab76b9c9a4b9ca786
+ms.sourcegitcommit: 43d4f838d132ab9bcfa59dbda3b544c06373b6a9
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 08/22/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
-
-## <a name="august-28-2017"></a>28 augusti 2017
-
-Version 2.0.15
-
-### <a name="cli"></a>CLI
-
-* Tillkommen juridisk information för `--version`.
-
-### <a name="acs"></a>ACS
-
-* Regioner i förhandsversionen har korrigerats.
-* `dns_name_prefix`-standardprefixet har formaterats korrekt.
-* Utdata från acs-kommandot har optimerats.
-
-### <a name="appservice"></a>App Service
-
-* [VIKTIG ÄNDRING] Inkonsekvenser i utdata från `az webapp config appsettings [delete|set]` har åtgärdats
-* Ett nytt alias (`-i`) har lagts till för `az webapp config container set --docker-custom-image-name`
-* `az webapp log show` har gjorts tillgängligt
-* Nya argument har gjorts tillgängliga från `az webapp delete` så att App Service-planer, mått eller DNS-registreringar bevaras
-* Åtgärdat: Platsinställningar identifieras korrekt
-
-### <a name="iot"></a>IoT
-
-* Åtgärdat (#3934): Befintliga principer rensas inte längre när nya principer skapas
-
-### <a name="network"></a>Nätverk
-
-* [VIKTIG ÄNDRING] `vnet list-private-access-services` har bytt namn till `vnet list-endpoint-services`
-* [VIKTIG ÄNDRING] Alternativet `--private-access-services` har bytt namn till `--service-endpoints` för `vnet subnet [create|update]`
-* Stöd har lagts till för flera IP- och portintervall för `nsg rule [create|update]`
-* SKU-stöd har lagts till för `lb create`
-* SKU-stöd har lagts till för `public-ip create`
-
-### <a name="profile"></a>Profil
-
-* `--msi` och `--msi-port` har gjorts tillgängliga för inloggning med identiteten för en virtuell dator
-
-### <a name="service-fabric"></a>Service Fabric
-
-* Förhandsversion
-* Förenklade användar- och lösenordsregler för registrering via kommando
-* Lösenordsprompten för användare även efter att parametern har angetts har åtgärdats
-* Stöd har lagts till för tomma `registry_cred`
-
-### <a name="storage"></a>Lagring
-
-* Stöd har lagts till för att ställa in blobbnivå
-* Argumenten `--bypass` och `--default-action` har lagts till för `storage account [create|update]` för att ge stöd för händelsedirigering nedåt med tjänsten
-* Nya kommandon har gjorts tillgängliga för att lägga till VNET-regler och IP-baserade regler för `storage account network-rule`  
-* Stöd har lagts till för tjänstkryptering med kundhanterade nycklar
-* [VIKTIG ÄNDRING] Alternativet `--encryption` har bytt namn till `--encryption-services` för kommandot `az storage account create and az storage account update`
-* Åtgärdat (#4220): `az storage account update encryption` – matchningsfel i syntax
-
-### <a name="vm"></a>Virtuell dator
-
-* Ett problem har åtgärdats som gjorde att extra, felaktig information visades för `vmss get-instance-view` när det användes med `--instance-id *`
-* Stöd har lagts till för `--lb-sku` för `vmss create`: 
-* Namn på personer har tagits bort från svartlistan för administratörsnamn för `[vm|vmss] create` 
-* Ett problem har åtgärdats som gjorde att `[vm|vmss] create` returnerade ett fel om det inte gick att extrahera planinformation från en avbildning
-* Kraschar som inträffade när en vmms-skalningsuppsättning skapades med en intern LB har åtgärdats
-* Ett problem har åtgärdats som gjorde att `--no-wait`-argumentet inte fungerade med `vm availability-set create`
-
 
 ## <a name="august-15-2017"></a>15 augusti 2017
 

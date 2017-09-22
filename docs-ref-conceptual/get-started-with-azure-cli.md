@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 85c418a8-6177-4833-bb8d-ff4ce2233c1a
-ms.openlocfilehash: 5d6d7abb34fa2be571a9a49f0f84380538592807
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: bfc865f9b34afd8f312808fa420ad987be2a7d34
+ms.sourcegitcommit: 792a4283245160072edcf2bee1482aba19b285d5
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 06/26/2017
 ---
 # <a name="get-started-with-azure-cli-20"></a>Kom igång med Azure CLI 2.0
 
@@ -73,7 +73,7 @@ När resursgruppen har skapas ger kommandot `az group create` flera egenskaper f
 
 Nu när vi har en resursgrupp kan vi skapa en virtuell Linux-dator i den.
 
-Du kan skapa en virtuell Linux-dator med den populära UbuntuLTS-avbildningen med två anslutna lagringsdiskar på 10 GB och 20 GB med följande kommando:
+Du kan skapa en virtuell Linux-dator med den populära UbuntuTLS-avbildningen med två anslutna lagringsdiskar på 10 GB och 20 GB med följande kommando:
 
 ```azurecli-interactive
 az vm create -n MyLinuxVM -g MyResourceGroup --image UbuntuLTS --data-disk-sizes-gb 10 20

@@ -12,7 +12,6 @@
 ## [Utdataformat](format-output-azure-cli.md)
 ## [Fråga](query-azure-cli.md)
 ## [Prenumerationer](manage-azure-subscriptions-azure-cli.md)
-### [Hantera moln](manage-clouds-azure-cli.md)
 ## [Viktig information](release-notes-azure-cli.md)
 # Exempelskript
 ## [Virtuella Linux-datorer](/azure/virtual-machines/linux/cli-samples?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json)
