@@ -14,14 +14,14 @@
           href: create-an-azure-service-principal-azure-cli.md
     - name: Interaktivt läge
       href: interactive-azure-cli.md
-    - name: Distribuera
+    - name: Distributionsmallar
       items:
-        - name: Med mallar
+        - name: Använd distributionsmallar
           href: /azure/azure-resource-manager/resource-group-template-deploy-cli?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
-        - name: Exportera mallar
+        - name: Exportera distributionsmallar
           href: /azure/azure-resource-manager/resource-manager-export-template-cli?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
-        - name: Med privata mallar
-          href: /azure-resource-manager/resource-manager-cli-sas-token?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
+        - name: Distribuera från privata mallar
+          href: /azure/azure-resource-manager/resource-manager-cli-sas-token?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
     - name: Utdataformat
       href: format-output-azure-cli.md
     - name: Fråga
