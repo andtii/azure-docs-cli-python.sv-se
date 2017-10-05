@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 580438bfc66f3ed0b4dad504258eab453b1b9183
-ms.sourcegitcommit: c1df7794ad42adb8640b51b630e4275f4a791ac2
+ms.openlocfilehash: 935814d56d0a6be00f626da860dc643adbf14804
+ms.sourcegitcommit: 9f38efbb7efd800ee5cab80d6641770d268c5a68
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/19/2017
+ms.lasthandoff: 09/22/2017
 ---
 # <a name="install-azure-cli-20"></a>Installera Azure CLI 2.0
 
@@ -36,13 +36,15 @@ I macOS kan du installera antingen med [Homebrew](https://brew.sh/) eller manuel
 
 1. Om du inte redan har Homebrew installerar du det genom att följa [anvisningarna för att installera Homebrew](https://docs.brew.sh/Installation.html).
 
-2. Uppdatera din lokala Homebrew-lagringsplats.
+2. Om du tidigare har installerat CLI manuellt följer du anvisningarna för [manuell avinstallation](#UninstallManually).
+
+3. Uppdatera din lokala Homebrew-lagringsplats.
 
    ```bash
    brew update
    ```
 
-3. Installera `azure-cli`-paketet.
+4. Installera `azure-cli`-paketet.
 
   ```bash
   brew install azure-cli
@@ -73,11 +75,9 @@ I macOS kan du installera antingen med [Homebrew](https://brew.sh/) eller manuel
 
 ## <a name="install-on-windows"></a>Installera i Windows
 
-Du kan installera Azure CLI 2.0 med MSI och använda det på kommandoraden i Windows, eller så kan du installera CLI med `apt-get` i Bash i Ubuntu för Windows.
-
 ### <a name="install-with-msi-for-the-windows-command-line"></a>Installera med MSI för kommandoraden i Windows 
 
-Om du vill installera CLI i Windows och använda det på Windows-kommandoraden laddar du ned och kör [MSI](https://aka.ms/InstallAzureCliWindows).
+Om du vill installera CLI i Windows och använda det på Windows-kommandoraden laddar du ned och kör [Azure CLI-installationsprogrammet (MSI)](https://aka.ms/InstallAzureCliWindows).
 
 ### <a name="install-with-apt-get-for-bash-on-ubuntu-on-windows"></a>Installera med apt-get för Bash i Ubuntu för Windows
 
@@ -247,6 +247,16 @@ Om `curl` returnerar ett fel relaterat till `-L`-parametern, eller ett felmeddel
 curl https://azurecliprod.blob.core.windows.net/install | bash
 ```
 
+### <a name="az-command-not-found"></a>Det gick inte att hitta kommandot `az`
+
+Du kan behöva rensa cacheminnet för gränssnittets kommando-hash. Kör
+
+```bash
+hash -r
+```
+
+och se om problemet är löst.
+
 ## <a name="uninstall-cli-1x-versions"></a>Avinstallera CLI 1.x-versioner
 
 Om du har en tidigare CLI 1.x-version på datorn kan du avinstallera den baserat på den typ av installation du använde för att installera versionen.
@@ -261,7 +271,7 @@ Ta bort den äldre CLI-versionen med `npm uninstall`.
 
 ### <a name="uninstall-with-distributable"></a>Avinstallera med distributable
 
-Om du installerade via [MSI](http://aka.ms/webpi-azure-cli) eller ett [Mac OS-paket](http://aka.ms/mac-azure-cli) använder du samma verktyg för att ta bort installationen.
+Om du installerade via [Azure CLI-installationsprogrammet (MSI)](http://aka.ms/webpi-azure-cli) eller ett [macOS-paket](http://aka.ms/mac-azure-cli) använder du samma verktyg för att ta bort installationen.
 
 ### <a name="uninstall-with-docker"></a>Avinstallera med Docker
 
@@ -277,13 +287,15 @@ Uppdatera Azure CLI genom att använda samma metod som du använde för att inst
 
 ### <a name="update-with-homebrew"></a>Uppdatera med Homebrew
 
-1. Uppdatera informationen om din lokala Homebrew-lagringsplats.
+1. Om du tidigare har installerat manuellt följer du anvisningarna för att [installera med Homebrew](#macOS).
+
+2. Uppdatera informationen om din lokala Homebrew-lagringsplats.
 
    ```bash
    brew update
    ```
 
-2. Uppgradera dina installerade paket.
+3. Uppgradera dina installerade paket.
 
    ```bash
    brew upgrade
@@ -291,7 +303,7 @@ Uppdatera Azure CLI genom att använda samma metod som du använde för att inst
 
 ### <a name="update-with-msi"></a>Uppdatera med MSI
 
-Kör [MSI](https://aka.ms/InstallAzureCliWindows) igen.
+Kör [Azure CLI-installationsprogrammet (MSI)](https://aka.ms/InstallAzureCliWindows) igen.
 
 ### <a name="update-with-apt-get"></a>Uppdatera med apt-get
 
@@ -396,7 +408,7 @@ Om du installerade en Docker-avbildning måste du ta bort eventuella behållare 
 > [!NOTE]
 > Om du installerade en specifik version av avbildningen måste du lägga till `:<version>` i slutet av avbildningens namn.
 
-### <a name="uninstall-manually"></a>Avinstallera manuellt
+###<a name="a-nameuninstallmanuallyuninstall-manually"></a><a name="UninstallManually"/>Avinstallera manuellt
 
 Om du använder skriptet på https://aka.ms/InstallAzureCli för att installera CLI kan du avinstallera det med dessa anvisningar.
 

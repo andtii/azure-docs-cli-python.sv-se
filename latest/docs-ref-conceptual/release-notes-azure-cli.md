@@ -12,13 +12,73 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: ad30efeb7efafcc5816160ee130665d37adb62c6
-ms.sourcegitcommit: e866977985ba0286fa05f41729dd7e7d9ce86f8e
+ms.openlocfilehash: 72630c52b5e6afd69809ff19145717c0d65e0252
+ms.sourcegitcommit: 3a490ae3a2a1b2e63a062806f9b720fa4c6be01e
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/13/2017
+ms.lasthandoff: 09/25/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
+
+## <a name="september-22-2017"></a>22 september 2017
+
+Version 2.0.18
+
+### <a name="resource"></a>Resurs
+
+* Stöd har lagts till för att visa inbyggda principdefinitioner
+* Stödlägesparametern har lagts till för att skapa principdefinitioner
+* Stöd har lagts till för UI-definitioner och mallar till `managedapp definition create`
+* [VIKTIG ÄNDRING] Resurstypen `managedapp` har ändrats från `appliances` till `applications` och `applianceDefinitions` till `applicationDefinitions`
+
+### <a name="network"></a>Nätverk
+
+* Stöd har lagts till för tillgänglighetszonen till underkommandon `network lb` och `network public-ip`
+* Stöd har lagts till för IPv6 Microsoft-peering till `express-route`
+* Gruppkommandon för `asg`-programsäkerhet har lagts till
+* Argumentet `--application-security-groups` har lagts till för `nic [create|ip-config create|ip-config update]`
+* Argumenten `--source-asgs` och `--destination-asgs` har lagts till för `nsg rule [create|update]`
+* Argumenten `--ddos-protection` och `--vm-protection` har lagts till för `vnet [create|update]`
+* `network [vnet-gateway|vpn-client|show-url]`-kommandon har lagts till
+
+### <a name="storage"></a>Lagring
+
+* Problem har åtgärdats där `storage account network-rule`-kommandon kan misslyckas efter uppdatering av SDK
+
+### <a name="eventgrid"></a>Eventgrid
+
+* Azure Event Grid Python SDK har uppdaterats för att använda en senare API-version "2017-09-15-preview"
+
+### <a name="sql"></a>SQL
+
+* Argumentet `sql server list` för `--resource-group` har ändrats så att det är valfritt. Om inget anges returneras alla sql-servrar i prenumerationen
+* Parametern `--no-wait` har lagts till för `db [create|copy|restore|update|replica create|create|update]` och `dw [create|update]`
+
+### <a name="keyvault"></a>KeyVault
+
+* Stöd har lagts till för Keyvault-kommandon bakom en proxy
+
+### <a name="vm"></a>Virtuell dator
+
+* Stöd har lagts till för tillgänglighetszon till `[vm|vmss|disk] create`
+* Problem har åtgärdats där användning av `--app-gateway ID` med `vmss create` kunde orsaka fel
+* Argumentet `--asgs` har lagts till för `vm create`
+* Stöd har lagts till för att köra kommandon på virtuella datorer med `vm run-command`
+* [FÖRHANDSVERSION] Stöd har lagts till för VMSS-diskkryptering med `vmss encryption`
+* Stöd har lagts till för att utföra underhåll på virtuella datorer med `vm perform-maintenance`
+
+### <a name="acs"></a>ACS
+
+* [FÖRHANDSVERSION] Argumentet `--orchestrator-release` har lagts till i `acs create` för ACS-förhandsversionsregioner
+
+### <a name="appservice"></a>App Service
+
+* Möjlighet att uppdatera och visa autentiseringsinställningar med `webapp auth [update|show]` har lagts till
+
+### <a name="backup"></a>Säkerhetskopiering
+
+* Förhandsversion
+
 
 ## <a name="september-11-2017"></a>11 september 2017
 
