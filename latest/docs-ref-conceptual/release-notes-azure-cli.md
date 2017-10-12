@@ -247,7 +247,7 @@ Version 2.0.13
 * Uppdaterat till Batch SDK 3.1.0 och Batch Management SDK 4.1.0
 * Ett nytt kommando har lagts till för att visa antalet uppgifter för ett jobb
 * En bugg i bearbetningen av SAS-URL:er för resursfiler har åtgärdats
-* Nu har slutpunkten för ett Batch-konto stöd för ett valfritt ”https://”-prefix
+* Nu har slutpunkten för ett Batch-konto stöd för ett valfritt ”https://” -prefix
 * Stöd har lagts till för att lägga till listor med fler än 100 uppgifter i ett jobb
 * Felsökningsloggning har lagts till för inläsning av kommandomodulen Extensions
 
