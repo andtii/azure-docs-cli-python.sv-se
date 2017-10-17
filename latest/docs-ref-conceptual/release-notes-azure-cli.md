@@ -12,13 +12,71 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: 72630c52b5e6afd69809ff19145717c0d65e0252
-ms.sourcegitcommit: 3a490ae3a2a1b2e63a062806f9b720fa4c6be01e
+ms.openlocfilehash: 2ea9daa558200204750f19b5d22685587ff097ef
+ms.sourcegitcommit: 376bc0601aba890630dadd55908c1a65ddf40f5a
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/25/2017
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
+
+## <a name="october-9-2017"></a>9 oktober 2017
+
+Version 2.0.19
+
+### <a name="core"></a>Kärna
+
+* Hantering av URL:er för ADFS-utfärdare med ett avslutande snedstreck till Azure Stack har lagts till
+
+### <a name="appservice"></a>App Service
+
+* Generisk uppdatering med nytt kommando `webapp update` har lagts till
+
+### <a name="batch"></a>Batch
+
+* Har uppdaterats till Batch SDK 4.0.0
+* Alternativet `--image` har uppdaterats för att VirtualMachineConfiguration ska ha stöd för ARM-avbildningsreferenser utöver publish:offer:sku:version
+* Stöd för den nya CLI-tilläggsmodellen för kommandon för batchtillägg har lagts till
+* Batch-stöd från komponentmodellen har tagits bort
+
+### <a name="batchai"></a>Batchai
+
+* Första versionen av Batch AI-modulen
+
+### <a name="keyvault"></a>KeyVault
+
+* Autentiseringsproblem med Key Vault har åtgärdats vid användning av ADFS på Azure Stack. [(#4448)](https://github.com/Azure/azure-cli/issues/4448)
+
+### <a name="network"></a>Nätverk
+
+* Argumentet `--server` för `application-gateway address-pool create` har ändrats så att det är frivilligt, vilket möjliggör tomma adresspooler
+* `traffic-manager` har uppdaterats så att de senaste funktionerna stöds
+
+### <a name="resource"></a>Resurs
+
+* Stöd har lagts till för alternativ för `--resource-group/-g` för resursgruppnamnet till `group`
+* Kommandon har lagts till för `account lock` så att de fungerar med lås på prenumerationsnivån
+* Kommandon har lagts till för `group lock` så att de fungerar med lås på gruppnivån
+* Kommandon har lagts till för `resource lock` så att de fungerar med lås på resursnivån
+
+### <a name="sql"></a>SQL
+
+* Stöd har lagts till för transparent datakryptering med SQL och transparent datakryptering med Bring Your Own Key
+* Kommandot `db list-deleted` och parametern `db restore --deleted-time` har lagts till, vilket gör att det går att hitta och återställa borttagna databaser
+* `db op list` och `db op cancel` har lagts till, vilket gör det möjligt att lista och avbryta åtgärder som pågår på databasen
+
+### <a name="storage"></a>Lagring
+
+* Stöd har lagts till för ögonblicksbild av filresurs
+
+### <a name="vm"></a>Virtuell dator
+
+* Ett bugg har åtgärdats i `vm show` där användning av `-d` orsakade en krasch på privata IP-adresser som saknas
+* [FÖRHANDSVERSION] Stöd har lagts till för löpande uppgradering till `vmss create`
+* Stöd har lagts till för att uppdatera krypteringsinställningar med `vm encryption enable`
+* Parametern `--os-disk-size-gb` har lagts till i `vm create`
+* Parametern `--license-type` har lagts till för Windows till `vmss create`
+
 
 ## <a name="september-22-2017"></a>22 september 2017
 
@@ -247,7 +305,7 @@ Version 2.0.13
 * Uppdaterat till Batch SDK 3.1.0 och Batch Management SDK 4.1.0
 * Ett nytt kommando har lagts till för att visa antalet uppgifter för ett jobb
 * En bugg i bearbetningen av SAS-URL:er för resursfiler har åtgärdats
-* Nu har slutpunkten för ett Batch-konto stöd för ett valfritt ”https://” -prefix
+* Nu har slutpunkten för ett Batch-konto stöd för ett valfritt ”https://”-prefix
 * Stöd har lagts till för att lägga till listor med fler än 100 uppgifter i ett jobb
 * Felsökningsloggning har lagts till för inläsning av kommandomodulen Extensions
 

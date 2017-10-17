@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 935814d56d0a6be00f626da860dc643adbf14804
-ms.sourcegitcommit: 9f38efbb7efd800ee5cab80d6641770d268c5a68
+ms.openlocfilehash: 1b47bd5603f5214dd11d772caaebe8cf380df5c0
+ms.sourcegitcommit: 5e862fd0a93cf668fa76a74ae1c7505d3c8c45f2
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 10/09/2017
 ---
 # <a name="install-azure-cli-20"></a>Installera Azure CLI 2.0
 
@@ -104,7 +104,10 @@ Om du vill installera CLI i Windows och använda det på Windows-kommandoraden l
 
 ## <a name="install-on-debianubuntu-with-apt-get"></a>Installera i Debian/Ubuntu med apt-get
 
-Du kan installera Azure CLI 2.0 via `apt-get` på Debian/Ubuntu-baserade system.
+För distributioner som använder `apt`-pakethanteraren kan du installera Azure CLI 2.0 via `apt-get`.
+
+> [!NOTE]
+> Distributionen måste ha stöd för Python 2.7.x eller Python 3.x för att kunna använda CLI.
 
 1. Ändra listan med källor:
  
@@ -134,7 +137,10 @@ Du kan installera Azure CLI 2.0 via `apt-get` på Debian/Ubuntu-baserade system.
 
 ## <a name="install-on-rhel-fedora-and-centos-with-yum"></a>Installera på RHEL, Fedora och CentOS med yum
 
-För distributioner som bygger på RedHat och innehåller `yum`-pakethanteraren kan du installera Azure CLI 2.0 via `yum`.
+För distributioner som använder `yum`-pakethanteraren kan du installera Azure CLI 2.0 via `yum`.
+
+> [!NOTE]
+> Distributionen måste ha stöd för Python 2.7.x eller Python 3.x för att kunna använda CLI.
 
 1. Importera nyckeln för Microsoft-lagringsplatsen:
 
@@ -158,6 +164,11 @@ För distributioner som bygger på RedHat och innehåller `yum`-pakethanteraren 
 4. Kör CLI från kommandotolken med kommandot `az`.
 
 ## <a name="install-on-opensuse-and-sle-with-zypper"></a>Installera på openSUSE och SLE med zypper
+
+För distributioner som använder `zypper`-pakethanteraren kan du installera Azure CLI 2.0 via `zypper`.
+
+> [!NOTE]
+> Distributionen måste ha stöd för Python 2.7.x eller Python 3.x för att kunna använda CLI.
 
 1. Importera nyckeln för Microsoft-lagringsplatsen:
 
@@ -201,9 +212,9 @@ CLI installeras i avbildningen som `az`-kommandot i `/usr/local/bin`.
 > docker run -v ${HOME}:/root azuresdk/azure-cli-python:<version>
 > ```
 
-## <a name="a-namelinuxinstall-on-linux-without-apt-get"></a><a name="Linux"/>Installera i Linux utan apt-get
+## <a name="a-namelinuxinstall-on-linux-without-a-package-manager"></a><a name="Linux"/>Installera på Linux utan en pakethanterare
 
-Om det är möjligt rekommenderar vi att du installerar CLI med en pakethanterare. För distributioner som inte har någon pakethanterare kan du installera manuellt.
+Om det är möjligt rekommenderar vi att du installerar CLI med en pakethanterare. Om du inte vill lägga till Microsofts lagringsplatser eller arbetar med en distribution som saknar tillhandahållet paket kan du installera CLI manuellt.
 
 1. Kontrollera att din Linux-distribution uppfyller alla förhandskrav.
 
@@ -219,7 +230,7 @@ Om det är möjligt rekommenderar vi att du installerar CLI med en pakethanterar
    SUSE OpenSUSE 13.2    | sudo zypper refresh && sudo zypper --non-interactive install curl gcc python python-xml libffi-devel python-devel openssl-devel
    ```
 
-Om din distribution inte visas i listan ovan måste du installera [Python](https://www.python.org/downloads/), [libffi](https://sourceware.org/libffi/) och [OpenSSL](https://www.openssl.org/source/).
+Om distributionen inte finns med i listan ovan måste du installera [Python 2.7 eller senare](https://www.python.org/downloads/), [libffi](https://sourceware.org/libffi/) och [OpenSSL](https://www.openssl.org/source/).
 
 2. Installera CLI med `curl`.
 
@@ -420,6 +431,12 @@ Om du använder skriptet på https://aka.ms/InstallAzureCli för att installera 
    ```
 
 2. Ta bort raden `<install location>/lib/azure-cli/az.completion` från `<install location>/.bash_profile`.
+
+3. Om gränssnittet använder kommandocache läser du in det på nytt.
+
+   ```bash
+   hash -r
+   ```
 
 > [!Note]
 > Standardplatsen för installation är `/Users/<username>`.
