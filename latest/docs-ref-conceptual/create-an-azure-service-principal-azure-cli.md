@@ -5,18 +5,18 @@ keywords: Azure CLI 2.0, Azure Active Directory, Azure Active directory, AD, RBA
 author: rloutlaw
 ms.author: routlaw
 manager: douge
-ms.date: 02/27/2017
+ms.date: 10/12/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: fab89cb8-dac1-4e21-9d34-5eadd5213c05
-ms.openlocfilehash: f37df762a9a605ea649b215f38f2e9866614f4ac
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: 5ae8af014b821fe5297ea44056ef33c4570d1d47
+ms.sourcegitcommit: 5cfbea569fef193044da712708bc6957d3fb557c
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 10/14/2017
 ---
 # <a name="create-an-azure-service-principal-with-azure-cli-20"></a>Skapa Azure-tjänstens huvudnamn med Azure CLI 2.0
 
@@ -31,7 +31,7 @@ Den här artikeln vägleder dig genom att skapa en säkerhetsprincip med Azure C
 
 Ett huvudnamn för Azure-tjänsten är en säkerhetsidentitet som används av appar som skapats av användare, tjänster och automatiseringsverktyg för att få åtkomst till specifika Azure-resurser. Se det som en användaridentitet (inloggning och lösenord eller certifikat) med en viss roll och väl kontrollerad behörighet att komma åt dina resurser. Den behöver bara kunna utföra vissa åtgärder, till skillnad från en allmän användaridentitet. Det ger bättre säkerhet om du bara ger den lägsta behörighetsnivån som krävs för att den ska kunna utföra sina administrativa uppgifter. 
 
-För närvarande stöder bara Azure CLI 2.0 skapande av lösenordsbaserade autentiseringsuppgifter. I det här avsnittet tar vi upp hur du skapar ett huvudnamn för tjänsten med ett specifikt lösenord och också hur du kan tilldela den specifika roller.
+Azure CLI 2.0 har stöd för att skapa lösenordsbaserade autentiseringsuppgifter och autentiseringsuppgifter för certifikat. Det här avsnittet handlar om båda typerna av autentiseringsuppgifter.
 
 ## <a name="verify-your-own-permission-level"></a>Kontrollera din egen behörighetsnivå
 
@@ -76,9 +76,9 @@ az ad app list --display-name MyDemoWebApp
 
 Alternativet `--display-name` filtrerar den returnerade listan med appar för att vissa att dem med `displayName` börjar med MyDemoWebApp.
 
-### <a name="create-the-service-principal"></a>Skapa huvudnamn för tjänsten
+### <a name="create-a-service-principal-with-a-password"></a>Skapa ett huvudnamn för tjänsten med ett lösenord
 
-Skapa huvudnamn för tjänsten med [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac). 
+Använd [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) och parametern `--password` för att skapa tjänstens huvudnamn med ett lösenord. Om du inte anger en roll eller ett omfång är standardinställningen rollen **Deltagare** för den aktuella prenumerationen. Om du skapar ett huvudnamn för tjänsten utan att använda vare sig `--password` eller parametern `--cert` används lösenordsautentisering och ett lösenord skapas för dig.
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name {appId} --password "{strong password}" 
@@ -96,6 +96,29 @@ az ad sp create-for-rbac --name {appId} --password "{strong password}"
 
  > [!WARNING] 
  > Skapa inte ett osäkert lösenord.  Följ vägledningen med [regler för lösenord och begränsningar i Azure AD](/azure/active-directory/active-directory-passwords-policy).
+
+### <a name="create-a-service-principal-with-a-self-signed-certificate"></a>Skapa ett huvudnamn för tjänsten med ett självsignerat certifikat
+
+Använd [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) och parametern `--create-cert` för att skapa ett självsignerat certifikat.
+
+```azurecli-interactive
+az ad sp create-for-rbac --name {appId} --create-cert
+```
+
+```json
+{
+  "appId": "c495db57-82e0-4e2e-9369-069dff176858",
+  "displayName": "azure-cli-2017-10-12-22-15-38",
+  "fileWithCertAndPrivateKey": "<path>/<file-name>.pem",
+  "name": "http://MyDemoWebApp",
+  "password": null,
+  "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+}
+```
+
+Kopiera värdet för svaret `fileWithCertAndPrivateKey`. Det här är certifikatfilen som kommer att användas för autentisering.
+
+I [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) finns fler alternativ när du använder certifikat.
 
 ### <a name="get-information-about-the-service-principal"></a>Hämta information om tjänstens huvudnamn
 
@@ -118,10 +141,10 @@ az ad sp show --id a487e0c1-82af-47d9-9a0b-af184eb87646d
 
 ### <a name="sign-in-using-the-service-principal"></a>Logga in med tjänstens huvudnamn
 
-Du kan nu logga in som det nya huvudnamnet för tjänsten för appen med hjälp av det *appId* och *lösenordet* från `az ad sp show`.  Ange *klientvärdet* från resultatet av `az ad sp create-for-rbac`.
+Du kan nu logga in som det nya huvudnamnet för tjänsten för appen med *appId* från `az ad sp show` och antingen *lösenordet* eller sökvägen till det skapade certifikatet.  Ange *klientvärdet* från resultatet av `az ad sp create-for-rbac`.
 
 ```azurecli-interactive
-az login --service-principal -u a487e0c1-82af-47d9-9a0b-af184eb87646d --password {password} --tenant {tenant}
+az login --service-principal -u a487e0c1-82af-47d9-9a0b-af184eb87646d --password {password-or-path-to-cert} --tenant {tenant}
 ``` 
 
 Dessa utdata visas efter en lyckad inloggning:

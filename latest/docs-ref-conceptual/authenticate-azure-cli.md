@@ -12,15 +12,17 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 65becd3a-9d69-4415-8a30-777d13a0e7aa
-ms.openlocfilehash: 4ab4f0de38614eff00f55bad96ea886bb007f3c0
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: 3ba1dd840102c738ccd9eb62a0b9db612cec48d1
+ms.sourcegitcommit: 5cfbea569fef193044da712708bc6957d3fb557c
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 10/14/2017
 ---
 # <a name="log-in-with-azure-cli-20"></a>Logga in med Azure CLI 2.0
 
-Du kan logga in och autentisera med Azure CLI på flera olika sätt. Det är enklast att komma igång genom att logga in interaktivt via webbläsaren eller att logga in på kommandoraden. Den rekommenderade metoden är att använda huvudnamn för tjänsten, vilket gör det möjligt för dig att skapa icke-interaktiva konton som du kan använda för att manipulera resurser. Du kan säkerställa att dina automatiseringsskript är ännu säkrare genom att tilldela dem lämplig behörighet som krävs för ett huvudnamn för tjänsten.
+Du kan logga in och autentisera med Azure CLI på flera olika sätt. Det är enklast att komma igång genom att logga in interaktivt via webbläsaren eller att logga in på kommandoraden. Den rekommenderade metoden är att använda huvudnamn för tjänsten, vilket gör det möjligt för dig att skapa icke-interaktiva konton som du kan använda för att manipulera resurser. Du kan säkerställa att dina automatiseringsskript är ännu säkrare genom att tilldela dem lämplig behörighet som krävs för ett huvudnamn för tjänsten. 
+
+Inga av dina privata autentiseringsuppgifter lagras lokalt. Istället skapas en autentiseringstoken av Azure och lagras. När du loggat in är din lokala inloggningstoken giltig till dess att det går 14 dagar utan att den används. Då måste du autentisera på nytt.
 
 Kommandon som du kör med CLI körs mot standardprenumerationen.  Om du har mer än en prenumeration kanske du behöver [bekräfta din standardprenumeration](manage-azure-subscriptions-azure-cli.md) och ändra den efter behov.
 
