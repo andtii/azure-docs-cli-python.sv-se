@@ -4,6 +4,9 @@
 ## [Cloud Shell](/azure/cloud-shell/overview)
 ## [Logga in](authenticate-azure-cli.md)
 ### [Skapa ett huvudnamn för tjänsten](create-an-azure-service-principal-azure-cli.md)
+### Använda hanterade tjänstidentiteter
+#### [Konfigurera MSI för en virtuell Azure-dator](/azure/active-directory/msi-qs-configure-cli-windows-vm?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json)
+#### [Logga in på en virtuell Azure-dator med MSI](/azure/active-directory/msi-how-to-get-access-token-using-msi?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json)
 ## [Interaktivt läge](interactive-azure-cli.md)
 ## Distributionsmallar
 ### [Använd distributionsmallar](/azure/azure-resource-manager/resource-group-template-deploy-cli?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json)
