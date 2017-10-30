@@ -12,13 +12,54 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: 2ea9daa558200204750f19b5d22685587ff097ef
-ms.sourcegitcommit: 376bc0601aba890630dadd55908c1a65ddf40f5a
+ms.openlocfilehash: 429b099dabd27d9356e88791f955ec52acd2a5f9
+ms.sourcegitcommit: 9b36c15dc0e10024e23b8018604f5ef63c025de1
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 10/11/2017
+ms.lasthandoff: 10/24/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
+
+## <a name="october-24-2017"></a>24 oktober 2017
+
+Version 2.0.20
+
+### <a name="core"></a>Kärna
+
+* `2017-03-09-profile` har uppdaterats för att använda `MGMT_STORAGE`, API-version `2016-01-01`
+
+### <a name="acr"></a>ACR
+
+* Resurshanteringen har uppdaterats för att peka på API-version `2017-10-01`
+* SKU:n för BYOS ("bring your own storage") har ändrats till klassisk
+* Register-SKU:erna har bytt namn till Basic, Standard och Premium
+
+### <a name="acs"></a>ACS
+
+* [FÖRHANDSVERSION] `az aks`-kommandon har lagts till
+* Kubernetes `get-credentials` har åtgärdats
+
+### <a name="appservice"></a>App Service
+
+* Problem med att nedladdade `webapp`-loggar kunde vara ogiltiga har åtgärdats
+
+### <a name="component"></a>Komponent
+
+* Ett tydligare utfasningsmeddelande har lagts till för alla installationsprogram och bekräftelsefrågor
+
+### <a name="monitor"></a>Övervaka
+
+* `action-group`-kommandon har lagts till
+
+### <a name="resource"></a>Resurs
+
+* Inkompatibilitet med den senaste versionen av msrest-beroende i `group export` har åtgärdats
+* `policy assignment create` har åtgärdats så att det fungerar med inbyggda principdefinitioner och principuppsättningsdefinitioner
+
+### <a name="vm"></a>Virtuell dator
+
+* Argumentet `--accelerated-networking` har lagts till för `vmss create`
+
 
 ## <a name="october-9-2017"></a>9 oktober 2017
 
