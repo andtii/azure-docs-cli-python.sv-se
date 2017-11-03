@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: fab89cb8-dac1-4e21-9d34-5eadd5213c05
-ms.openlocfilehash: 5ae8af014b821fe5297ea44056ef33c4570d1d47
-ms.sourcegitcommit: 5cfbea569fef193044da712708bc6957d3fb557c
+ms.openlocfilehash: a6ad5611f3e507b65e160122c87e22ec44546588
+ms.sourcegitcommit: e8fe15e4f7725302939d726c75ba0fb3cad430be
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 10/14/2017
+ms.lasthandoff: 10/27/2017
 ---
 # <a name="create-an-azure-service-principal-with-azure-cli-20"></a>Skapa Azure-tjänstens huvudnamn med Azure CLI 2.0
 
@@ -78,7 +78,7 @@ Alternativet `--display-name` filtrerar den returnerade listan med appar för at
 
 ### <a name="create-a-service-principal-with-a-password"></a>Skapa ett huvudnamn för tjänsten med ett lösenord
 
-Använd [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) och parametern `--password` för att skapa tjänstens huvudnamn med ett lösenord. Om du inte anger en roll eller ett omfång är standardinställningen rollen **Deltagare** för den aktuella prenumerationen. Om du skapar ett huvudnamn för tjänsten utan att använda vare sig `--password` eller parametern `--cert` används lösenordsautentisering och ett lösenord skapas för dig.
+Använd [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) och parametern `--password` för att skapa tjänstens huvudnamn med ett lösenord. Om du inte anger någon roll eller något omfång så blir standardinställningen rollen **Deltagare** för den aktuella prenumerationen. Om du skapar ett huvudnamn för tjänsten utan att använda vare sig `--password` eller parametern `--cert` används lösenordsautentisering och ett lösenord skapas för dig.
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name {appId} --password "{strong password}" 
