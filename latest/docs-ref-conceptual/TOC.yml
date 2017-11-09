@@ -34,6 +34,8 @@
       href: query-azure-cli.md
     - name: Prenumerationer
       href: manage-azure-subscriptions-azure-cli.md
+    - name: Tillägg
+      href: azure-cli-extensions.md
     - name: Viktig information
       href: release-notes-azure-cli.md
 - name: Exempelskript
