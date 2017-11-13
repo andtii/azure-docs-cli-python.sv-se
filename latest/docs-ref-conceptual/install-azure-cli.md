@@ -5,18 +5,18 @@ keywords: Azure CLI,Install Azure CLI,Azure Python CLI,Azure CLI Reference
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 08/17/2017
+ms.date: 11/01/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 4703a192e23b04d0ad42daf60e415d798610cce0
-ms.sourcegitcommit: 932cc86172ab55c00346f62504787c096ed7b2bd
+ms.openlocfilehash: 2b56382355cad5313a604ed1f493a2bcbebf3e27
+ms.sourcegitcommit: e9b4c6dd9093980b69ca47f93f44ac54d0e5b68a
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 10/24/2017
+ms.lasthandoff: 11/03/2017
 ---
 # <a name="install-azure-cli-20"></a>Installera Azure CLI 2.0
 
@@ -102,12 +102,12 @@ Om du vill installera CLI i Windows och använda det på Windows-kommandoraden l
 
 5.  Kör CLI från kommandotolken med kommandot `az`.
 
-## <a name="install-on-debianubuntu-with-apt-get"></a>Installera i Debian/Ubuntu med apt-get
+## <a name="install-with-apt-package-manager"></a>Installera med apt-pakethanteraren 
 
-För distributioner som använder `apt`-pakethanteraren kan du installera Azure CLI 2.0 via `apt-get`.
+För distributioner som använder `apt`-pakethanteraren, t.ex. Ubuntu eller Debian, kan du installera Azure CLI 2.0 via `apt-get`.
 
 > [!NOTE]
-> Distributionen måste ha stöd för Python 2.7.x eller Python 3.x för att kunna använda CLI.
+> Du måste ha Python 2.7.x eller Python 3.x för att kunna använda CLI. Om distributionen inte har ett paket för någon av dessa kan du [installera Python](https://www.python.org/downloads/).
 
 1. Ändra listan med källor:
  
@@ -135,12 +135,12 @@ För distributioner som använder `apt`-pakethanteraren kan du installera Azure 
 
 3.  Kör CLI från kommandotolken med kommandot `az`.
 
-## <a name="install-on-rhel-fedora-and-centos-with-yum"></a>Installera på RHEL, Fedora och CentOS med yum
+## <a name="install-with-yum-package-manager"></a>Installera med yum-pakethanteraren
 
-För distributioner som använder `yum`-pakethanteraren kan du installera Azure CLI 2.0 via `yum`.
+För distributioner som använder `yum`-pakethanteraren, t.ex. Red Hat Enterprise Linux (RHEL), Fedora eller CentOS, kan du installera Azure CLI 2.0 via `yum`.
 
 > [!NOTE]
-> Distributionen måste ha stöd för Python 2.7.x eller Python 3.x för att kunna använda CLI.
+> Du måste ha Python 2.7.x eller Python 3.x för att kunna använda CLI. Om distributionen inte har ett paket för någon av dessa kan du [installera Python](https://www.python.org/downloads/).
 
 1. Importera nyckeln för Microsoft-lagringsplatsen:
 
@@ -163,12 +163,12 @@ För distributioner som använder `yum`-pakethanteraren kan du installera Azure 
 
 4. Kör CLI från kommandotolken med kommandot `az`.
 
-## <a name="install-on-opensuse-and-sle-with-zypper"></a>Installera på openSUSE och SLE med zypper
+## <a name="install-with-zypper-package-manager"></a>Installera med zypper-pakethanteraren
 
-För distributioner som använder `zypper`-pakethanteraren kan du installera Azure CLI 2.0 via `zypper`.
+För distributioner som använder `zypper`-pakethanteraren, t.ex. OpenSUSE eller SLE, kan du installera Azure CLI 2.0 via `zypper`.
 
 > [!NOTE]
-> Distributionen måste ha stöd för Python 2.7.x eller Python 3.x för att kunna använda CLI.
+> Du måste ha Python 2.7.x eller Python 3.x för att kunna använda CLI. Om distributionen inte har ett paket för någon av dessa kan du [installera Python](https://www.python.org/downloads/).
 
 1. Importera nyckeln för Microsoft-lagringsplatsen:
 
@@ -266,7 +266,7 @@ Du kan behöva rensa cacheminnet för gränssnittets kommando-hash. Kör
 hash -r
 ```
 
-och se om problemet är löst.
+och se om problemet är löst. Kommandot kanske inte finns i `$PATH`. Se till att `<install path>/bin` visas i `$PATH`, och starta om gränssnittet vid behov.
 
 ## <a name="uninstall-cli-1x-versions"></a>Avinstallera CLI 1.x-versioner
 
@@ -316,7 +316,7 @@ Uppdatera Azure CLI genom att använda samma metod som du använde för att inst
 
 Kör [Azure CLI-installationsprogrammet (MSI)](https://aka.ms/InstallAzureCliWindows) igen.
 
-### <a name="update-with-apt-get"></a>Uppdatera med apt-get
+### <a name="update-with-apt"></a>Uppdatera med apt
 
 Använd `apt-get upgrade` för att uppdatera CLI-paketet.
 
@@ -330,6 +330,24 @@ Använd `apt-get upgrade` för att uppdatera CLI-paketet.
 > ```bash
 > sudo apt-get update && sudo apt-get install --only-upgrade -y azure-cli
 > ```
+
+### <a name="update-with-yum"></a>Uppdatera med yum
+
+Uppdatera Azure CLI med kommandot `yum update`.
+
+```bash
+yum check-update
+sudo yum update azure-cli
+```
+
+### <a name="update-with-zypper"></a>Uppdatera med zypper
+
+Du kan uppdatera paketet med kommandot `zypper update`.
+
+```bash
+sudo zypper refresh
+sudo zypper update azure-cli
+```
 
 ### <a name="update-with-docker"></a>Uppdatera med Docker
 
@@ -381,12 +399,54 @@ Avinstallera `azure-cli`-paketet.
 
 Kör [MSI](https://aka.ms/InstallAzureCliWindows) igen och välj Avinstallera.
 
-### <a name="uninstall-with-apt-get"></a>Avinstallera med apt-get
+### <a name="uninstall-with-apt"></a>Avinstallera med apt
 
 Avinstallera via `apt-get remove`:
 
   ```bash
   sudo apt-get remove -y azure-cli
+  ```
+
+### <a name="uninstall-with-yum"></a>Avinstallera med yum
+
+1. Ta bort paketet från datorn.
+
+   ```bash
+   sudo yum remove azure-cli
+   ```
+
+2. Ta bort lagringsinformationen om du inte tänker installera om CLI.
+
+   ```bash
+   sudo rm /etc/yum.repos.d/azure-cli.repo
+   ```
+
+3. Om du har tagit bort lagringsinformationen ska du också ta bort Microsoft GPG-signaturnyckeln.
+
+  ```bash
+  MSFT_KEY=`rpm -qa gpg-pubkey /* --qf "%{version}-%{release} %{summary}\n" | grep Microsoft | awk '{print $1}'`
+  rpm -e --allmatches gpg-pubkey-$MSFT_KEY
+  ```
+
+### <a name="uninstall-with-zypper"></a>Avinstallera med zypper
+
+1. Ta bort paketet från datorn.
+
+    ```bash
+    sudo zypper remove -y azure-cli
+    ```
+
+2. Ta bort lagringsinformationen om du inte tänker installera om CLI.
+
+  ```bash
+  sudo rm /etc/zypp/repos.d/azure-cli.repo
+  ```
+
+3. Om du har tagit bort lagringsinformationen ska du också ta bort Microsoft GPG-signaturnyckeln.
+
+  ```bash
+  MSFT_KEY=`rpm -qa gpg-pubkey /* --qf "%{version}-%{release} %{summary}\n" | grep Microsoft | awk '{print $1}'`
+  rpm -e --allmatches gpg-pubkey-$MSFT_KEY
   ```
 
 ### <a name="uninstall-with-docker"></a>Avinstallera med Docker
