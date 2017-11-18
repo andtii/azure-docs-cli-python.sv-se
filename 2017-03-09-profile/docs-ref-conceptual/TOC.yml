@@ -12,22 +12,30 @@
       items:
         - name: Skapa ett huvudnamn för tjänsten
           href: create-an-azure-service-principal-azure-cli.md
+        - name: Använda hanterade tjänstidentiteter
+          items:
+            - name: Konfigurera MSI för en virtuell Azure-dator
+              href: /azure/active-directory/msi-qs-configure-cli-windows-vm?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
+            - name: Logga in på en virtuell Azure-dator med MSI
+              href: /azure/active-directory/msi-how-to-get-access-token-using-msi?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
     - name: Interaktivt läge
       href: interactive-azure-cli.md
-    - name: Distribuera
+    - name: Distributionsmallar
       items:
-        - name: Med mallar
+        - name: Använd distributionsmallar
           href: /azure/azure-resource-manager/resource-group-template-deploy-cli?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
-        - name: Exportera mallar
+        - name: Exportera distributionsmallar
           href: /azure/azure-resource-manager/resource-manager-export-template-cli?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
-        - name: Med privata mallar
-          href: /azure-resource-manager/resource-manager-cli-sas-token?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
+        - name: Distribuera från privata mallar
+          href: /azure/azure-resource-manager/resource-manager-cli-sas-token?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
     - name: Utdataformat
       href: format-output-azure-cli.md
     - name: Fråga
       href: query-azure-cli.md
     - name: Prenumerationer
       href: manage-azure-subscriptions-azure-cli.md
+    - name: Tillägg
+      href: azure-cli-extensions.md
     - name: Viktig information
       href: release-notes-azure-cli.md
 - name: Exempelskript

@@ -12,13 +12,246 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: e893b99349bbf2a5eec8af254158eb07001f1da7
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: 429b099dabd27d9356e88791f955ec52acd2a5f9
+ms.sourcegitcommit: 9b36c15dc0e10024e23b8018604f5ef63c025de1
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 10/24/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
+
+## <a name="october-24-2017"></a>24 oktober 2017
+
+Version 2.0.20
+
+### <a name="core"></a>Kärna
+
+* `2017-03-09-profile` har uppdaterats för att använda `MGMT_STORAGE`, API-version `2016-01-01`
+
+### <a name="acr"></a>ACR
+
+* Resurshanteringen har uppdaterats för att peka på API-version `2017-10-01`
+* SKU:n för BYOS ("bring your own storage") har ändrats till klassisk
+* Register-SKU:erna har bytt namn till Basic, Standard och Premium
+
+### <a name="acs"></a>ACS
+
+* [FÖRHANDSVERSION] `az aks`-kommandon har lagts till
+* Kubernetes `get-credentials` har åtgärdats
+
+### <a name="appservice"></a>App Service
+
+* Problem med att nedladdade `webapp`-loggar kunde vara ogiltiga har åtgärdats
+
+### <a name="component"></a>Komponent
+
+* Ett tydligare utfasningsmeddelande har lagts till för alla installationsprogram och bekräftelsefrågor
+
+### <a name="monitor"></a>Övervaka
+
+* `action-group`-kommandon har lagts till
+
+### <a name="resource"></a>Resurs
+
+* Inkompatibilitet med den senaste versionen av msrest-beroende i `group export` har åtgärdats
+* `policy assignment create` har åtgärdats så att det fungerar med inbyggda principdefinitioner och principuppsättningsdefinitioner
+
+### <a name="vm"></a>Virtuell dator
+
+* Argumentet `--accelerated-networking` har lagts till för `vmss create`
+
+
+## <a name="october-9-2017"></a>9 oktober 2017
+
+Version 2.0.19
+
+### <a name="core"></a>Kärna
+
+* Hantering av URL:er för ADFS-utfärdare med ett avslutande snedstreck till Azure Stack har lagts till
+
+### <a name="appservice"></a>App Service
+
+* Generisk uppdatering med nytt kommando `webapp update` har lagts till
+
+### <a name="batch"></a>Batch
+
+* Har uppdaterats till Batch SDK 4.0.0
+* Alternativet `--image` har uppdaterats för att VirtualMachineConfiguration ska ha stöd för ARM-avbildningsreferenser utöver publish:offer:sku:version
+* Stöd för den nya CLI-tilläggsmodellen för kommandon för batchtillägg har lagts till
+* Batch-stöd från komponentmodellen har tagits bort
+
+### <a name="batchai"></a>Batchai
+
+* Första versionen av Batch AI-modulen
+
+### <a name="keyvault"></a>KeyVault
+
+* Autentiseringsproblem med Key Vault har åtgärdats vid användning av ADFS på Azure Stack. [(#4448)](https://github.com/Azure/azure-cli/issues/4448)
+
+### <a name="network"></a>Nätverk
+
+* Argumentet `--server` för `application-gateway address-pool create` har ändrats så att det är frivilligt, vilket möjliggör tomma adresspooler
+* `traffic-manager` har uppdaterats så att de senaste funktionerna stöds
+
+### <a name="resource"></a>Resurs
+
+* Stöd har lagts till för alternativ för `--resource-group/-g` för resursgruppnamnet till `group`
+* Kommandon har lagts till för `account lock` så att de fungerar med lås på prenumerationsnivån
+* Kommandon har lagts till för `group lock` så att de fungerar med lås på gruppnivån
+* Kommandon har lagts till för `resource lock` så att de fungerar med lås på resursnivån
+
+### <a name="sql"></a>SQL
+
+* Stöd har lagts till för transparent datakryptering med SQL och transparent datakryptering med Bring Your Own Key
+* Kommandot `db list-deleted` och parametern `db restore --deleted-time` har lagts till, vilket gör att det går att hitta och återställa borttagna databaser
+* `db op list` och `db op cancel` har lagts till, vilket gör det möjligt att lista och avbryta åtgärder som pågår på databasen
+
+### <a name="storage"></a>Lagring
+
+* Stöd har lagts till för ögonblicksbild av filresurs
+
+### <a name="vm"></a>Virtuell dator
+
+* Ett bugg har åtgärdats i `vm show` där användning av `-d` orsakade en krasch på privata IP-adresser som saknas
+* [FÖRHANDSVERSION] Stöd har lagts till för löpande uppgradering till `vmss create`
+* Stöd har lagts till för att uppdatera krypteringsinställningar med `vm encryption enable`
+* Parametern `--os-disk-size-gb` har lagts till i `vm create`
+* Parametern `--license-type` har lagts till för Windows till `vmss create`
+
+
+## <a name="september-22-2017"></a>22 september 2017
+
+Version 2.0.18
+
+### <a name="resource"></a>Resurs
+
+* Stöd har lagts till för att visa inbyggda principdefinitioner
+* Stödlägesparametern har lagts till för att skapa principdefinitioner
+* Stöd har lagts till för UI-definitioner och mallar till `managedapp definition create`
+* [VIKTIG ÄNDRING] Resurstypen `managedapp` har ändrats från `appliances` till `applications` och `applianceDefinitions` till `applicationDefinitions`
+
+### <a name="network"></a>Nätverk
+
+* Stöd har lagts till för tillgänglighetszonen till underkommandon `network lb` och `network public-ip`
+* Stöd har lagts till för IPv6 Microsoft-peering till `express-route`
+* Gruppkommandon för `asg`-programsäkerhet har lagts till
+* Argumentet `--application-security-groups` har lagts till för `nic [create|ip-config create|ip-config update]`
+* Argumenten `--source-asgs` och `--destination-asgs` har lagts till för `nsg rule [create|update]`
+* Argumenten `--ddos-protection` och `--vm-protection` har lagts till för `vnet [create|update]`
+* `network [vnet-gateway|vpn-client|show-url]`-kommandon har lagts till
+
+### <a name="storage"></a>Lagring
+
+* Problem har åtgärdats där `storage account network-rule`-kommandon kan misslyckas efter uppdatering av SDK
+
+### <a name="eventgrid"></a>Eventgrid
+
+* Azure Event Grid Python SDK har uppdaterats för att använda en senare API-version "2017-09-15-preview"
+
+### <a name="sql"></a>SQL
+
+* Argumentet `sql server list` för `--resource-group` har ändrats så att det är valfritt. Om inget anges returneras alla sql-servrar i prenumerationen
+* Parametern `--no-wait` har lagts till för `db [create|copy|restore|update|replica create|create|update]` och `dw [create|update]`
+
+### <a name="keyvault"></a>KeyVault
+
+* Stöd har lagts till för Keyvault-kommandon bakom en proxy
+
+### <a name="vm"></a>Virtuell dator
+
+* Stöd har lagts till för tillgänglighetszon till `[vm|vmss|disk] create`
+* Problem har åtgärdats där användning av `--app-gateway ID` med `vmss create` kunde orsaka fel
+* Argumentet `--asgs` har lagts till för `vm create`
+* Stöd har lagts till för att köra kommandon på virtuella datorer med `vm run-command`
+* [FÖRHANDSVERSION] Stöd har lagts till för VMSS-diskkryptering med `vmss encryption`
+* Stöd har lagts till för att utföra underhåll på virtuella datorer med `vm perform-maintenance`
+
+### <a name="acs"></a>ACS
+
+* [FÖRHANDSVERSION] Argumentet `--orchestrator-release` har lagts till i `acs create` för ACS-förhandsversionsregioner
+
+### <a name="appservice"></a>App Service
+
+* Möjlighet att uppdatera och visa autentiseringsinställningar med `webapp auth [update|show]` har lagts till
+
+### <a name="backup"></a>Säkerhetskopiering
+
+* Förhandsversion
+
+
+## <a name="september-11-2017"></a>11 september 2017
+
+Version 2.0.17
+
+### <a name="core"></a>Kärna
+
+* Kommandomodulen kan ange eget korrelations-ID i telemetri
+* Åtgärdat JSON-dumpproblem när telemetri är angivet till diagnostikläge
+
+### <a name="acs"></a>Acs
+
+* Kommandot `acs list-locations` har lagts till
+* Fick `ssh-key-file` att leverera förväntat standardvärde
+
+### <a name="appservice"></a>App Service
+
+* Möjlighet att skapa en webbapp i en annan resursgrupp än den som hör till den aktiva tjänstens plan har lagts till
+
+### <a name="cdn"></a>CDN
+
+* "CustomDomain is not interable"-bugg för `cdn custom-domain create` har åtgärdats.
+
+### <a name="extension"></a>Anknytning
+
+* Första versionen.
+
+### <a name="keyvault"></a>KeyVault
+
+* Problem där behörigheter var skifteslägeskänsliga för `keyvault set-policy` har åtgärdats.
+
+### <a name="network"></a>Nätverk
+
+* `vnet list-private-access-services` har bytt namn till `vnet list-endpoint-services`
+* Namn på `--private-access-services`-argument har bytts till `--service-endpoints` för `vnet subnet create/update`
+* Stöd för flera IP- och portintervall har lagts till för `nsg rule create/update`
+* SKU-stöd har lagts till för `lb create`
+* SKU-stöd har lagts till för `public-ip create`
+
+### <a name="resource"></a>Resurs
+
+* Tillåt att definitioner för resursprincipparametern anges i `policy definition create` och `policy definition update`
+* Tillåt att parametervärden anges för `policy assignment create`
+* Tillåt att JSON eller fil för alla parametrar anges
+* API-versionen har utökats
+
+### <a name="sql"></a>SQL
+
+* `sql server vnet-rule`-kommandon har lagts till
+
+### <a name="vm"></a>Virtuell dator
+
+* Åtgärdat: Tilldela inte åtkomst om inte `--scope` har angetts
+* Åtgärdat: Använd samma tilläggsnamn som portalen gör
+* `subscription` har tagits bort från `[vm|vmss] create`-utmatningen
+* Åtgärdat: SKU:n för `[vm|vmss] create`-lagring tillämpas inte på datadiskar med en avbildning
+* Åtgärdat: `vm format-secret --secrets` accepterade inte ID:n som skildes åt med ny rad
+
+## <a name="august-31-2017"></a>31 augusti 2017
+
+Version 2.0.16
+
+### <a name="keyvault"></a>KeyVault
+
+* Bugg vid försök att automatiskt lösa hemlig kodning med `secret download` har åtgärdats
+
+### <a name="sf"></a>Sf
+
+* Avveckla alla kommandon till förmån för Service Fabric CLI (sfctl)
+
+### <a name="storage"></a>Lagring
+
+* Problem där lagringskonton inte kunde skapas i regioner som inte stöder NetworkACLs-funktionen har åtgärdats
+* Fastställ innehållstyp och innehållskodning under blob- och filuppladdning om varken innehållstyp eller innehållskodning har angetts
 
 ## <a name="august-28-2017"></a>28 augusti 2017
 
@@ -113,7 +346,7 @@ Version 2.0.13
 * Uppdaterat till Batch SDK 3.1.0 och Batch Management SDK 4.1.0
 * Ett nytt kommando har lagts till för att visa antalet uppgifter för ett jobb
 * En bugg i bearbetningen av SAS-URL:er för resursfiler har åtgärdats
-* Nu har slutpunkten för ett Batch-konto stöd för ett valfritt 'https://' -prefix
+* Nu har slutpunkten för ett Batch-konto stöd för ett valfritt ”https://” -prefix
 * Stöd har lagts till för att lägga till listor med fler än 100 uppgifter i ett jobb
 * Felsökningsloggning har lagts till för inläsning av kommandomodulen Extensions
 
