@@ -1,78 +1,63 @@
 ---
 title: Logga in med Azure CLI 2.0
 description: "Logga in med Azure 2.0 CLI på Linux, Mac eller Windows."
-keywords: Azure CLI 2.0, Linux, Mac, Windows, OS X, Ubuntu, Debian, CentOS, RHEL, SUSE, CoreOS, Docker, Windows, Python, PIP
-author: rloutlaw
-ms.author: routlaw
-manager: douge
-ms.date: 02/27/2017
+keywords: Azure CLI 2.0, inloggning, Azure CLI, autentisering, auktorisera, logga in
+author: sptramer
+ms.author: stttramer
+manager: routlaw
+ms.date: 11/13/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 65becd3a-9d69-4415-8a30-777d13a0e7aa
-ms.openlocfilehash: fea893ebd55811527e0e92375ffc081a52cdbb57
-ms.sourcegitcommit: bcf93ad8ed8802072249cd8187cd4420da89b4c6
+ms.openlocfilehash: dd05868f7378673836f47e743ed4088f2efd3dca
+ms.sourcegitcommit: 905939cc44764b4d1cc79a9b36c0793f7055a686
 ms.translationtype: HT
 ms.contentlocale: sv-SE
+ms.lasthandoff: 11/20/2017
 ---
-# <a name="log-in-with-azure-cli-20"></a><span data-ttu-id="1cfdc-104">Logga in med Azure CLI 2.0</span><span class="sxs-lookup"><span data-stu-id="1cfdc-104">Log in with Azure CLI 2.0</span></span>
+# <a name="log-in-with-azure-cli-20"></a><span data-ttu-id="69a89-104">Logga in med Azure CLI 2.0</span><span class="sxs-lookup"><span data-stu-id="69a89-104">Log in with Azure CLI 2.0</span></span>
 
-<span data-ttu-id="1cfdc-105">Du kan logga in och autentisera med Azure CLI på flera olika sätt.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-105">There are several ways to log in and authenticate with the Azure CLI.</span></span> <span data-ttu-id="1cfdc-106">Det är enklast att komma igång genom att logga in interaktivt via webbläsaren eller att logga in på kommandoraden.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-106">The simplest way to get started is to log in interactively through your browser, or to log in at the command line.</span></span> <span data-ttu-id="1cfdc-107">Den rekommenderade metoden är att använda huvudnamn för tjänsten, vilket gör det möjligt för dig att skapa icke-interaktiva konton som du kan använda för att manipulera resurser.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-107">Our recommended approach is to use service principals, which provide a way for you to create non-interactive accounts that you can use to manipulate resources.</span></span> <span data-ttu-id="1cfdc-108">Du kan säkerställa att dina automatiseringsskript är ännu säkrare genom att tilldela dem lämplig behörighet som krävs för ett huvudnamn för tjänsten.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-108">By granting just the appropriate permissions needed to a service principal, you can ensure your automation scripts are even more secure.</span></span>
+<span data-ttu-id="69a89-105">Du kan logga in och autentisera med Azure CLI på flera olika sätt.</span><span class="sxs-lookup"><span data-stu-id="69a89-105">There are several ways to log in and authenticate with the Azure CLI.</span></span> <span data-ttu-id="69a89-106">Det är enklast att komma igång genom att logga in interaktivt via webbläsaren eller att logga in på kommandoraden.</span><span class="sxs-lookup"><span data-stu-id="69a89-106">The simplest way to get started is to log in interactively through your browser, or to log in at the command line.</span></span> <span data-ttu-id="69a89-107">Den rekommenderade metoden är att använda huvudnamn för tjänsten, vilket gör det möjligt för dig att skapa icke-interaktiva konton som du kan använda för att manipulera resurser.</span><span class="sxs-lookup"><span data-stu-id="69a89-107">Our recommended approach is to use service principals, which provide a way for you to create non-interactive accounts that you can use to manipulate resources.</span></span> <span data-ttu-id="69a89-108">Du kan säkerställa att dina automatiseringsskript är ännu säkrare genom att tilldela dem lämplig behörighet som krävs för ett huvudnamn för tjänsten.</span><span class="sxs-lookup"><span data-stu-id="69a89-108">By granting just the appropriate permissions needed to a service principal, you can ensure your automation scripts are even more secure.</span></span> 
 
-<span data-ttu-id="1cfdc-109">Kommandon som du kör med CLI körs mot standardprenumerationen.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-109">Commands that you run with the CLI are run against your default subscription.</span></span>  <span data-ttu-id="1cfdc-110">Om du har mer än en prenumeration kanske du behöver [bekräfta din standardprenumeration](manage-azure-subscriptions-azure-cli.md) och ändra den efter behov.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-110">If you have more than one subscription, you may want to [confirm your default subscription](manage-azure-subscriptions-azure-cli.md) and change it appropriately.</span></span>
+<span data-ttu-id="69a89-109">Inga av dina privata autentiseringsuppgifter lagras lokalt.</span><span class="sxs-lookup"><span data-stu-id="69a89-109">None of your private credential information is stored locally.</span></span> <span data-ttu-id="69a89-110">Istället skapas en autentiseringstoken av Azure och lagras.</span><span class="sxs-lookup"><span data-stu-id="69a89-110">Instead, an authentication token is generated by Azure and stored.</span></span> <span data-ttu-id="69a89-111">När du loggat in är din lokala inloggningstoken giltig till dess att det går 14 dagar utan att den används.</span><span class="sxs-lookup"><span data-stu-id="69a89-111">After logging in, your local login token is valid until it goes for 14 days without being used.</span></span> <span data-ttu-id="69a89-112">Då måste du autentisera på nytt.</span><span class="sxs-lookup"><span data-stu-id="69a89-112">At that point, you will need to re-authenticate.</span></span>
 
-## <a name="interactive-log-in"></a><span data-ttu-id="1cfdc-111">Interaktiv inloggning</span><span class="sxs-lookup"><span data-stu-id="1cfdc-111">Interactive log-in</span></span>
+<span data-ttu-id="69a89-113">När du har loggat in körs CLI-kommandon mot standardprenumerationen.</span><span class="sxs-lookup"><span data-stu-id="69a89-113">After logging in, CLI Commands are run against your default subscription.</span></span> <span data-ttu-id="69a89-114">Om du har mer än en prenumeration kanske du behöver [ändra din standardprenumeration](manage-azure-subscriptions-azure-cli.md).</span><span class="sxs-lookup"><span data-stu-id="69a89-114">If you have more than one subscription, you may want to [change your default subscription](manage-azure-subscriptions-azure-cli.md).</span></span>
 
-<span data-ttu-id="1cfdc-112">Logga in interaktivt från din webbläsare.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-112">Log in interactively from your web browser.</span></span>
+## <a name="interactive-log-in"></a><span data-ttu-id="69a89-115">Interaktiv inloggning</span><span class="sxs-lookup"><span data-stu-id="69a89-115">Interactive log-in</span></span>
+
+<span data-ttu-id="69a89-116">Logga in interaktivt från din webbläsare.</span><span class="sxs-lookup"><span data-stu-id="69a89-116">Log in interactively from your web browser.</span></span>
 
 [!INCLUDE [interactive_login](includes/interactive-login.md)]
 
-## <a name="command-line"></a><span data-ttu-id="1cfdc-113">Kommandorad</span><span class="sxs-lookup"><span data-stu-id="1cfdc-113">Command line</span></span>
+## <a name="command-line"></a><span data-ttu-id="69a89-117">Kommandorad</span><span class="sxs-lookup"><span data-stu-id="69a89-117">Command line</span></span>
 
-<span data-ttu-id="1cfdc-114">Ange dina autentiseringsuppgifter på kommandoraden.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-114">Provide your credentials on the command line.</span></span>
+<span data-ttu-id="69a89-118">Ange dina autentiseringsuppgifter på kommandoraden.</span><span class="sxs-lookup"><span data-stu-id="69a89-118">Provide your credentials on the command line.</span></span>
 
 > [!Note]
-> <span data-ttu-id="1cfdc-115">Den här metoden fungerar inte med Microsoft-konton eller konton som har tvåfaktorsautentisering aktiverad.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-115">This approach doesn't work with Microsoft accounts or accounts that have two-factor authentication enabled.</span></span>
+> <span data-ttu-id="69a89-119">Den här metoden fungerar inte med Microsoft-konton eller konton som har tvåfaktorsautentisering aktiverad.</span><span class="sxs-lookup"><span data-stu-id="69a89-119">This approach doesn't work with Microsoft accounts or accounts that have two-factor authentication enabled.</span></span>
 
-```azurecli
+```azurecli-interactive
 az login -u <username> -p <password>
 ```
 
-## <a name="logging-in-with-a-service-principal"></a><span data-ttu-id="1cfdc-116">Logga in med ett huvudnamn för tjänsten</span><span class="sxs-lookup"><span data-stu-id="1cfdc-116">Logging in with a service principal</span></span>
+## <a name="logging-in-with-a-service-principal"></a><span data-ttu-id="69a89-120">Logga in med ett huvudnamn för tjänsten</span><span class="sxs-lookup"><span data-stu-id="69a89-120">Logging in with a service principal</span></span>
 
-<span data-ttu-id="1cfdc-117">Huvudnamn för tjänsten liknar användarkonton som du kan tillämpa regler på med Azure Active Directory.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-117">Service principals are like user accounts to which you can apply rules using Azure Active Directory.</span></span>
-<span data-ttu-id="1cfdc-118">Autentisering med tjänstens huvudnamn är det bästa sätt att säkra användningen av dina Azure-resurser från antingen dina skript eller program som manipulerar resurser.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-118">Authenticating with a service principal is the best way to secure the usage of your Azure resources from either your scripts or applications that manipulate resources.</span></span>
-<span data-ttu-id="1cfdc-119">Du definierar de roller du vill använda via `az role`-uppsättningen med kommandon.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-119">You define the roles you want your users to have via the `az role` set of commands.</span></span>
-<span data-ttu-id="1cfdc-120">Du kan läsa mer och se exempel på roller för tjänstens huvudnamn i våra [referensartiklar om az-roller](https://docs.microsoft.com/cli/azure/role.md).</span><span class="sxs-lookup"><span data-stu-id="1cfdc-120">You can learn more and see examples of service principal roles in our [az role reference articles](https://docs.microsoft.com/cli/azure/role.md).</span></span>
+<span data-ttu-id="69a89-121">Huvudnamn för tjänsten liknar användarkonton som du kan tillämpa regler på med Azure Active Directory.</span><span class="sxs-lookup"><span data-stu-id="69a89-121">Service principals are like user accounts to which you can apply rules using Azure Active Directory.</span></span>
+<span data-ttu-id="69a89-122">Autentisering med tjänstens huvudnamn är det bästa sätt att säkra användningen av dina Azure-resurser från antingen dina skript eller program som manipulerar resurser.</span><span class="sxs-lookup"><span data-stu-id="69a89-122">Authenticating with a service principal is the best way to secure the usage of your Azure resources from either your scripts or applications that manipulate resources.</span></span> <span data-ttu-id="69a89-123">Om tjänstens huvudnamn inte redan är tillgängligt och du vill skapa ett läser du [Create an Azure service principal with the Azure CLI](create-an-azure-service-principal-azure-cli.md) (Skapa tjänstens huvudnamn i Azure med Azure CLI).</span><span class="sxs-lookup"><span data-stu-id="69a89-123">If you don't already have a service principal available and would like to create one, see [Create an Azure service principal with the Azure CLI](create-an-azure-service-principal-azure-cli.md).</span></span>
 
-1. <span data-ttu-id="1cfdc-121">Om du inte redan har ett huvudnamn för tjänsten kan du [skapa ett](create-an-azure-service-principal-azure-cli.md).</span><span class="sxs-lookup"><span data-stu-id="1cfdc-121">If you don't already have a service principal, [create one](create-an-azure-service-principal-azure-cli.md).</span></span>
+<span data-ttu-id="69a89-124">Om du vill logga in med tjänstens huvudnamn anger du användarnamn, lösenord eller certifikatets PEM-fil samt klienten som är associerad med tjänstens huvudnamn:</span><span class="sxs-lookup"><span data-stu-id="69a89-124">To log in with a service principal, you provide the username, password or certificate PEM file, and the tenant associated with the service principal:</span></span>
 
-1. <span data-ttu-id="1cfdc-122">Logga in med huvudnamnet för tjänsten.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-122">Log in with the service principal.</span></span>
+```azurecli-interactive
+az login --service-principal -u <user> -p <password-or-cert> --tenant <tenant>
+```
 
-   ```azurecli
-   az login --service-principal -u "http://my-app" -p <password> --tenant <tenant>
-   ```
+<span data-ttu-id="69a89-125">Klientvärdet är den Azure Active Directory-klient som är associerad med tjänstens huvudnamn.</span><span class="sxs-lookup"><span data-stu-id="69a89-125">The tenant value is the Azure Active Directory tenant associated with the service principal.</span></span> <span data-ttu-id="69a89-126">Det kan antingen vara en .onmicrosoft.com-domän eller klientens objekt-ID i Azure.</span><span class="sxs-lookup"><span data-stu-id="69a89-126">This can either be an .onmicrosoft.com domain, or the Azure object ID for the tenant.</span></span>
+<span data-ttu-id="69a89-127">Du kan skaffa klientens objekt-ID för din aktuella inloggning med följande kommando:</span><span class="sxs-lookup"><span data-stu-id="69a89-127">You can get the tenant object ID for your current login by using the following command:</span></span>
 
-   <span data-ttu-id="1cfdc-123">För att få din klient loggar du in interaktivt och sedan hämtar du klienten från din prenumeration.</span><span class="sxs-lookup"><span data-stu-id="1cfdc-123">To get your tenant, log in interactively and then get the tenantId from your subscription.</span></span>
+```azurecli
+az account show --query 'tenanatId' -o tsv
+```
 
-   ```azurecli
-   az login
-   az account show
-   ```
-
-   ```json
-   {
-       "environmentName": "AzureCloud",
-       "id": "********-****-****-****-************",
-       "isDefault": true,
-       "name": "Pay-As-You-Go",
-       "state": "Enabled",
-       "tenantId": "********-****-****-****-************",
-       "user": {
-       "name": "********",
-       "type": "user"
-       }
-   }
-   ```
