@@ -28,16 +28,18 @@
           href: /azure/azure-resource-manager/resource-manager-export-template-cli?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
         - name: Distribuera från privata mallar
           href: /azure/azure-resource-manager/resource-manager-cli-sas-token?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
+    - name: Hantera prenumerationer
+      href: manage-azure-subscriptions-azure-cli.md
+    - name: Arbeta med flera moln
+      href: manage-clouds-azure-cli.md?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
     - name: Utdataformat
       href: format-output-azure-cli.md
     - name: Fråga
       href: query-azure-cli.md
-    - name: Prenumerationer
-      href: manage-azure-subscriptions-azure-cli.md
     - name: Tillägg
       href: azure-cli-extensions.md
     - name: Viktig information
-      href: release-notes-azure-cli.md
+      href: release-notes-azure-cli.md?toc=%2fcli%2fazure%2ftoc.json&bc=%2fcli%2fazure%2fbreadcrumb%2ftoc.json
 - name: Exempelskript
   items:
     - name: Virtuella Linux-datorer

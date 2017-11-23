@@ -12,13 +12,119 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: 429b099dabd27d9356e88791f955ec52acd2a5f9
-ms.sourcegitcommit: 9b36c15dc0e10024e23b8018604f5ef63c025de1
+ms.openlocfilehash: 761bd61474e7c72fb2daeb756828f00196b56c3a
+ms.sourcegitcommit: bb649ebd7e7fce8fb5008ac1e2e2c33481a45df9
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 10/24/2017
+ms.lasthandoff: 11/16/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
+
+## <a name="november-14-2017"></a>14 november 2017
+
+Version 2.0.21
+
+### <a name="acr"></a>ACR
+
+* Stöd för att skapa webhooks i replikeringsregioner har lagts till
+
+
+### <a name="acs"></a>ACS
+
+* Alla ”agent” till ”nod” har ändrats i AKS
+* Föråldrat `--orchestrator-release`-alternativ för `acs create`
+* Standardstorleken för virtuella datorer för AKS till `Standard_D1_v2` har ändrats
+* Åtgärdade `az aks browse` i Windows
+* Åtgärdade `az aks get-credentials` i Windows
+
+### <a name="appservice"></a>App Service
+
+* Distributionskälla `config-zip` för webappar och funktionsappar har lagts till
+* `--docker-container-logging`-alternativ till `az webapp log config` har lagts till
+* Alternativet `storage` från parametern `--web-server-logging` av `az webapp log config` har tagits bort
+* Förbättrade felmeddelanden för `deployment user set`
+* Stöd för att skapa Linux-funktionsappar har lagts till
+* Åtgärdade `list-locations`
+
+### <a name="batch"></a>Batch
+
+* En bugg har åtgärdats i kommandot för skapande av pool när ett resurs-ID användes med flaggan `--image`
+
+### <a name="batchai"></a>Batchai
+
+* Ett kort alternativ har lagts till, `-s`, för `--vm-size` VM-storlek i kommandot `file-server create`
+* Kontonamn och nyckelargument har lagts till för `cluster create`-parametrar
+* Dokumentation har skapats för `job list-files` och `job stream-file`
+* Ett kort alternativ har lagts till, `-r`, för `--cluster-name` när klusternamn anges med kommandot `job create`
+
+### <a name="cloud"></a>Molnet
+
+* `cloud [register|update]` har ändrats för att förhindra att moln registreras som saknar slutpunkter som krävs
+
+### <a name="container"></a>Behållare
+
+* Stöd för att öppna flera portar har lagts till
+* Princip för omstart av behållargrupp har lagts till
+* Stöd för att montera Azure-filresurs som volym har lagts till
+* Hjälpdokument har uppdaterats
+
+### <a name="data-lake-analytics"></a>Data Lake Analytics
+
+* `[job|account] list` har ändrats för att ge mer kortfattad information
+
+### <a name="data-lake-store"></a>Data Lake Store
+
+* `account list` har ändrats för att ge mer kortfattad information
+
+### <a name="extension"></a>Anknytning
+
+* `extension list-available` har lagts till för att tillåta lista över officiella Microsoft-tillägg
+* `--name` har lagts till för `extension [add|update]` för att tillåta installation av tillägg via namn
+
+### <a name="iot"></a>IoT
+
+* Stöd för certifikatutfärdare (CA) och certifikatkedjor har lagts till
+
+### <a name="monitor"></a>Övervaka
+
+* `activity-log alert`-kommandon har lagts till
+
+### <a name="network"></a>Nätverk
+
+* Stöd för CAA DNS-poster har lagts till
+* Problem där slutpunkter inte kunde uppdateras med `traffic-manager profile update` har åtgärdats
+* Problem där `vnet update --dns-servers` inte fungerade beroende på hur VNET skapades har åtgärdats
+* Problem där relativa DNS-namn hade importerats felaktigt av `dns zone import` har åtgärdats
+
+### <a name="reservations"></a>Reservationer
+
+* Inledande förhandsversion
+
+### <a name="resource"></a>Resurs
+
+* Stöd för resurs-ID till parametern `--resource` och lås på resursnivå har lagts till
+
+### <a name="sql"></a>SQL
+
+* Parametern `--ignore-missing-vnet-service-endpoint` har lagts till i `sql server vnet-rule [create|update]`
+
+### <a name="storage"></a>Lagring
+
+* `storage account create` har ändrats för att använda SKU `Standard_RAGRS` som standard
+* Buggar när fil-/blob-namn som innehåller icke-ASCII-tecken hanteras har åtgärdats
+* Bugg som förhindrade användning av `--source-uri` med `storage [blob|file] copy start-batch` har åtgärdats
+* Kommandon för blob och borttagning av flera objekt med `storage [blob|file] delete-batch` har lagts till
+* Problem vid aktivering av mått med `storage metrics update` har åtgärdats
+* Problem med filer över 200 GB vid användning av `storage blob upload-batch` har åtgärdats
+* Problem där `--bypass` och `--default-action` ignorerades av `storage account [create|update]` har åtgärdats
+
+### <a name="vm"></a>Virtuell dator
+
+* En bugg med `vmss create` som förhindrade användning med storleksnivån `Basic` har åtgärdats
+* `--plan` argument till `[vm|vmss] create` för anpassade avbildningar med faktureringsinformation har lagts till
+* Kommandona `vm secret `[add|remove|list] har lagts till
+* `vm format-secret` har bytt namn till `vm secret format`
+* Argumentet `--encrypt format` har lagts till för `vm encryption enable`
 
 ## <a name="october-24-2017"></a>24 oktober 2017
 

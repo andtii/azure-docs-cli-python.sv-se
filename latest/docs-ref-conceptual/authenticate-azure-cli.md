@@ -1,22 +1,22 @@
 ---
 title: Logga in med Azure CLI 2.0
 description: "Logga in med Azure 2.0 CLI på Linux, Mac eller Windows."
-keywords: Azure CLI 2.0, Linux, Mac, Windows, OS X, Ubuntu, Debian, CentOS, RHEL, SUSE, CoreOS, Docker, Windows, Python, PIP
-author: rloutlaw
-ms.author: routlaw
-manager: douge
-ms.date: 02/27/2017
+keywords: Azure CLI 2.0, inloggning, Azure CLI, autentisering, auktorisera, logga in
+author: sptramer
+ms.author: stttramer
+manager: routlaw
+ms.date: 11/13/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 65becd3a-9d69-4415-8a30-777d13a0e7aa
-ms.openlocfilehash: 3ba1dd840102c738ccd9eb62a0b9db612cec48d1
-ms.sourcegitcommit: 5cfbea569fef193044da712708bc6957d3fb557c
+ms.openlocfilehash: dd05868f7378673836f47e743ed4088f2efd3dca
+ms.sourcegitcommit: 5db22de971cf3983785cb209d92cbed1bbd69ecf
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 10/14/2017
+ms.lasthandoff: 11/14/2017
 ---
 # <a name="log-in-with-azure-cli-20"></a>Logga in med Azure CLI 2.0
 
@@ -24,7 +24,7 @@ Du kan logga in och autentisera med Azure CLI på flera olika sätt. Det är enk
 
 Inga av dina privata autentiseringsuppgifter lagras lokalt. Istället skapas en autentiseringstoken av Azure och lagras. När du loggat in är din lokala inloggningstoken giltig till dess att det går 14 dagar utan att den används. Då måste du autentisera på nytt.
 
-Kommandon som du kör med CLI körs mot standardprenumerationen.  Om du har mer än en prenumeration kanske du behöver [bekräfta din standardprenumeration](manage-azure-subscriptions-azure-cli.md) och ändra den efter behov.
+När du har loggat in körs CLI-kommandon mot standardprenumerationen. Om du har mer än en prenumeration kanske du behöver [ändra din standardprenumeration](manage-azure-subscriptions-azure-cli.md).
 
 ## <a name="interactive-log-in"></a>Interaktiv inloggning
 
@@ -46,35 +46,18 @@ az login -u <username> -p <password>
 ## <a name="logging-in-with-a-service-principal"></a>Logga in med ett huvudnamn för tjänsten
 
 Huvudnamn för tjänsten liknar användarkonton som du kan tillämpa regler på med Azure Active Directory.
-Autentisering med tjänstens huvudnamn är det bästa sätt att säkra användningen av dina Azure-resurser från antingen dina skript eller program som manipulerar resurser.
-Du definierar de roller du vill använda via `az role`-uppsättningen med kommandon.
-Du kan läsa mer och se exempel på roller för tjänstens huvudnamn i våra [referensartiklar om az-roller](https://docs.microsoft.com/cli/azure/role.md).
+Autentisering med tjänstens huvudnamn är det bästa sätt att säkra användningen av dina Azure-resurser från antingen dina skript eller program som manipulerar resurser. Om tjänstens huvudnamn inte redan är tillgängligt och du vill skapa ett läser du [Create an Azure service principal with the Azure CLI](create-an-azure-service-principal-azure-cli.md) (Skapa tjänstens huvudnamn i Azure med Azure CLI).
 
-1. Om du inte redan har ett huvudnamn för tjänsten kan du [skapa ett](create-an-azure-service-principal-azure-cli.md).
+Om du vill logga in med tjänstens huvudnamn anger du användarnamn, lösenord eller certifikatets PEM-fil samt klienten som är associerad med tjänstens huvudnamn:
 
-1. Logga in med huvudnamnet för tjänsten.
+```azurecli-interactive
+az login --service-principal -u <user> -p <password-or-cert> --tenant <tenant>
+```
 
-   ```azurecli-interactive
-   az login --service-principal -u "http://my-app" -p <password> --tenant <tenant>
-   ```
+Klientvärdet är den Azure Active Directory-klient som är associerad med tjänstens huvudnamn. Det kan antingen vara en .onmicrosoft.com-domän eller klientens objekt-ID i Azure.
+Du kan skaffa klientens objekt-ID för din aktuella inloggning med följande kommando:
 
-   För att få din klient loggar du in interaktivt och sedan hämtar du klienten från din prenumeration.
+```azurecli
+az account show --query 'tenanatId' -o tsv
+```
 
-   ```azurecli
-   az account show
-   ```
-
-   ```json
-   {
-       "environmentName": "AzureCloud",
-       "id": "********-****-****-****-************",
-       "isDefault": true,
-       "name": "Pay-As-You-Go",
-       "state": "Enabled",
-       "tenantId": "********-****-****-****-************",
-       "user": {
-       "name": "********",
-       "type": "user"
-       }
-   }
-   ```
