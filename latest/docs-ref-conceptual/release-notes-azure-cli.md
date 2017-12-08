@@ -12,13 +12,71 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ce0428f7-0a59-4e72-9237-d907b171af51
-ms.openlocfilehash: 761bd61474e7c72fb2daeb756828f00196b56c3a
-ms.sourcegitcommit: 905939cc44764b4d1cc79a9b36c0793f7055a686
+ms.openlocfilehash: e02b84891f4bf60cde12591b8e85987f4b3c9e79
+ms.sourcegitcommit: a3c8e15eafac1ddc2289110d513b39714a23353b
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 11/20/2017
+ms.lasthandoff: 12/07/2017
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
+
+## <a name="december-5-2017"></a>5 december 2017
+
+Version 2.0.22
+
+* `az component` kommandon har tagits bort. Använd `az extension` istället
+
+### <a name="core"></a>Kärna
+* `AZURE_US_GOV_CLOUD` AAD-utfärdarslutpunkten har ändrats från login.microsoftonline.com till login.microsoftonline.us
+* Felet med att telemetri kontinuerligt skickades på nytt har åtgärdats
+
+### <a name="acs"></a>ACS
+
+* Kommandona `aks install-connector` och `aks remove-connector` har lagts till
+* Förbättrad felrapportering för `acs create`
+* Användning av `aks get-credentials -f` utan fullständig sökväg har åtgärdats
+
+### <a name="advisor"></a>Advisor
+
+* Första utgåvan
+
+### <a name="appservice"></a>App Service
+
+* Skapande av certifikatnamn med `webapp config ssl upload` har åtgärdats
+* `webapp [list|show]` och `functionapp [list|show]` har åtgärdats för att visa rätt appar
+* Standardvärde har lagts till för `WEBSITE_NODE_DEFAULT_VERSION`
+
+### <a name="consumption"></a>Förbrukning
+
+* Stöd för API-versionen 2017-11-30 har lagts till
+
+### <a name="container"></a>Behållare
+
+* Regression till standardportar har åtgärdats
+
+### <a name="monitor"></a>Övervaka
+
+* Flerdimensionellt stöd för måttkommandon har lagts till
+
+### <a name="resource"></a>Resurs
+
+* Argumentet `--include-response-body` har lagts till för `resource show`
+
+### <a name="role"></a>Roll
+
+* Visning av standardtilldelningar för "klassiska" administratörer till `role assignment list` har lagts till
+* Stöd har lagts till för `ad sp reset-credentials` för att lägga till autentiseringsuppgifter istället för att skriva över
+* Förbättrad felrapportering för `ad sp create-for-rbac`
+
+### <a name="sql"></a>SQL
+
+* Kommandona `sql db list-usages` och `sql db show-usage` har lagts till
+* Kommandona `sql server conn-policy show` och `sql server conn-policy update` har lagts till
+
+### <a name="vm"></a>Virtuell dator
+
+* Zoninformation har lagts till i `az vm list-skus`
+
 
 ## <a name="november-14-2017"></a>14 november 2017
 
@@ -408,7 +466,7 @@ Version 2.0.15
 
 * Stöd har lagts till för att ställa in blobbnivå
 * Argumenten `--bypass` och `--default-action` har lagts till för `storage account [create|update]` för att ge stöd för händelsedirigering nedåt med tjänsten
-* Nya kommandon har gjorts tillgängliga för att lägga till VNET-regler och IP-baserade regler för `storage account network-rule`  
+* Nya kommandon har gjorts tillgängliga för att lägga till VNET-regler och IP-baserade regler för `storage account network-rule`
 * Stöd har lagts till för tjänstkryptering med kundhanterade nycklar
 * [VIKTIG ÄNDRING] Alternativet `--encryption` har bytt namn till `--encryption-services` för kommandot `az storage account create and az storage account update`
 * Åtgärdat (#4220): `az storage account update encryption` – matchningsfel i syntax
@@ -416,8 +474,8 @@ Version 2.0.15
 ### <a name="vm"></a>Virtuell dator
 
 * Ett problem har åtgärdats som gjorde att extra, felaktig information visades för `vmss get-instance-view` när det användes med `--instance-id *`
-* Stöd har lagts till för `--lb-sku` för `vmss create`: 
-* Namn på personer har tagits bort från svartlistan för administratörsnamn för `[vm|vmss] create` 
+* Stöd har lagts till för `--lb-sku` för `vmss create`:
+* Namn på personer har tagits bort från svartlistan för administratörsnamn för `[vm|vmss] create`
 * Ett problem har åtgärdats som gjorde att `[vm|vmss] create` returnerade ett fel om det inte gick att extrahera planinformation från en avbildning
 * Kraschar som inträffade när en vmms-skalningsuppsättning skapades med en intern LB har åtgärdats
 * Ett problem har åtgärdats som gjorde att `--no-wait`-argumentet inte fungerade med `vm availability-set create`
@@ -505,43 +563,43 @@ Version 2.0.12
 * Fakturerings- och förbrukningsmoduler har lagts till
 
 ```
-azure-cli (2.0.12)  
+azure-cli (2.0.12)
 
-acr (2.0.9)  
-acs (2.0.11)  
-appservice (0.1.11)  
-batch (3.0.3)  
-billing (0.1.3)  
-cdn (0.0.6)  
-cloud (2.0.7)  
-cognitiveservices (0.1.6)  
-command-modules-nspkg (2.0.1)  
-component (2.0.6)  
-configure (2.0.10)  
-consumption (0.1.3)  
-container (0.1.7)  
-core (2.0.12)  
-cosmosdb (0.1.11)  
-dla (0.0.10)  
-dls (0.0.11)  
-feedback (2.0.6)  
-find (0.2.6)  
-interactive (0.3.7)  
-iot (0.1.10)  
-keyvault (2.0.8)  
-lab (0.0.9)  
-monitor (0.0.8)  
-network (2.0.11)  
-nspkg (3.0.1)  
-profile (2.0.9)  
-rdbms (0.0.5)  
-redis (0.2.7)  
-resource (2.0.11)  
-role (2.0.9)  
-sf (1.0.5)  
-sql (2.0.8)  
-storage (2.0.11)  
-vm (2.0.11) 
+acr (2.0.9)
+acs (2.0.11)
+appservice (0.1.11)
+batch (3.0.3)
+billing (0.1.3)
+cdn (0.0.6)
+cloud (2.0.7)
+cognitiveservices (0.1.6)
+command-modules-nspkg (2.0.1)
+component (2.0.6)
+configure (2.0.10)
+consumption (0.1.3)
+container (0.1.7)
+core (2.0.12)
+cosmosdb (0.1.11)
+dla (0.0.10)
+dls (0.0.11)
+feedback (2.0.6)
+find (0.2.6)
+interactive (0.3.7)
+iot (0.1.10)
+keyvault (2.0.8)
+lab (0.0.9)
+monitor (0.0.8)
+network (2.0.11)
+nspkg (3.0.1)
+profile (2.0.9)
+rdbms (0.0.5)
+redis (0.2.7)
+resource (2.0.11)
+role (2.0.9)
+sf (1.0.5)
+sql (2.0.8)
+storage (2.0.11)
+vm (2.0.11)
 ```
 
 ### <a name="core"></a>Kärna
@@ -754,8 +812,8 @@ vm (2.0.11)
 * Alternativet `--marker` har tagits bort från kommandona `storage blob list`, `storage container list` och `storage share list` (#3745)
 * Stöd har lagts till för att skapa ett lagringskonto med endast HTTPS
 * Mått-, loggnings- och CORS-kommandon för lagring har uppdaterats (#3495)
-* Undantagsmeddelandet från CORS-tillägg har omformulerats (#3638) (#3362)  
-* Generatorn har konverterats till en lista för kommandot download batch i kontrolläge (#3592) 
+* Undantagsmeddelandet från CORS-tillägg har omformulerats (#3638) (#3362)
+* Generatorn har konverterats till en lista för kommandot download batch i kontrolläge (#3592)
 * Ett problem med kommandot download batch för blobbar i kontrolläge har åtgärdats (#3640) (#3592)
 
 ### <a name="vm"></a>Virtuell dator
@@ -821,7 +879,7 @@ vm (2.0.6)
 
 ### <a name="core"></a>Kärna
 
-* kärna: fånga in undantag som orsakats av oregistrerad provider och registrera den automatiskt   
+* kärna: fånga in undantag som orsakats av oregistrerad provider och registrera den automatiskt
 * prestanda: spara adal-token i cacheminnet tills processen avslutas ([#2603](https://github.com/Azure/azure-cli/issues/2603))
 * Åtgärda byte som returneras från hexadecimalt fingeravtryck -o tsv ([#3053](https://github.com/Azure/azure-cli/issues/3053))
 * Förbättrad nedladdning av Key Vault-certifikat och AAD SP-integrering ([#3003](https://github.com/Azure/azure-cli/issues/3003))
@@ -915,7 +973,7 @@ vm (2.0.6)
 * Åtgärda fel med `vpn-connection create` när du använder parametrarna `--no-wait` eller `--validate`.
 * Lägg till stöd för aktiva-aktiva VNet-gatewayer
 * Ta bort nullvärden från utdata för `network vpn-connection list/show`-kommandon.
-* BC: Åtgärda fel i utdata för `vpn-connection create` 
+* BC: Åtgärda fel i utdata för `vpn-connection create`
 * Åtgärda fel där argumentet ”--key-length” för ”vpn-connection create” inte parsades korrekt.
 * Åtgärda fel i `dns zone import` där poster inte importerades korrekt.
 * Åtgärda fel där `traffic-manager endpoint update` inte fungerade.
@@ -981,7 +1039,7 @@ Vi lanserade komponenter för ACR, Batch, KeyVault och SQL i den här versionen.
 
 ```
 azure-cli (2.0.2)
- 
+
 acr (2.0.0)
 acs (2.0.2)
 appservice (0.1.2)
@@ -1019,26 +1077,26 @@ vm (2.0.2)
 * Lägg till fråga om mallparametrar som saknas. ([#2364](https://github.com/Azure/azure-cli/pull/2364))
 * Stöder inställning av standardvärden för vanliga argument som standardresursgrupp, standardwebbplats, standard-vm
 * Stöder inloggning till specifik klient
- 
+
 ### <a name="acs"></a>ACS
 
 * [ACS] Lägga till stöd för att konfigurera ett ACS-standardkluster ([#2554](https://github.com/Azure/azure-cli/pull/2554))
 * Lägg till support för lösenordsfråga för ssh-nyckel. ([#2044](https://github.com/Azure/azure-cli/pull/2044))
 * Lägg till stöd för Windows-kluster. ([#2211](https://github.com/Azure/azure-cli/pull/2211))
 * Växla från rollen ägare till deltagare. ([#2321](https://github.com/Azure/azure-cli/pull/2321))
- 
+
 ### <a name="appservice"></a>AppService
 
 * appservice: stöd för att få extern ip-adress för DNS A-poster ([#2627](https://github.com/Azure/azure-cli/pull/2627))
 * appservice: stöd för certifikatbindning med jokertecken ([#2625](https://github.com/Azure/azure-cli/pull/2625))
 * appservice: stöd för lista med publiceringsprofiler ([#2504](https://github.com/Azure/azure-cli/pull/2504))
 * AppService – Utlöser källkontrollsynk efter konfig ([#2326](https://github.com/Azure/azure-cli/pull/2326))
- 
+
 ### <a name="datalake"></a>DataLake
 
 * Första versionen av Data Lake Analytics-modulen.
 * Första versionen av Data Lake Store-modulen.
- 
+
 ### <a name="docuemntdb"></a>DocuemntDB
 
 * DocumentDB: Lägger till stöd för att lista anslutningssträngar ([#2580](https://github.com/Azure/azure-cli/pull/2580))
@@ -1097,8 +1155,8 @@ role (2.0.0)
 sql (0.1.1b5)
 storage (2.0.0)
 vm (2.0.0)
- 
-Python (Darwin) 2.7.10 (default, Jul 30 2016, 19:40:32) 
+
+Python (Darwin) 2.7.10 (default, Jul 30 2016, 19:40:32)
 [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)]
 ```
 
