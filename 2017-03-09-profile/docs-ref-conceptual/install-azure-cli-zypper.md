@@ -12,20 +12,19 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: c01679ccb77880f1f628f4e48683d8ff030a568b
-ms.sourcegitcommit: 905939cc44764b4d1cc79a9b36c0793f7055a686
+ms.openlocfilehash: 6b9a97e73f45c8271f1e8f19d5a8cf5f9f748d07
+ms.sourcegitcommit: 2e4d0bdd94c626e061434883032367b5619de4fe
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 11/20/2017
+ms.lasthandoff: 12/09/2017
 ---
 # <a name="install-azure-cli-20-with-zypper"></a>Installera Azure CLI 2.0 med zypper
 
 Om du kör en distribution där `zypper` ingår, till exempel OpenSUSE eller SLE, så finns det ett paket för Azure CLI som du kan installera i systemet.
 
-> [!NOTE]
-> Du måste ha Python 2.7.x eller Python 3.x för att kunna använda CLI. Om distributionen inte har ett paket för någon av dessa kan du [installera Python](https://www.python.org/downloads/).
+[!INCLUDE [linux-install-requirements.md](includes/linux-install-requirements.md)]
 
-## <a name="install"></a>Installera 
+## <a name="install"></a>Installera
 
 1. Installera `curl`:
 

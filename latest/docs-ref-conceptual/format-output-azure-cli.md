@@ -12,15 +12,15 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 74bdb727-481d-45f7-a44e-15d18dc55483
-ms.openlocfilehash: d1440cc1e99ccddb18d23306cc0fcdb4b8babf14
-ms.sourcegitcommit: f107cf927ea1ef51de181d87fc4bc078e9288e47
+ms.openlocfilehash: 3e99c2533031dc063a50996f26712d4df92f65c9
+ms.sourcegitcommit: 2e4d0bdd94c626e061434883032367b5619de4fe
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 09/04/2017
+ms.lasthandoff: 12/09/2017
 ---
 # <a name="output-formats-for-azure-cli-20-commands"></a>Utdataformat för Azure CLI 2.0-kommandon
 
-Azure CLI 2.0 använder json som standardalternativ för utdata, men erbjuder olika sätt för att formatera utdata från olika kommandon.  Använd parametrarna `--output` (eller `--out` eller `-o`) för att formatera kommandots utdata till någon av de utdatatyper som anges i följande tabell. 
+Azure CLI 2.0 använder json som standardalternativ för utdata, men erbjuder olika sätt för att formatera utdata från olika kommandon.  Använd parametrarna `--output` (eller `--out` eller `-o`) för att formatera kommandots utdata till någon av de utdatatyper som anges i följande tabell.
 
 --resultat | Beskrivning
 ---------|-------------------------------
@@ -65,10 +65,10 @@ Resultatet är i det här formuläret (visar endast partiella utdata för att h�
     },
           ...
           ...
-          ...   
+          ...
 ]
 ```
- 
+
 ## <a name="using-the-table-option"></a>Använda tabellalternativet
 
 Tabellalternativet ger en lättläst uppsättning utdata, men tänk på att kapslade objekt inte ingår i utdata med enkla `--output table`, till skillnad från föregående .json-exempel.  Om du använder samma exempel med ”tabell”-utdataformat får du en granskad lista över de vanligaste egenskapsvärdena.
@@ -132,7 +132,7 @@ KBDemo020
 
 ## <a name="setting-the-default-output-format"></a>Konfigurera format för standardutdata
 
-Med kommandot `az configure` kan du konfigurera din miljö eller upprätta inställningar som standardinställningar för utdataformat. För vanlig användning är det enklaste standardutdataformatet ”tabellformatet” – välj **3** som utdataformat när du uppmanas att välja. 
+Med kommandot `az configure` kan du konfigurera din miljö eller upprätta inställningar som standardinställningar för utdataformat. För vanlig användning är det enklaste standardutdataformatet ”tabellformatet” – välj **3** som utdataformat när du uppmanas att välja.
 
 ```
 What default output format would you like?
@@ -140,5 +140,5 @@ What default output format would you like?
  [2] jsonc - Colored JSON formatted output that most closely matches API responses
  [3] table - Human-readable output format
  [4] tsv - Tab and Newline delimited, great for GREP, AWK, etc.
-Please enter a choice [3]: 
+Please enter a choice [3]:
 ```

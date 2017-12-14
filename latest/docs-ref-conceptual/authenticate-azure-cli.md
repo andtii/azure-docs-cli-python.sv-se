@@ -12,15 +12,15 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: 65becd3a-9d69-4415-8a30-777d13a0e7aa
-ms.openlocfilehash: dd05868f7378673836f47e743ed4088f2efd3dca
-ms.sourcegitcommit: 5db22de971cf3983785cb209d92cbed1bbd69ecf
+ms.openlocfilehash: 0a8ec3541783ae19961f2acf1192c0ee061a465f
+ms.sourcegitcommit: 2e4d0bdd94c626e061434883032367b5619de4fe
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/09/2017
 ---
 # <a name="log-in-with-azure-cli-20"></a>Logga in med Azure CLI 2.0
 
-Du kan logga in och autentisera med Azure CLI på flera olika sätt. Det är enklast att komma igång genom att logga in interaktivt via webbläsaren eller att logga in på kommandoraden. Den rekommenderade metoden är att använda huvudnamn för tjänsten, vilket gör det möjligt för dig att skapa icke-interaktiva konton som du kan använda för att manipulera resurser. Du kan säkerställa att dina automatiseringsskript är ännu säkrare genom att tilldela dem lämplig behörighet som krävs för ett huvudnamn för tjänsten. 
+Du kan logga in och autentisera med Azure CLI på flera olika sätt. Det är enklast att komma igång genom att logga in interaktivt via webbläsaren eller att logga in på kommandoraden. Den rekommenderade metoden är att använda huvudnamn för tjänsten, vilket gör det möjligt för dig att skapa icke-interaktiva konton som du kan använda för att manipulera resurser. Du kan säkerställa att dina automatiseringsskript är ännu säkrare genom att tilldela dem lämplig behörighet som krävs för ett huvudnamn för tjänsten.
 
 Inga av dina privata autentiseringsuppgifter lagras lokalt. Istället skapas en autentiseringstoken av Azure och lagras. När du loggat in är din lokala inloggningstoken giltig till dess att det går 14 dagar utan att den används. Då måste du autentisera på nytt.
 
@@ -58,6 +58,6 @@ Klientvärdet är den Azure Active Directory-klient som är associerad med tjän
 Du kan skaffa klientens objekt-ID för din aktuella inloggning med följande kommando:
 
 ```azurecli
-az account show --query 'tenanatId' -o tsv
+az account show --query 'tenantId' -o tsv
 ```
 

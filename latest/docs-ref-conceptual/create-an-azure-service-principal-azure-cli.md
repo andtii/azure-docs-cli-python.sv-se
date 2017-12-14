@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: fab89cb8-dac1-4e21-9d34-5eadd5213c05
-ms.openlocfilehash: a6ad5611f3e507b65e160122c87e22ec44546588
-ms.sourcegitcommit: e8fe15e4f7725302939d726c75ba0fb3cad430be
+ms.openlocfilehash: 9c2b693c356be78893d0893221d99a23beb5f38b
+ms.sourcegitcommit: 2e4d0bdd94c626e061434883032367b5619de4fe
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 10/27/2017
+ms.lasthandoff: 12/09/2017
 ---
 # <a name="create-an-azure-service-principal-with-azure-cli-20"></a>Skapa Azure-tjänstens huvudnamn med Azure CLI 2.0
 
@@ -29,13 +29,13 @@ Den här artikeln vägleder dig genom att skapa en säkerhetsprincip med Azure C
 
 ## <a name="what-is-a-service-principal"></a>Vad är ett huvudnamn för tjänsten?
 
-Ett huvudnamn för Azure-tjänsten är en säkerhetsidentitet som används av appar som skapats av användare, tjänster och automatiseringsverktyg för att få åtkomst till specifika Azure-resurser. Se det som en användaridentitet (inloggning och lösenord eller certifikat) med en viss roll och väl kontrollerad behörighet att komma åt dina resurser. Den behöver bara kunna utföra vissa åtgärder, till skillnad från en allmän användaridentitet. Det ger bättre säkerhet om du bara ger den lägsta behörighetsnivån som krävs för att den ska kunna utföra sina administrativa uppgifter. 
+Ett huvudnamn för Azure-tjänsten är en säkerhetsidentitet som används av appar som skapats av användare, tjänster och automatiseringsverktyg för att få åtkomst till specifika Azure-resurser. Se det som en användaridentitet (inloggning och lösenord eller certifikat) med en viss roll och väl kontrollerad behörighet att komma åt dina resurser. Den behöver bara kunna utföra vissa åtgärder, till skillnad från en allmän användaridentitet. Det ger bättre säkerhet om du bara ger den lägsta behörighetsnivån som krävs för att den ska kunna utföra sina administrativa uppgifter.
 
 Azure CLI 2.0 har stöd för att skapa lösenordsbaserade autentiseringsuppgifter och autentiseringsuppgifter för certifikat. Det här avsnittet handlar om båda typerna av autentiseringsuppgifter.
 
 ## <a name="verify-your-own-permission-level"></a>Kontrollera din egen behörighetsnivå
 
-Först måste du ha tillräcklig behörighet i Azure Active Directory och Azure-prenumerationen. Du måste specifikt kunna skapa en app i Active Directory och tilldela en roll till tjänstens huvudnamn. 
+Först måste du ha tillräcklig behörighet i Azure Active Directory och Azure-prenumerationen. Du måste specifikt kunna skapa en app i Active Directory och tilldela en roll till tjänstens huvudnamn.
 
 Det enklaste sättet att kontrollera om kontot har tillräcklig behörighet är via portalen. Se [Kontrollera behörighet som krävs i portalen](/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions).
 
@@ -81,8 +81,8 @@ Alternativet `--display-name` filtrerar den returnerade listan med appar för at
 Använd [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) och parametern `--password` för att skapa tjänstens huvudnamn med ett lösenord. Om du inte anger någon roll eller något omfång så blir standardinställningen rollen **Deltagare** för den aktuella prenumerationen. Om du skapar ett huvudnamn för tjänsten utan att använda vare sig `--password` eller parametern `--cert` används lösenordsautentisering och ett lösenord skapas för dig.
 
 ```azurecli-interactive
-az ad sp create-for-rbac --name {appId} --password "{strong password}" 
-``` 
+az ad sp create-for-rbac --name {appId} --password "{strong password}"
+```
 
 ```json
 {
@@ -94,7 +94,7 @@ az ad sp create-for-rbac --name {appId} --password "{strong password}"
 }
 ```
 
- > [!WARNING] 
+ > [!WARNING]
  > Skapa inte ett osäkert lösenord.  Följ vägledningen med [regler för lösenord och begränsningar i Azure AD](/azure/active-directory/active-directory-passwords-policy).
 
 ### <a name="create-a-service-principal-with-a-self-signed-certificate"></a>Skapa ett huvudnamn för tjänsten med ett självsignerat certifikat
@@ -145,7 +145,7 @@ Du kan nu logga in som det nya huvudnamnet för tjänsten för appen med *appId*
 
 ```azurecli-interactive
 az login --service-principal -u a487e0c1-82af-47d9-9a0b-af184eb87646d --password {password-or-path-to-cert} --tenant {tenant}
-``` 
+```
 
 Dessa utdata visas efter en lyckad inloggning:
 
@@ -165,9 +165,9 @@ Dessa utdata visas efter en lyckad inloggning:
 ]
 ```
 
-Använd värdena `id`, `password` och `tenant` som autentiseringsuppgifter för att köra din app. 
+Använd värdena `id`, `password` och `tenant` som autentiseringsuppgifter för att köra din app.
 
-## <a name="managing-roles"></a>Hantera roller 
+## <a name="managing-roles"></a>Hantera roller
 
 > [!NOTE]
 > Rollbaserad åtkomst i Azure (RBAC) är en modell för att definiera och hantera roller för användar- och säkerhetsobjekt.
@@ -210,10 +210,10 @@ az role assignment list --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d
 }
 ```
 
-> [!NOTE] 
+> [!NOTE]
 > Om kontot inte har tillräcklig behörighet för att tilldela en roll får du ett felmeddelanden.
 > Meddelandet anger att ditt konto ”inte har behörighet att utföra åtgärden ”Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/{guid}”.
-   
+
 ## <a name="change-the-credentials-of-a-security-principal"></a>Ändra autentiseringsuppgifter för säkerhetsobjektet
 
 Det är en bra säkerhetsrutin att granska behörigheter och uppdatera lösenordet regelbundet. Du kanske också vill hantera och ändra säkerhetsreferenser när appen förändras.

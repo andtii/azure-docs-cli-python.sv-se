@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 96a123575226f281accf125cb5bb29ee7d14ef2a
-ms.sourcegitcommit: 905939cc44764b4d1cc79a9b36c0793f7055a686
+ms.openlocfilehash: 247ae43813ca9ca7b7b98ebd8e933e02989c6649
+ms.sourcegitcommit: 2e4d0bdd94c626e061434883032367b5619de4fe
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 11/20/2017
+ms.lasthandoff: 12/09/2017
 ---
 # <a name="install-azure-cli-20-on-windows"></a>Installera Azure CLI 2.0 i Windows
 
@@ -34,4 +34,4 @@ Du kan nu köra Azure CLI med kommandot `az` från antingen kommandotolken i Win
 
 Vi tycker det är tråkigt om du väljer att avinstallera Azure CLI. Använd kommandot `az feedback` för att ange några orsaker till varför du har valt att avinstallera och ge exempel på hur vi kan förbättra CLI-upplevelsen innan du avinstallerar. Vi vill se till att Azure CLI är så felfritt och användarvänligt som möjligt. Du kan även [skicka in ett github-ärende](https://github.com/Azure/azure-cli/issues).
 
-Avinstallation kan utföras genom att köra MSI igen och välja alternativet ”Avinstallera”. Du kan [ladda ned MSI-installationsprogrammet](https://aka.ms/InstallAzureCliWindows) om du inte längre har det på din dator.
+Du kan avinstallera genom att köra MSI igen och välja alternativet ”Avinstallera”. Du kan [ladda ned MSI-installationsprogrammet](https://aka.ms/InstallAzureCliWindows) om du inte längre har det på din dator.
