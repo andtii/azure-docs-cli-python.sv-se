@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: f792d3fc84eedade52ddfb3f351e48689e474d53
-ms.sourcegitcommit: 905939cc44764b4d1cc79a9b36c0793f7055a686
+ms.openlocfilehash: cf1405cae70762146f63bc6629edc0dd1d949fff
+ms.sourcegitcommit: 2e4d0bdd94c626e061434883032367b5619de4fe
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 11/20/2017
+ms.lasthandoff: 12/09/2017
 ---
 # <a name="install-azure-cli-20-on-linux-manually"></a>Installera Azure CLI 2.0 på Linux manuellt
 
@@ -28,7 +28,7 @@ Följande programvara måste vara tillgänglig i systemet för att du ska kunna 
 
 * [Python 2.7 eller Python 3.x](https://www.python.org/downloads/)
 * [libffi](https://sourceware.org/libffi/)
-* [OpenSSL](https://www.openssl.org/source/)
+* [OpenSSL 1.0.2](https://www.openssl.org/source/)
 
 ## <a name="install-or-update-manually"></a>Installera eller uppdatera manuellt
 
@@ -58,7 +58,7 @@ Om du inte kan köra kommandot efter installationen kan du behöva rensa cachemi
 hash -r
 ```
 
-och se om problemet är löst. 
+och se om problemet är löst.
 
 Det här kan även inträffa om du inte startade om gränssnittet efter installationen. Kontrollera att platsen för kommandot `az` är i `$PATH`.
 

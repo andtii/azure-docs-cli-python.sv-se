@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ms.assetid: ea5c0ee1-c530-4a1e-a83f-e1be71f6d416
-ms.openlocfilehash: 36429bb23f392ff6210a9c99885df83f53768386
-ms.sourcegitcommit: 5fc7d8ccf2304c5a12fb99a80f0b00a0ad2c34e9
+ms.openlocfilehash: 5a667ad8720100b45ff714601225535ef442545c
+ms.sourcegitcommit: 2e4d0bdd94c626e061434883032367b5619de4fe
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 12/01/2017
+ms.lasthandoff: 12/09/2017
 ---
 # <a name="install-azure-cli-20"></a>Installera Azure CLI 2.0
 
@@ -70,12 +70,12 @@ I macOS kan du installera antingen med [Homebrew](https://brew.sh/) eller manuel
    ```bash
    exec -l $SHELL
    ```
-   
+
 3. Kör CLI från kommandotolken med kommandot `az`.
 
 ## <a name="install-on-windows"></a>Installera i Windows
 
-### <a name="install-with-msi-for-the-windows-command-line"></a>Installera med MSI för kommandoraden i Windows 
+### <a name="install-with-msi-for-the-windows-command-line"></a>Installera med MSI för kommandoraden i Windows
 
 Om du vill installera CLI i Windows och använda det på Windows-kommandoraden laddar du ned och kör [Azure CLI-installationsprogrammet (MSI)](https://aka.ms/InstallAzureCliWindows).
 
@@ -102,15 +102,14 @@ Om du vill installera CLI i Windows och använda det på Windows-kommandoraden l
 
 5.  Kör CLI från kommandotolken med kommandot `az`.
 
-## <a name="install-with-apt-package-manager"></a>Installera med apt-pakethanteraren 
+## <a name="install-with-apt-package-manager"></a>Installera med apt-pakethanteraren
 
 För distributioner som använder `apt`-pakethanteraren, t.ex. Ubuntu eller Debian, kan du installera Azure CLI 2.0 via `apt-get`.
 
-> [!NOTE]
-> Du måste ha Python 2.7.x eller Python 3.x för att kunna använda CLI. Om distributionen inte har ett paket för någon av dessa kan du [installera Python](https://www.python.org/downloads/).
+[!INCLUDE [linux-install-requirements.md](includes/linux-install-requirements.md)]
 
 1. Ändra listan med källor:
- 
+
    - 32-bitarssystem
 
      ```bash
@@ -139,8 +138,7 @@ För distributioner som använder `apt`-pakethanteraren, t.ex. Ubuntu eller Debi
 
 För distributioner som använder `yum`-pakethanteraren, t.ex. Red Hat Enterprise Linux (RHEL), Fedora eller CentOS, kan du installera Azure CLI 2.0 via `yum`.
 
-> [!NOTE]
-> Du måste ha Python 2.7.x eller Python 3.x för att kunna använda CLI. Om distributionen inte har ett paket för någon av dessa kan du [installera Python](https://www.python.org/downloads/).
+[!INCLUDE [linux-install-requirements.md](includes/linux-install-requirements.md)]
 
 1. Importera nyckeln för Microsoft-lagringsplatsen:
 
@@ -167,8 +165,7 @@ För distributioner som använder `yum`-pakethanteraren, t.ex. Red Hat Enterpris
 
 För distributioner som använder `zypper`-pakethanteraren, t.ex. OpenSUSE eller SLE, kan du installera Azure CLI 2.0 via `zypper`.
 
-> [!NOTE]
-> Du måste ha Python 2.7.x eller Python 3.x för att kunna använda CLI. Om distributionen inte har ett paket för någon av dessa kan du [installera Python](https://www.python.org/downloads/).
+[!INCLUDE [linux-install-requirements.md](includes/linux-install-requirements.md)]
 
 1. Importera nyckeln för Microsoft-lagringsplatsen:
 
@@ -230,7 +227,7 @@ Om det är möjligt rekommenderar vi att du installerar CLI med en pakethanterar
    SUSE OpenSUSE 13.2    | sudo zypper refresh && sudo zypper --non-interactive install curl gcc python python-xml libffi-devel python-devel openssl-devel
    ```
 
-Om distributionen inte finns med i listan ovan måste du installera [Python 2.7 eller senare](https://www.python.org/downloads/), [libffi](https://sourceware.org/libffi/) och [OpenSSL](https://www.openssl.org/source/).
+Om distributionen inte finns med i listan ovan måste du installera [Python 2.7 eller senare](https://www.python.org/downloads/), [libffi](https://sourceware.org/libffi/) och [OpenSSL 1.0.2](https://www.openssl.org/source/).
 
 2. Installera CLI med `curl`.
 
