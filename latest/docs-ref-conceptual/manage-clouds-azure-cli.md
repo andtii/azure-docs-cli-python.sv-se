@@ -10,15 +10,15 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
-ms.openlocfilehash: 0eb07d2919f6e640e1d594db9e18f9ada4d9f59f
-ms.sourcegitcommit: 2e4d0bdd94c626e061434883032367b5619de4fe
+ms.openlocfilehash: 6f4cfec45becc0c4940e9066af53396b41db779d
+ms.sourcegitcommit: 16426a08c0f2f62d0b9dca3df8132cece659acff
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 12/09/2017
+ms.lasthandoff: 12/21/2017
 ---
 # <a name="managing-multiple-clouds-with-azure-cli-20"></a>Hantera flera moln med Azure CLI 2.0
 
-Om du arbetar över olika regioner eller använder [Azure Stack](https://docs.microsoft.com/en-us/azure/azure-stack/user/) kan du behöva använda mer än ett moln. Microsoft tillhandahåller moln för efterlevnad av regionala lagar som är tillgängliga för dig. I den här artikeln får du veta hur du skaffar information om moln som är tillgängliga för ditt konto, ändrar ditt aktuella moln och registrerar eller avregistrerar nya moln för användning med Azure Stack.
+Om du arbetar över olika regioner eller använder [Azure Stack](https://docs.microsoft.com/azure/azure-stack/user/) kan du behöva använda mer än ett moln. Microsoft tillhandahåller moln för efterlevnad av regionala lagar som är tillgängliga för dig. I den här artikeln får du veta hur du skaffar information om moln som är tillgängliga för ditt konto, ändrar ditt aktuella moln och registrerar eller avregistrerar nya moln för användning med Azure Stack.
 
 ## <a name="listing-clouds"></a>Visa en lista över tillgängliga moln
 
