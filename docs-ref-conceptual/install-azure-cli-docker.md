@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 76ecf2c9cd0e6e694a31ac160112d1348863f118
-ms.sourcegitcommit: 3eef136ae752eb90c67af604d4ddd298d70b1c9d
+ms.openlocfilehash: 7a12da712cd2aad5bb5fb56e27267a8e05df34a6
+ms.sourcegitcommit: c95a0cde5819cfe8a4f6b058a52f09a8f87c9696
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/06/2018
+ms.lasthandoff: 01/23/2018
 ---
 # <a name="install-azure-cli-20-with-docker"></a>Installera Azure CLI 2.0 med Docker
 
@@ -27,10 +27,10 @@ Du kan använda Docker för att installera en fristående Linux-behållare med A
 Installera CLI med `docker run`.
 
    ```bash
-   docker run -it azuresdk/azure-cli-python:<version>
+   docker run -it microsoft/azure-cli:<version>
    ```
 
-Se våra [Docker-taggar](https://hub.docker.com/r/azuresdk/azure-cli-python/tags/) för tillgängliga versioner.
+Se våra [Docker-taggar](https://hub.docker.com/r/microsoft/azure-cli/tags/) för tillgängliga versioner.
 
 CLI installeras i avbildningen som `az`-kommandot i `/usr/local/bin`.
 
@@ -38,7 +38,7 @@ CLI installeras i avbildningen som `az`-kommandot i `/usr/local/bin`.
 > Om du vill hämta SSH-nycklarna från användarmiljön så kan du använda `-v ${HOME}:/root` för att montera $HOME som `/root`.
 
 > ```bash
-> docker run -it -v ${HOME}:/root azuresdk/azure-cli-python:<version>
+> docker run -it -v ${HOME}:/root microsoft/azure-cli:<version>
 > ```
 
 ### <a name="update-with-docker"></a>Uppdatera med Docker
@@ -48,18 +48,18 @@ Om du vill uppdatera med Docker måste du hämta den nya avbildningen och åters
 1. Uppdatera den lokala avbildningen med `docker pull`.
 
    ```bash
-   docker pull azuresdk/azure-cli-python
+   docker pull microsoft/azure-cli
    ```
 
 2. Hämta behållarna som för närvarande använder CLI-avbildningen.
 
    ```bash
-   docker container ls -a --filter 'ancestor=azuresdk/azure-cli-python'
+   docker container ls -a --filter 'ancestor=microsoft/azure-cli'
    ```
 
    ```output
    CONTAINER ID        IMAGE                              COMMAND             CREATED             STATUS                        PORTS               NAMES
-   34a868beb2ab        azuresdk/azure-cli-python:latest      "/bin/sh -c bash"   8 minutes ago       Exited (0) 8 minutes ago                       inspiring_benz
+   34a868beb2ab        microsoft/azure-cli:latest      "/bin/sh -c bash"   8 minutes ago       Exited (0) 8 minutes ago                       inspiring_benz
    ```
 
   > [!NOTE]
@@ -70,7 +70,7 @@ Om du vill uppdatera med Docker måste du hämta den nya avbildningen och åters
    ```bash
    docker stop inspiring_benz
    docker rm inspiring_benz
-   docker run azuresdk/azure-cli-python
+   docker run microsoft/azure-cli
    ```
 
 ### <a name="uninstall-with-docker"></a>Avinstallera med Docker
@@ -82,12 +82,12 @@ Om du vill avinstallera CLI Docker-avbildningen fullständigt måste du ta bort 
 1. Hämta behållarna som kör azure-cli-avbildningen.
 
    ```bash
-   docker container ls -a --filter 'ancestor=azuresdk/azure-cli-python'
+   docker container ls -a --filter 'ancestor=microsoft/azure-cli'
    ```
 
    ```output
    CONTAINER ID        IMAGE                              COMMAND             CREATED             STATUS                        PORTS               NAMES
-   34a868beb2ab        azuresdk/azure-cli-python:latest      "/bin/sh -c bash"   8 minutes ago       Exited (0) 8 minutes ago                       inspiring_benz
+   34a868beb2ab        microsoft/azure-cli:latest      "/bin/sh -c bash"   8 minutes ago       Exited (0) 8 minutes ago                       inspiring_benz
    ```
   > [!NOTE]
   > Om du installerade en specifik version av avbildningen måste du lägga till `:<version>` i slutet av avbildningens namn.
@@ -101,6 +101,6 @@ Om du vill avinstallera CLI Docker-avbildningen fullständigt måste du ta bort 
 3. Ta bort den lokalt installerade CLI-avbildningen.
 
    ```bash
-   docker rmi azuresdk/azure-cli-python
+   docker rmi microsoft/azure-cli
    ```
 
