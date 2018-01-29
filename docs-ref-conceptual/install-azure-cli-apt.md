@@ -12,11 +12,11 @@ ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 75c531a13a4b730158cd2e874cb6c5d581a27598
-ms.sourcegitcommit: 3eef136ae752eb90c67af604d4ddd298d70b1c9d
+ms.openlocfilehash: 65e8e78275b0f40a2298934fe8bc9368bbf796a7
+ms.sourcegitcommit: 59f0b667f2202bae8914e6fc8dc5c9dc79fef91c
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/06/2018
+ms.lasthandoff: 01/25/2018
 ---
 # <a name="install-azure-cli-20-with-apt"></a>Installera Azure CLI 2.0 med apt
 
@@ -51,6 +51,24 @@ Om du kör en distribution där `apt` ingår, till exempel Ubuntu eller Debian, 
    ```
 
 Du kan köra Azure CLI med kommandot `az`.
+
+## <a name="troubleshooting"></a>Felsökning
+
+### <a name="apt-key-fails-with-no-dirmngr"></a>apt-key misslyckas: "Ingen dirmngr"
+
+När du kör kommandot `apt-key` kanske ett felmeddelande i stil med följande visas.
+
+```output
+gpg: failed to start the dirmngr '/usr/bin/dirmngr': No such file or directory
+gpg: connecting dirmngr at '/tmp/apt-key-gpghome.kt5zo27tp1/S.dirmngr' failed: No such file or directory
+gpg: keyserver receive failed: No dirmngr
+```
+
+Detta beror på att en komponent saknas som krävs av `apt-key`. Du kan lösa detta genom att installera `dirmngr`-paketet.
+
+```bash
+sudo apt-get install dirmngr
+```
 
 ## <a name="update"></a>Uppdatering
 
