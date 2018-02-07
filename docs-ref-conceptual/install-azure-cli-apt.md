@@ -1,26 +1,25 @@
 ---
-title: Installera Azure CLI 2.0 med apt
+title: "Installera Azure CLI 2.0 på Linux med apt"
 description: "Så här installerar du Azure CLI 2.0 med apt-pakethanteraren"
 keywords: Azure CLI,Install Azure CLI,azure apt, azure debian, azure ubuntu
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 11/01/2017
+ms.date: 01/29/18
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 65e8e78275b0f40a2298934fe8bc9368bbf796a7
-ms.sourcegitcommit: 59f0b667f2202bae8914e6fc8dc5c9dc79fef91c
+ms.openlocfilehash: fdd9f0061d5d38ed5a349b11eb0f5f27786bc1ab
+ms.sourcegitcommit: 8606f36963e8daa6448d637393d1e4ef2c9859a0
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/25/2018
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="install-azure-cli-20-with-apt"></a>Installera Azure CLI 2.0 med apt
 
-Om du kör en distribution där `apt` ingår, till exempel Ubuntu eller Debian, så finns det ett paket för Azure CLI som du kan installera i systemet.
+Om du kör en distribution där `apt` ingår, till exempel Ubuntu eller Debian, så finns det ett paket tillgängligt för Azure CLI. Det här paketet har testats med Ubuntu Wheezy och Ubuntu Xenial.
 
 [!INCLUDE [linux-install-requirements.md](includes/linux-install-requirements.md)]
 
@@ -54,9 +53,11 @@ Du kan köra Azure CLI med kommandot `az`.
 
 ## <a name="troubleshooting"></a>Felsökning
 
+Här är några vanliga problem som kan uppstå vid installation med `apt`. Om ditt problem inte visas här så kan du [öppna ett github-supportärende](https://github.com/Azure/azure-cli/issues).
+
 ### <a name="apt-key-fails-with-no-dirmngr"></a>apt-key misslyckas: "Ingen dirmngr"
 
-När du kör kommandot `apt-key` kanske ett felmeddelande i stil med följande visas.
+När du kör kommandot `apt-key` kanske ett felmeddelande i stil med följande visas:
 
 ```output
 gpg: failed to start the dirmngr '/usr/bin/dirmngr': No such file or directory
@@ -64,7 +65,7 @@ gpg: connecting dirmngr at '/tmp/apt-key-gpghome.kt5zo27tp1/S.dirmngr' failed: N
 gpg: keyserver receive failed: No dirmngr
 ```
 
-Detta beror på att en komponent saknas som krävs av `apt-key`. Du kan lösa detta genom att installera `dirmngr`-paketet.
+Det här felet beror på att en komponent som krävs av `apt-key` saknas. Du kan lösa problemet genom att installera `dirmngr`-paketet.
 
 ```bash
 sudo apt-get install dirmngr
@@ -79,15 +80,15 @@ Använd `apt-get upgrade` för att uppdatera CLI-paketet.
    ```
 
 > [!NOTE]
-> När du gör det uppgraderas alla installerade paket på datorn som ingen beroendeändring gjorts för.
+> Med det här kommandot uppgraderas alla installerade paket på datorn som ingen beroendeändring gjorts för.
 > Om du bara vill uppgradera CLI använder du `apt-get install`.
 > ```bash
 > sudo apt-get update && sudo apt-get install --only-upgrade -y azure-cli
 > ```
 
-### <a name="uninstall"></a>Avinstallera
+## <a name="uninstall"></a>Avinstallera
 
-Vi tycker det är tråkigt om du väljer att avinstallera Azure CLI. Använd kommandot `az feedback` för att ange några orsaker till varför du har valt att avinstallera och ge exempel på hur vi kan förbättra CLI-upplevelsen innan du avinstallerar. Vi vill se till att Azure CLI är så felfritt och användarvänligt som möjligt. Du kan även [skicka in ett github-ärende](https://github.com/Azure/azure-cli/issues).
+[!INCLUDE [uninstall-boilerplate.md](includes/uninstall-boilerplate.md)]
 
 1. Avinstallera med `apt-get remove`.
 

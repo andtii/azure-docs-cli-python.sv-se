@@ -5,33 +5,39 @@ keywords: Azure CLI,Install Azure CLI,azure install windows, azure cli windows, 
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 11/01/2017
+ms.date: 01/29/18
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 247ae43813ca9ca7b7b98ebd8e933e02989c6649
-ms.sourcegitcommit: 3eef136ae752eb90c67af604d4ddd298d70b1c9d
+ms.openlocfilehash: f2745c05c12a4ed5fb5a25e86a5dec1664651066
+ms.sourcegitcommit: 8606f36963e8daa6448d637393d1e4ef2c9859a0
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/06/2018
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="install-azure-cli-20-on-windows"></a>Installera Azure CLI 2.0 i Windows
 
-I Windows kan du installera en intern binärfil från en MSI som du kan använda via kommandotolken i Windows eller PowerShell. Om du använder ett Windows-undersystem för Linux (WSL) finns paket tillgängliga för den distribution som du kör. På den [primära installationssidan](install-azure-cli.md) finns en lista med pakethanterare som stöds eller instruktioner om hur du installerar manuellt under WSL.
+På Windows installeras Azure CLI-binärfilen via en MSI, vilket ger dig åtkomst till CLI via Windows kommandotolk (CMD) eller PowerShell.
+Om du använder ett Windows-undersystem för Linux (WSL) finns paket tillgängliga för din Linux-distribution. På den [primära installationssidan](install-azure-cli.md) finns en lista med pakethanterare som stöds eller instruktioner om hur du installerar manuellt under WSL.
 
-## <a name="install-or-update-with-msi"></a>Installera eller uppdatera med MSI
+## <a name="install-or-update"></a>Installera eller uppdatera
 
-MSI-delen som kan distribueras används för installation, uppdatering och avinstallation av kommandot `az` i Windows. Du kan [ladda ned MSI-installationsprogrammet](https://aka.ms/InstallAzureCliWindows) och sedan köra det för att installera eller uppdatera.
+MSI-delen som kan distribueras används för installation, uppdatering och avinstallation av kommandot `az` i Windows.
+
+> [!div class="nextstepaction"]
+> [Ladda ned MSI-installationsprogrammet](https://aka.ms/InstallAzureCliWindows)
 
 När installationsprogrammet frågar om ändringar kan göras på din dator klickar du på ”Ja”.
 
-Du kan nu köra Azure CLI med kommandot `az` från antingen kommandotolken i Windows eller PowerShell.
+Du kan nu köra Azure CLI med kommandot `az` från antingen kommandotolken i Windows eller PowerShell. PowerShell erbjuder vissa funktioner för tabbifyllning som inte är tillgängliga från kommandoraden.
 
-## <a name="uninstall-with-msi"></a>Avinstallera med MSI
+## <a name="uninstall"></a>Avinstallera
 
-Vi tycker det är tråkigt om du väljer att avinstallera Azure CLI. Använd kommandot `az feedback` för att ange några orsaker till varför du har valt att avinstallera och ge exempel på hur vi kan förbättra CLI-upplevelsen innan du avinstallerar. Vi vill se till att Azure CLI är så felfritt och användarvänligt som möjligt. Du kan även [skicka in ett github-ärende](https://github.com/Azure/azure-cli/issues).
+[!INCLUDE [uninstall-boilerplate.md](includes/uninstall-boilerplate.md)]
 
-Du kan avinstallera genom att köra MSI igen och välja alternativet ”Avinstallera”. Du kan [ladda ned MSI-installationsprogrammet](https://aka.ms/InstallAzureCliWindows) om du inte längre har det på din dator.
+Du kan avinstallera genom att köra MSI igen och välja alternativet ”Avinstallera”. 
+
+> [!div class="nextstepaction"]
+> [Ladda ned MSI-installationsprogrammet](https://aka.ms/InstallAzureCliWindows)

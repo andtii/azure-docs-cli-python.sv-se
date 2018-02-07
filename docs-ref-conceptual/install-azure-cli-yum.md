@@ -1,26 +1,25 @@
 ---
-title: Installera Azure CLI 2.0 med yum
+title: "Installera Azure CLI 2.0 på Linux med yum"
 description: "Så här installerar du Azure CLI 2.0 med yum"
 keywords: Azure CLI,Install Azure CLI,azure yum,azure rhel, azure fedora, azure centos
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 11/01/2017
+ms.date: 01/29/18
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: f0d5effcd8315094b30050a35119e41eddf89961
-ms.sourcegitcommit: 3eef136ae752eb90c67af604d4ddd298d70b1c9d
+ms.openlocfilehash: 9d11c3cf5d9e7ba58c3e2edd830e0d12669f5b91
+ms.sourcegitcommit: 8606f36963e8daa6448d637393d1e4ef2c9859a0
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/06/2018
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="install-azure-cli-20-with-yum"></a>Installera Azure CLI 2.0 med yum
 
-Om du kör en distribution där `yum` ingår, till exempel RHEL, Fedora eller CentOS, så finns det ett paket för Azure CLI som du kan installera i systemet.
+Om du kör en distribution där `yum` ingår, till exempel RHEL, Fedora eller CentOS, så finns det ett paket tillgängligt för Azure CLI. Det här paketet har testats med RHEL 7, Fedora 19 och senare samt CentOS 7.
 
 [!INCLUDE [linux-install-requirements.md](includes/linux-install-requirements.md)]
 
@@ -58,7 +57,7 @@ sudo yum update azure-cli
 
 ## <a name="uninstall"></a>Avinstallera
 
-Vi tycker det är tråkigt om du väljer att avinstallera Azure CLI. Använd kommandot `az feedback` för att ange några orsaker till varför du har valt att avinstallera och ge exempel på hur vi kan förbättra CLI-upplevelsen innan du avinstallerar. Vi vill se till att Azure CLI är så felfritt och användarvänligt som möjligt. Du kan även [skicka in ett github-ärende](https://github.com/Azure/azure-cli/issues).
+[!INCLUDE [uninstall-boilerplate.md](includes/uninstall-boilerplate.md)]
 
 1. Ta bort paketet från datorn.
 

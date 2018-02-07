@@ -1,26 +1,25 @@
 ---
-title: Installera Azure CLI 2.0 med zypper
+title: "Installera Azure CLI 2.0 på Linux med zypper"
 description: "Så här installerar du Azure CLI 2.0 med zypper"
 keywords: azure cli, azure cli install, azure cli zypper, azure cli opensuse, azure cli sle
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 11/01/2017
+ms.date: 01/29/18
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 6b9a97e73f45c8271f1e8f19d5a8cf5f9f748d07
-ms.sourcegitcommit: 3eef136ae752eb90c67af604d4ddd298d70b1c9d
+ms.openlocfilehash: c0b566f96e47d34d20f7bf85db0fae32913ed596
+ms.sourcegitcommit: 8606f36963e8daa6448d637393d1e4ef2c9859a0
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/06/2018
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="install-azure-cli-20-with-zypper"></a>Installera Azure CLI 2.0 med zypper
 
-Om du kör en distribution där `zypper` ingår, till exempel OpenSUSE eller SLE, så finns det ett paket för Azure CLI som du kan installera i systemet.
+Om du kör en distribution där `zypper` ingår, till exempel openSUSE eller SLES, så finns det ett paket tillgängligt för Azure CLI. Det här paketet har testats med openSUSE 42.2 och SLES 12 SP 2.
 
 [!INCLUDE [linux-install-requirements.md](includes/linux-install-requirements.md)]
 
@@ -65,7 +64,7 @@ sudo zypper update azure-cli
 
 ## <a name="uninstall"></a>Avinstallera
 
-Vi tycker det är tråkigt om du väljer att avinstallera Azure CLI. Använd kommandot `az feedback` för att ange några orsaker till varför du har valt att avinstallera och ge exempel på hur vi kan förbättra CLI-upplevelsen innan du avinstallerar. Vi vill se till att Azure CLI är så felfritt och användarvänligt som möjligt. Du kan även [skicka in ett github-ärende](https://github.com/Azure/azure-cli/issues).
+[!INCLUDE [uninstall-boilerplate.md](includes/uninstall-boilerplate.md)]
 
 1. Ta bort paketet från datorn.
 
