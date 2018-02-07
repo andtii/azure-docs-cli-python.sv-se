@@ -1,78 +1,68 @@
 ---
 title: "Installera Azure CLI för macOS"
 description: "Så här installerar du Azure CLI 2.0 på macOS"
-keywords: Azure CLI,Install Azure CLI,azure macos, azure install macos
+keywords: "Azure CLI, Installera Azure CLI, azure macos, installera azure för macos"
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 10/27/2017
+ms.date: 01/29/18
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: e615d2b3ab3b1307e982cb1d4d456633440afdf6
-ms.sourcegitcommit: 3eef136ae752eb90c67af604d4ddd298d70b1c9d
+ms.openlocfilehash: 36fd2604677db0b7f820ee11884bf790fb1d75cb
+ms.sourcegitcommit: 8606f36963e8daa6448d637393d1e4ef2c9859a0
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/06/2018
+ms.lasthandoff: 02/01/2018
 ---
-# <a name="install-azure-cli-20-on-macos"></a><span data-ttu-id="f2bb6-104">Installera Azure CLI 2.0 på macOS</span><span class="sxs-lookup"><span data-stu-id="f2bb6-104">Install Azure CLI 2.0 on macOS</span></span>
+# <a name="install-azure-cli-20-on-macos"></a><span data-ttu-id="2c220-104">Installera Azure CLI 2.0 på macOS</span><span class="sxs-lookup"><span data-stu-id="2c220-104">Install Azure CLI 2.0 on macOS</span></span>
 
-<span data-ttu-id="f2bb6-105">På macOS-plattformen kan du installera Azure CLI via antingen [pakethanteraren Homebrew](http://brew.sh) eller manuellt.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-105">For the macOS platform, you can install the Azure CLI either through the [homebrew package manager](http://brew.sh) or manually.</span></span> <span data-ttu-id="f2bb6-106">Vi rekommenderar att du installerar via Homebrew. Då blir det enklare att installera, hämta uppdateringar och avinstallera om du skulle behöva det.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-106">The preferred installation method is through homebrew, so that it's easier to install, get updates, and uninstall if you need to.</span></span>
+<span data-ttu-id="2c220-105">På macOS-plattformen kan du installera Azure CLI via [pakethanteraren Homebrew](http://brew.sh).</span><span class="sxs-lookup"><span data-stu-id="2c220-105">For the macOS platform, you can install the Azure CLI either through the [homebrew package manager](http://brew.sh).</span></span> <span data-ttu-id="2c220-106">Med Homebrew är det enkelt att se till att installationen av CLI alltid är uppdaterad.</span><span class="sxs-lookup"><span data-stu-id="2c220-106">Homebrew makes it easy to keep your installation of the CLI update to date.</span></span> <span data-ttu-id="2c220-107">CLI-paketet har testats på macOS-versionerna 10.9 och senare.</span><span class="sxs-lookup"><span data-stu-id="2c220-107">The CLI package has been tested on macOS versions 10.9 and later.</span></span>
 
-## <a name="use-homebrew-to-install"></a><span data-ttu-id="f2bb6-107">Använda Homebrew för att installera</span><span class="sxs-lookup"><span data-stu-id="f2bb6-107">Use homebrew to install</span></span>
+## <a name="install"></a><span data-ttu-id="2c220-108">Installera</span><span class="sxs-lookup"><span data-stu-id="2c220-108">Install</span></span>
 
-<span data-ttu-id="f2bb6-108">CLI-installationen hanteras enklast med Homebrew.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-108">Homebrew is the easiest way to manage your CLI install.</span></span> <span data-ttu-id="f2bb6-109">Homebrew erbjuder ett bekvämt sätt att installera, uppdatera och avinstallera.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-109">It provides convenient ways to install, update, and uninstall.</span></span> <span data-ttu-id="f2bb6-110">Det påminner om andra pakethanterare, till exempel `apt` och `yum`.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-110">It's similar to other package managers such as `apt` or `yum`.</span></span>
-<span data-ttu-id="f2bb6-111">Om du inte har Homebrew i systemet kan du [installera Homebrew](https://docs.brew.sh/Installation.html) innan du fortsätter.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-111">If you don't have homebrew available on your system, [install homebrew](https://docs.brew.sh/Installation.html) before continuing.</span></span>
+<span data-ttu-id="2c220-109">CLI-installationen hanteras enklast med Homebrew.</span><span class="sxs-lookup"><span data-stu-id="2c220-109">Homebrew is the easiest way to manage your CLI install.</span></span> <span data-ttu-id="2c220-110">Homebrew erbjuder ett bekvämt sätt att installera, uppdatera och avinstallera.</span><span class="sxs-lookup"><span data-stu-id="2c220-110">It provides convenient ways to install, update, and uninstall.</span></span> <span data-ttu-id="2c220-111">Om du inte har Homebrew i systemet kan du [installera Homebrew](https://docs.brew.sh/Installation.html) innan du fortsätter.</span><span class="sxs-lookup"><span data-stu-id="2c220-111">If you don't have homebrew available on your system, [install homebrew](https://docs.brew.sh/Installation.html) before continuing.</span></span>
 
-### <a name="install-with-homebrew"></a><span data-ttu-id="f2bb6-112">Installera med Homebrew</span><span class="sxs-lookup"><span data-stu-id="f2bb6-112">Install with homebrew</span></span>
-
-<span data-ttu-id="f2bb6-113">Du kan installera CLI genom att uppdatera informationen om brew-lagringsplatsen och sedan köra kommandot `install`:</span><span class="sxs-lookup"><span data-stu-id="f2bb6-113">You can install the CLI by updating your brew repository information, and then running the `install` command:</span></span>
+<span data-ttu-id="2c220-112">Du kan installera CLI genom att uppdatera informationen om brew-lagringsplatsen och sedan köra kommandot `install`:</span><span class="sxs-lookup"><span data-stu-id="2c220-112">You can install the CLI by updating your brew repository information, and then running the `install` command:</span></span>
 
 ```bash
 brew update && brew install azure-cli
 ```
 
-<span data-ttu-id="f2bb6-114">Sedan kan du köra Azure CLI med kommandot `az`.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-114">You can then run the Azure CLI with the `az` command.</span></span>
+<span data-ttu-id="2c220-113">Sedan kan du köra Azure CLI med kommandot `az`.</span><span class="sxs-lookup"><span data-stu-id="2c220-113">You can then run the Azure CLI with the `az` command.</span></span>
 
-### <a name="update-with-homebrew"></a><span data-ttu-id="f2bb6-115">Uppdatera med Homebrew</span><span class="sxs-lookup"><span data-stu-id="f2bb6-115">Update with homebrew</span></span>
+## <a name="troubleshooting"></a><span data-ttu-id="2c220-114">Felsökning</span><span class="sxs-lookup"><span data-stu-id="2c220-114">Troubleshooting</span></span>
 
-<span data-ttu-id="f2bb6-116">CLI uppdateras regelbundet med felkorrigeringar, förbättringar, nya funktioner och förhandsgranskningsmöjligheter.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-116">The CLI is regularly updated with bug fixes, improvements, new features, and preview functionality.</span></span> <span data-ttu-id="f2bb6-117">En ny version blir tillgänglig ungefär varannan vecka.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-117">A new release is available roughly every two weeks.</span></span> <span data-ttu-id="f2bb6-118">Om du vill uppdatera CLI-paketet måste du uppdatera informationen om din lokala lagringsplats.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-118">You will need to update your local repository information, and then update the CLI package.</span></span>
+<span data-ttu-id="2c220-115">Om du stötte på problem när du installerade CLI med Homebrew så är det här några vanliga fel som kan uppstå.</span><span class="sxs-lookup"><span data-stu-id="2c220-115">If you encounter a problem when installing the CLI through Homebrew, here are some common errors.</span></span> <span data-ttu-id="2c220-116">Om ditt problem inte visas här så kan du [öppna ett github-supportärende](https://github.com/Azure/azure-cli/issues).</span><span class="sxs-lookup"><span data-stu-id="2c220-116">If your issue is not listed here, please [file an issue on github](https://github.com/Azure/azure-cli/issues).</span></span>
 
-```bash
-brew update && brew upgrade azure-cli
-```
+### <a name="unable-to-find-python-or-installed-packages"></a><span data-ttu-id="2c220-117">Det gick inte att hitta Python eller installerade paket</span><span class="sxs-lookup"><span data-stu-id="2c220-117">Unable to find Python or installed packages</span></span>
 
-### <a name="troubleshooting"></a><span data-ttu-id="f2bb6-119">Felsökning</span><span class="sxs-lookup"><span data-stu-id="f2bb6-119">Troubleshooting</span></span>
-
-<span data-ttu-id="f2bb6-120">Stötte du på problem när du installerade eller uppdaterade CLI med Homebrew?</span><span class="sxs-lookup"><span data-stu-id="f2bb6-120">Did you encounter a problem when installing or updating the CLI with homebrew?</span></span> <span data-ttu-id="f2bb6-121">Här är några vanliga fel som kan uppstå, samt sätt att diagnostisera och lösa dem.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-121">Here are some common errors that might occur, and ways to diagnose and resolve them.</span></span>
-
-#### <a name="unable-to-find-python-or-installed-packages"></a><span data-ttu-id="f2bb6-122">Det gick inte att hitta Python eller installerade paket</span><span class="sxs-lookup"><span data-stu-id="f2bb6-122">Unable to find Python or installed packages</span></span>
-
-<span data-ttu-id="f2bb6-123">Om installationen inte kunde hitta Python eller installerade paket så kan detta bero på en versionskonflikt eller något annat problem som uppstod under installationen av Homebrew.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-123">If your install is unable to find Python or installed packages, there may be a minor version mismatch or other issue which occurred during homebrew installation.</span></span> <span data-ttu-id="f2bb6-124">Eftersom CLI inte använder en virtuell miljö måste det gå att hitta rätt versioner av Python som har installerats av Homebrew.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-124">Since the CLI does not use a virtualenv, it relies on being able to find correct versions of Python installed by homebrew.</span></span> <span data-ttu-id="f2bb6-125">Du kan åtgärda dessa problem genom att länka till Python-installationen igen:</span><span class="sxs-lookup"><span data-stu-id="f2bb6-125">You may be able to fix these issues by re-linking your Python installation:</span></span>
+<span data-ttu-id="2c220-118">Om installationen inte kunde hitta Python eller installerade paket så kan det bero på en versionskonflikt eller något annat problem som uppstod under installationen av Homebrew.</span><span class="sxs-lookup"><span data-stu-id="2c220-118">If your install is unable to find Python or installed packages, there may be a minor version mismatch or other issue that occurred during homebrew installation.</span></span> <span data-ttu-id="2c220-119">Eftersom CLI inte använder en virtuell Python-miljö så är det viktigt att det går att hitta rätt version av Python.</span><span class="sxs-lookup"><span data-stu-id="2c220-119">Since the CLI does not use a Python virtual environment, it relies on being able to find correct Python version.</span></span> <span data-ttu-id="2c220-120">Du kan åtgärda de här problemen genom att länka till Python-installationen igen.</span><span class="sxs-lookup"><span data-stu-id="2c220-120">You may be able to fix these issues by relinking your Python installation.</span></span>
 
 ```bash
 brew link --overwrite python3
 ```
 
-#### <a name="the-cli-version-is-out-of-date"></a><span data-ttu-id="f2bb6-126">CLI-versionen är inaktuell</span><span class="sxs-lookup"><span data-stu-id="f2bb6-126">The CLI version is out of date</span></span>
+### <a name="cli-version-1x-is-installed"></a><span data-ttu-id="2c220-121">CLI-version 1.x har installerats</span><span class="sxs-lookup"><span data-stu-id="2c220-121">CLI version 1.x is installed</span></span>
 
-<span data-ttu-id="f2bb6-127">Om du tror att den installerade versionen av CLI kan vara inaktuell så kan du köra kommandot `brew update` följt av `brew upgrade azure-cli`.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-127">If you think that your installed CLI version might be out of date, you will need to run a `brew update` command, followed by `brew upgrade azure-cli`.</span></span> <span data-ttu-id="f2bb6-128">Tänk på att Homebrew-paket kan släppas långsammare än allmänna versioner om CLI inte uppdateras.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-128">If this does not update the CLI, be aware that homebrew packages may roll out more slowly than general releases.</span></span> <span data-ttu-id="f2bb6-129">Om du behöver de absolut senaste installationerna av CLI så bör du [installera manuellt](#manage-the-cli-manually).</span><span class="sxs-lookup"><span data-stu-id="f2bb6-129">If you require bleeding-edge installs of the CLI, then you should [install manually](#manage-the-cli-manually).</span></span>
+<span data-ttu-id="2c220-122">Om en inaktuell version installerades kan det bero på en föråldrad homebrew-cache.</span><span class="sxs-lookup"><span data-stu-id="2c220-122">If an out-of-date version was installed, it could be due to a stale homebrew cache.</span></span> <span data-ttu-id="2c220-123">Följ anvisningarna för [uppdateringen](#Update).</span><span class="sxs-lookup"><span data-stu-id="2c220-123">Follow the [update](#Update) instructions.</span></span>
 
-### <a name="uninstall-with-homebrew"></a><span data-ttu-id="f2bb6-130">Avinstallera med Homebrew</span><span class="sxs-lookup"><span data-stu-id="f2bb6-130">Uninstall with homebrew</span></span>
+## <a name="update"></a><span data-ttu-id="2c220-124">Uppdatering</span><span class="sxs-lookup"><span data-stu-id="2c220-124">Update</span></span>
 
-<span data-ttu-id="f2bb6-131">Vi tycker det är tråkigt om du väljer att avinstallera Azure CLI.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-131">If you ever decide to uninstall the Azure CLI, we're sorry to see you go.</span></span> <span data-ttu-id="f2bb6-132">Använd kommandot `az feedback` för att ange några orsaker till varför du har valt att avinstallera och ge exempel på hur vi kan förbättra CLI-upplevelsen innan du avinstallerar.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-132">Before you uninstall, use the `az feedback` command to give us some reasons why you chose to uninstall and how we could improve the CLI experience.</span></span> <span data-ttu-id="f2bb6-133">Vi vill se till att Azure CLI är så felfritt och användarvänligt som möjligt.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-133">We want to make sure that the Azure CLI is as bug-free and user-friendly as we can make it.</span></span> <span data-ttu-id="f2bb6-134">Du kan även [skicka in ett github-ärende](https://github.com/Azure/azure-cli/issues).</span><span class="sxs-lookup"><span data-stu-id="f2bb6-134">You can also [file a github issue](https://github.com/Azure/azure-cli/issues).</span></span>
+<span data-ttu-id="2c220-125">CLI uppdateras regelbundet med felkorrigeringar, förbättringar, nya funktioner och förhandsgranskningsmöjligheter.</span><span class="sxs-lookup"><span data-stu-id="2c220-125">The CLI is regularly updated with bug fixes, improvements, new features, and preview functionality.</span></span> <span data-ttu-id="2c220-126">En ny version blir tillgänglig ungefär varannan vecka.</span><span class="sxs-lookup"><span data-stu-id="2c220-126">A new release is available roughly every two weeks.</span></span> <span data-ttu-id="2c220-127">Uppdatera informationen om din lokala lagringsplats och uppgradera sedan `azure-cli`-paketet.</span><span class="sxs-lookup"><span data-stu-id="2c220-127">Update your local repository information and then upgrade the `azure-cli` package.</span></span>
 
-<span data-ttu-id="f2bb6-135">Om du installerade med Homebrew så bör du även använda det för att avinstallera.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-135">If you installed with homebrew, you should also use it to uninstall.</span></span>
+```bash
+brew update && brew upgrade azure-cli
+```
+
+## <a name="uninstall"></a><span data-ttu-id="2c220-128">Avinstallera</span><span class="sxs-lookup"><span data-stu-id="2c220-128">Uninstall</span></span>
+
+[!INCLUDE [uninstall-boilerplate.md](includes/uninstall-boilerplate.md)]
+
+<span data-ttu-id="2c220-129">Använd Homebrew för att avinstallera `azure-cli`-paketet.</span><span class="sxs-lookup"><span data-stu-id="2c220-129">Use homebrew to uninstall the `azure-cli` package.</span></span>
 
 ```bash
 brew uninstall azure-cli
 ```
-
-## <a name="install-the-cli-manually"></a><span data-ttu-id="f2bb6-136">Installera CLI manuellt</span><span class="sxs-lookup"><span data-stu-id="f2bb6-136">Install the CLI manually</span></span>
-
-<span data-ttu-id="f2bb6-137">Om du inte kan eller inte vill använda Homebrew för att utföra CLI-installationen så kan du installera manuellt.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-137">If you can't or don't want to rely on homebrew to manage the CLI install for you, then you can manually install.</span></span>
-
-<span data-ttu-id="f2bb6-138">Följ anvisningarna för [manuell installation på Linux](install-azure-cli-linux.md) för att installera manuellt på macOS.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-138">Follow the [manual Linux installation instructions](install-azure-cli-linux.md) to install manually on macOS.</span></span> <span data-ttu-id="f2bb6-139">macOS-version 10.9 och senare bör innehålla alla nödvändiga beroenden.</span><span class="sxs-lookup"><span data-stu-id="f2bb6-139">macOS versions 10.9 and later should include all of the required dependencies.</span></span>
