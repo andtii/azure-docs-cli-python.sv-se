@@ -11,11 +11,11 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: f2745c05c12a4ed5fb5a25e86a5dec1664651066
-ms.sourcegitcommit: 8606f36963e8daa6448d637393d1e4ef2c9859a0
+ms.openlocfilehash: fc84b80e44a994495ef97cf9d7ec4e4a79a5c5b3
+ms.sourcegitcommit: b41c5ed4a26c771a1a32b4560131f7a65b80fd33
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 02/01/2018
+ms.lasthandoff: 02/03/2018
 ---
 # <a name="install-azure-cli-20-on-windows"></a>Installera Azure CLI 2.0 i Windows
 
@@ -27,7 +27,7 @@ Om du använder ett Windows-undersystem för Linux (WSL) finns paket tillgängli
 MSI-delen som kan distribueras används för installation, uppdatering och avinstallation av kommandot `az` i Windows.
 
 > [!div class="nextstepaction"]
-> [Ladda ned MSI-installationsprogrammet](https://aka.ms/InstallAzureCliWindows)
+> [Ladda ned MSI-installationsprogrammet](https://azurecliprod.blob.core.windows.net/msi/azure-cli-latest.msi)
 
 När installationsprogrammet frågar om ändringar kan göras på din dator klickar du på ”Ja”.
 
@@ -40,4 +40,4 @@ Du kan nu köra Azure CLI med kommandot `az` från antingen kommandotolken i Win
 Du kan avinstallera genom att köra MSI igen och välja alternativet ”Avinstallera”. 
 
 > [!div class="nextstepaction"]
-> [Ladda ned MSI-installationsprogrammet](https://aka.ms/InstallAzureCliWindows)
+> [Ladda ned MSI-installationsprogrammet](https://azurecliprod.blob.core.windows.net/msi/azure-cli-latest.msi)
