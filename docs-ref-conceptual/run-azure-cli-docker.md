@@ -1,21 +1,20 @@
 ---
 title: "Kör Azure CLI 2.0 i en Docker-behållare"
 description: "Så här kör du en Docker-behållare med en värdlösning för Azure CLI 2.0"
-keywords: Azure CLI,Install Azure CLI,azure docker,azure docker image,
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 01/29/18
+ms.date: 01/29/2018
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: 819ff0cdb0df6057a5dff8f8ab015796f06c6a9b
-ms.sourcegitcommit: 8606f36963e8daa6448d637393d1e4ef2c9859a0
+ms.openlocfilehash: 3a09eb6d83bb5401628bd952d199a03ecbb8216e
+ms.sourcegitcommit: b93a19222e116d5880bbe64c03507c64e190331e
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 02/01/2018
+ms.lasthandoff: 02/15/2018
 ---
 # <a name="run-azure-cli-20-in-a-docker-container"></a>Kör Azure CLI 2.0 i en Docker-behållare
 
