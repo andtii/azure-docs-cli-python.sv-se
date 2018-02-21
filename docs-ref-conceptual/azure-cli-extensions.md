@@ -5,31 +5,31 @@ keywords: Azure CLI, Extensions
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 10/30/2017
+ms.date: 02/13/2018
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: a76e58c4430a184d133cca0ef0623f325aeb2f27
-ms.sourcegitcommit: 3eef136ae752eb90c67af604d4ddd298d70b1c9d
+ms.openlocfilehash: 548c06c64cc98598a2bd24bcc5959e59bffb4930
+ms.sourcegitcommit: b93a19222e116d5880bbe64c03507c64e190331e
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/06/2018
+ms.lasthandoff: 02/15/2018
 ---
 # <a name="using-extensions-with-the-azure-cli-20"></a>Använda tillägg med Azure CLI 2.0
 
-Tillägg är enskilda moduler som inte levereras med själva Azure CLI och som gör att du kan lägga till funktioner via nya kommandon. Detta kan vara experimentella versioner eller förhandsversioner, särskilda verktyg som Microsoft har för dina behov, eller till och med tillägg som du har skrivit själv. Tillägg möjliggör viss flexibilitet med CLI så att du kan ändra det efter dina behov, utan att behöva skicka en massa extra paket som inte anses vara en del av grundfunktionsuppsättningen.
+Tillägg är enskilda moduler som inte levereras med själva Azure CLI och som lägger till funktioner via nya kommandon. Det kan vara experimentella versioner eller förhandsversioner, särskilda verktyg från Microsoft eller anpassade funktioner som du har skrivit själv. Tillägg möjliggör viss flexibilitet med CLI så att du kan ändra det efter dina behov, utan att behöva skicka en massa extra paket som inte anses vara en del av grundfunktionsuppsättningen.
 
 Den här artikeln hjälper dig att förstå hur du installerar, uppdaterar och tar bort tillägg för CLI. Den bör också besvara vanliga frågor om tilläggens funktioner.
 
 ## <a name="finding-extensions"></a>Hitta tillägg
 
-Om du vill veta vilka tillägg som finns tillgängliga kan du använda `az extension list-available`. Det här kommandot visar de tillgängliga officiella tillägg som tillhandahålls och stöds av Microsoft.
+Om du vill veta vilka tillägg som finns tillgängliga kan du använda [az extension list-available](/cli/azure/extension?view=azure-cli-latest#az_extension_list_available). Det här kommandot visar de tillgängliga officiella tillägg som tillhandahålls och stöds av Microsoft.
 
 ## <a name="installing-extensions"></a>Installera tillägg
 
-När du har hittat ett tillägg som du vill installera använder du `az extension add` för att hämta det. Om tillägget är ett officiellt Microsoft-tillägg som finns i listan i `az extension list-available` kan du installera tillägget efter dess namn.
+När du har hittat ett tillägg som du vill installera använder du [az extension add](https://docs.microsoft.com/en-us/cli/azure/extension?view=azure-cli-latest#az_extension_add) för att hämta det. Om tillägget finns i listan i `az extension list-available` kan du installera tillägget efter dess namn.
 
 ```azurecli
 az extension add --name <extension-name>
@@ -45,7 +45,7 @@ När du har installerat ett tillägg finns det under värdet för `$AZURE_EXTENS
 
 ## <a name="updating-extensions"></a>Uppdatera tillägg
 
-Tillägg kan bara uppdateras efter namnet:
+Tillägg kan bara uppdateras efter namnet med hjälp av [az extension update](https://docs.microsoft.com/en-us/cli/azure/extension?view=azure-cli-latest#az_extension_update).
 
 ```azurecli
 az extension update --name <extension-name>
@@ -55,7 +55,7 @@ Installera om tillägget för att uppdatera det om ett tilläggsnamn av någon o
 
 ## <a name="uninstalling-extensions"></a>Avinstallera tillägg
 
-Om du inte längre behöver ett tillägg går det att ta bort det med `az extension remove`.
+Om du inte längre behöver ett tillägg går det att ta bort det med [az extension remove](https://docs.microsoft.com/en-us/cli/azure/extension?view=azure-cli-latest#az_extension_remove).
 
 ```azurecli
 az extension remove --name <extension-name>

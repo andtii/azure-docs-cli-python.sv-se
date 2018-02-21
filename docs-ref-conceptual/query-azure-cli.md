@@ -1,7 +1,6 @@
 ---
 title: "Frågekommandoutdata med Azure CLI 2.0"
-description: "Använd --query för att utföra JMESPath-frågor för utdata för Azure CLI 2.0-kommandon."
-keywords: "Azure CLI 2.0, JMESPath, fråga, Linux, Mac, Windows, OS X"
+description: "Lär dig hur du utför JMESPath-frågor för utdata för Azure CLI 2.0-kommandon."
 author: rloutlaw
 ms.author: routlaw
 manager: douge
@@ -11,20 +10,19 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.assetid: 5979acc5-21a5-41e2-a4b6-3183bfe6aa22
-ms.openlocfilehash: 0de18adc91589377d4f96a306a70c9adfeabdcab
-ms.sourcegitcommit: 8606f36963e8daa6448d637393d1e4ef2c9859a0
+ms.openlocfilehash: 98bc35c1e8136231011a2303901f42c68c9a7758
+ms.sourcegitcommit: b93a19222e116d5880bbe64c03507c64e190331e
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 02/01/2018
+ms.lasthandoff: 02/15/2018
 ---
-# <a name="using-jmespath-queries-with-azure-cli-20"></a>Använda JMESPath-frågor med Azure CLI 2.0
+# <a name="use-jmespath-queries-with-azure-cli-20"></a>Använda JMESPath-frågor med Azure CLI 2.0
 
 Azure CLI 2.0 använder parametern `--query` för att genomföra en [JMESPath-fråga](http://jmespath.org) på resultatet från `az`-kommandot. JMESPath är ett kraftfullt frågespråk för JSON-utdata.  Om du inte är bekant med JMESPath-frågor finns det en självstudie på [JMESPath.org/tutorial](http://JMESPath.org/tutorial.html).
 
 Parametern `Query` stöds av alla resurstyper (behållartjänster, webbappar, VM etc.) i Azure CLI 2.0 och kan användas i många olika syften.  Vi har angett flera exempel nedan.
 
-## <a name="selecting-simple-properties"></a>Välja enkla egenskaper
+## <a name="select-simple-properties"></a>Välja enkla egenskaper
 
 Det enkla kommandot `list` med `table`-utdataformat returnerar en granskad uppsättning av de vanligaste enkla egenskaperna för varje resurstyp i ett lättläst tabellformat.
 
@@ -85,7 +83,7 @@ RGDEMO001  KBDemo001VM
 RGDEMO001  KBDemo020
 ```
 
-## <a name="selecting-complex-nested-properties"></a>Välja komplexa kapslade egenskaper
+## <a name="select-complex-nested-properties"></a>Välja komplexa kapslade egenskaper
 
 Om den egenskap du vill välja ligger djupt kapslad i JSON-utdata måste du ange den fullständiga sökvägen till den kapslade egenskapen. Följande exempel visar hur du väljer den virtuella datorns namn och operativsystemtyp från kommandot för listan över virtuella datorer.
 

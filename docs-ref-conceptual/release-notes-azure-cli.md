@@ -1,23 +1,193 @@
 ---
 title: Viktig information om Azure CLI 2.0
 description: "Lär dig mer om de senaste uppdateringarna till Azure CLI 2.0"
-keywords: Viktig information om Azure CLI 2.0
 author: sptramer
 ms.author: sttramer
 manager: routlaw
-ms.date: 01/17/2018
+ms.date: 02/13/2018
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: 86babea3030ea932de1858a391014e5d0bba7f73
-ms.sourcegitcommit: cae66f994cb7b7f829f75ac528093fdb6851f64e
+ms.openlocfilehash: 480b646b7230c8fb22f10b28a9204287cd0acc19
+ms.sourcegitcommit: b93a19222e116d5880bbe64c03507c64e190331e
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/29/2018
+ms.lasthandoff: 02/15/2018
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
+
+## <a name="february-13-2018"></a>13 februari 2018
+
+Version 2.0.27
+
+### <a name="core"></a>Kärna
+
+* Autentiseringen har ändrats till nyckel för både prenumerations-ID och namn för MSI-inloggningen
+
+### <a name="acs"></a>ACS
+
+* [VIKTIG ÄNDRING] `aks get-versions` har bytt namn till `aks get-upgrades` för noggrannhet
+* `aks get-versions` har ändrats för att visa Kubernetes-versioner som är tillgängliga för `aks create`
+* `aks create`-standardvärden har ändrats för att låta servern välja version av Kubernetes
+* Hjälpmeddelanden som hänvisar till tjänstens huvudnamn som genererats av AKS har uppdaterats
+* Nodstorlekar som är standard för `aks create` har ändrats från "Standard\_D1\_v2" till "Standard\_DS1\_v2"
+* Tillförlitligheten har förbättrats för att hitta instrumentpanelen för `az aks browse`
+* `aks get-credentials` har åtgärdats för att hantera Unicode-fel vid inläsning av Kubernetes konfigurationsfiler
+* Ett meddelande för `az aks install-cli` har lagts till för att få hjälp med `kubectl` i `$PATH`
+
+### <a name="appservice"></a>App Service
+
+* Problem har åtgärdats där `webapp [backup|restore]` misslyckades på grund av en null-referens
+* Stöd för standard-apptjänstplaner via `az configure --defaults appserviceplan=my-asp` har lagts till
+
+### <a name="cdn"></a>CDN
+
+* `cdn custom-domain [enable-https|disable-https]`-kommandon har lagts till
+
+### <a name="container"></a>Behållare
+
+* `--follow`-alternativ för `az container logs` för direktuppspelningsloggar har lagts till
+* `container attach`-kommando som bifogar lokala standard-utdata och felströmmar till en behållare i en behållargrupp har lagts till
+
+### <a name="cosmosdb"></a>CosmosDB
+
+* Stöd har lagts till för att konfigurera funktioner
+
+### <a name="extension"></a>Anknytning
+
+* Stöd för `--pip-proxy`-parameter för `az extension [add|update]`-kommandon har lagts till
+* Stöd för `--pip-extra-index-urls`-argument för `az extension [add|update]`-kommandon har lagts till
+
+### <a name="feedback"></a>Feedback
+
+* Tilläggsinformation för telemetridata har lagts till
+
+### <a name="interactive"></a>Interaktiv
+
+* Problem har åtgärdats där användaren uppmanades att logga in vid användning av interaktivt läge i Cloud Shell
+* Regression med saknade kompletteringar för parametrar har åtgärdats
+
+### <a name="iot"></a>IoT
+
+* Problem har åtgärdats där `iot dps access policy [create|update]` returnerade fel i stil med "det gick inte att hitta" även när processen lyckades.
+* Problem har åtgärdats där `iot dps linked-hub [create|update]` returnerade fel i stil med "det gick inte att hitta" även när processen lyckades.
+* `--no-wait`-stöd har lagts till för `iot dps access policy [create|update]` och `iot dps linked-hub [create|update]`
+* `iot hub create` har ändrats för att tillåta att du anger antalet partitioner
+
+### <a name="monitor"></a>Övervaka
+
+* Kommandot `az monitor log-profiles create` har åtgärdats
+
+### <a name="network"></a>Nätverk
+
+* Alternativet `--tags` har korrigerats för följande kommandon:
+  * `network public-ip create`
+  * `network lb create`
+  * `network local-gateway create`
+  * `network nic create`
+  * `network vnet-gateway create`
+  * `network vpn-connection create`
+
+### <a name="profile"></a>Profil
+
+* `az login` har aktiverats från interaktivt läge
+
+### <a name="resource"></a>Resurs
+
+* `feature show` har lagts till
+
+### <a name="role"></a>Roll
+
+* Argumentet `--available-to-other-tenants` har lagts till för `ad app update`
+
+### <a name="sql"></a>SQL
+
+* `sql server dns-alias`-kommandon har lagts till
+* `sql db rename` har lagts till
+* Stöd för `--ids`-argumentet för alla SQL-kommandon har lagts till
+
+### <a name="storage"></a>Lagring
+
+* Kommandona `storage blob service-properties delete-policy` och `storage blob undelete` har lagts till för att aktivera mjuk borttagning
+
+### <a name="vm"></a>Virtuell dator
+
+* En krasch som inträffade när VM-krypteringen inte kunde initieras helt har åtgärdats
+* ID har lagts till för huvudnamnets utdata när du aktiverar MSI
+* Åtgärdade `vm boot-diagnostics get-boot-log`
+
+
+## <a name="january-31-2018"></a>31 januari 2018
+
+Version 2.0.26
+
+### <a name="core"></a>Kärna
+
+* Stöd har lagts till för att hämta rådatatoken i MSI-kontexten
+* En sträng för avsökningsindikatorn vid slutföring av LRO på Windows cmd.exe har tagits bort
+* En varning som visas när du använder en konfigurerad standard som har ändrats till en post på INFO-nivå har lagts till. Använd `--verbose` för att se
+* Lägga till en förloppsindikator för väntekommandon
+
+### <a name="acs"></a>ACS
+
+* Argumentet `--disable-browser` har förtydligats
+* Tabbifyllning för `--vm-size`-argument har förbättrats
+
+### <a name="appservice"></a>App Service
+
+* Åtgärdade `webapp log [tail|download]`
+* Kontrollen `kind` har tagits bort för webbappar och funktioner
+
+### <a name="cdn"></a>CDN
+
+* Problem med klient som saknades har åtgärdats med `cdn custom-domain create`
+
+### <a name="cosmosdb"></a>CosmosDB
+
+* Parameterbeskrivningen för redundansprinciper har korrigerats
+
+### <a name="interactive"></a>Interaktiv
+
+* Problem där kompletteringar för kommandoalternativ inte längre visades har åtgärdats
+
+### <a name="network"></a>Nätverk
+
+* Skydd för `--cert-password` till `application-gateway create` har lagts till
+* Problem med `application-gateway update` där `--sku` felaktigt applicerade ett standardvärde har åtgärdats
+* Skydd för `--shared-key` till `--authorization-key` har lagts till i `vpn-connection create`
+* Problem med klient som saknades har åtgärdats med `asg create`
+* Parametern `--file-name / -f` har lagts till för exporterade namn till `dns zone export`
+* Följande problem med `dns zone export` har åtgärdats:
+  * Problemet där långa TXT-poster exporterades felaktigt har åtgärdats
+  * Problemet där citerade TXT-poster exporterades felaktigt utan citattecken med omvänt snedstreck framför har åtgärdats
+* Problemet där vissa poster importerades två gånger med `dns zone import` har åtgärdats 
+* Kommandona `vnet-gateway root-cert` och `vnet-gateway revoked-cert` har återställts
+
+### <a name="profile"></a>Profil
+
+* `get-access-token` har åtgärdats för att fungera i en virtuell dator med en identitet
+
+### <a name="resource"></a>Resurs
+
+* Bugg i `deployment [create|validate]` där en varning visades felaktigt när "type"-mallfältet innehöll värden i versaler har åtgärdats
+
+### <a name="storage"></a>Lagring
+
+* Problem med att migrera Storage V1-konton till Storage V2 har åtgärdats
+* Förloppsrapportering har lagts till för alla kommandon som används för att ladda upp eller ladda ned
+* Bugg som förhindrade arg-alternativet "-n" med `storage account check-name` har åtgärdats  
+* En ögonblicksbildkolumn för tabellutdata har lagts till för `blob [list|show]`
+* Buggar med olika parametrar som var tvungna att tolkas som ints har åtgärdats
+
+### <a name="vm"></a>Virtuell dator
+
+* Kommandot `vm image accept-terms` har lagts till för att göra det möjligt att skapa virtuella datorer från avbildningar till ytterligare avgifter
+* `[vm|vmss create]` har åtgärdats så att kommandon kan köras genom proxy med osignerade certifikat
+* [FÖRHANDSVERSION] Stöd har lagts till för "låg" prioritet till VMSS
+* Skydd för `--admin-password` till `[vm|vmss] create` har lagts till
+
 
 ## <a name="january-17-2018"></a>17 januari 2018
 
@@ -84,7 +254,7 @@ Version 2.0.25
 ### <a name="monitor"></a>Övervaka
 
 * Stöd för flera diagnostikinställningar har lagts till Parametern `--name` krävs nu för `az monitor diagnostic-settings create`
-* Kommandot `monitor diagnostic-settings categories` har lagts till för att hämta diagnostikinställningskategorin 
+* Kommandot `monitor diagnostic-settings categories` har lagts till för att hämta diagnostikinställningskategorin
 
 ### <a name="network"></a>Nätverk
 
