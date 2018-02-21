@@ -1,238 +1,115 @@
 ---
-title: "Skapa Azure-tjänstens huvudnamn med Azure CLI 2.0"
-description: "Lär dig hur du skapar ett huvudnamn för tjänsten för din app eller tjänst med Azure CLI 2.0."
-keywords: Azure CLI 2.0, Azure Active Directory, Azure Active directory, AD, RBAC
-author: rloutlaw
-ms.author: routlaw
-manager: douge
-ms.date: 10/12/2017
+title: "Använda Azure-tjänstens huvudnamn med Azure CLI 2.0"
+description: "Lär dig hur du skapar och använder ett huvudnamn för tjänsten med Azure CLI 2.0."
+author: sptramer
+ms.author: sttramer
+manager: carmonm
+ms.date: 02/12/2018
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.assetid: fab89cb8-dac1-4e21-9d34-5eadd5213c05
-ms.openlocfilehash: e473b7289f3b72dc23a1f747e15cea1b88aa89e9
-ms.sourcegitcommit: dd5b2c7b0b56608ef9ea8730c7dc76e6c532d5ea
+ms.openlocfilehash: b46c735a14240bddd07659475ada1c33c75a1e67
+ms.sourcegitcommit: b93a19222e116d5880bbe64c03507c64e190331e
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 01/26/2018
+ms.lasthandoff: 02/15/2018
 ---
-# <a name="create-an-azure-service-principal-with-azure-cli-20"></a><span data-ttu-id="66e98-104">Skapa Azure-tjänstens huvudnamn med Azure CLI 2.0</span><span class="sxs-lookup"><span data-stu-id="66e98-104">Create an Azure service principal with Azure CLI 2.0</span></span>
+# <a name="create-an-azure-service-principal-with-azure-cli-20"></a><span data-ttu-id="f4e65-103">Skapa Azure-tjänstens huvudnamn med Azure CLI 2.0</span><span class="sxs-lookup"><span data-stu-id="f4e65-103">Create an Azure service principal with Azure CLI 2.0</span></span>
 
-<span data-ttu-id="66e98-105">Om du planerar att hantera appen eller tjänsten med Azure CLI 2.0 bör du köra denna under tjänstens huvudnamn för Azure Active Directory (AAD), i stället för dina autentiseringsuppgifter.</span><span class="sxs-lookup"><span data-stu-id="66e98-105">If you plan to manage your app or service with Azure CLI 2.0, you should run it under an Azure Active Directory (AAD) service principal rather than your own credentials.</span></span>
-<span data-ttu-id="66e98-106">Den här artikeln vägleder dig genom att skapa en säkerhetsprincip med Azure CLI 2.0.</span><span class="sxs-lookup"><span data-stu-id="66e98-106">This topic steps you through creating a security principal with Azure CLI 2.0.</span></span>
+<span data-ttu-id="f4e65-104">Om du vill skapa en separat inloggning med åtkomstbegränsningar så kan du göra det via tjänstens huvudnamn.</span><span class="sxs-lookup"><span data-stu-id="f4e65-104">If you want to create a separate login with access restrictions, you can do so through a service principal.</span></span> <span data-ttu-id="f4e65-105">Tjänstens huvudnamn är separata identiteter som kan associeras med ett konto.</span><span class="sxs-lookup"><span data-stu-id="f4e65-105">Service principals are separate identities that can be associated with an account.</span></span> <span data-ttu-id="f4e65-106">Tjänstens huvudnamn är användbara för att arbeta med program och uppgifter som måste automatiseras.</span><span class="sxs-lookup"><span data-stu-id="f4e65-106">Service principals are useful for working with applications and tasks that must be automated.</span></span> <span data-ttu-id="f4e65-107">I den artikeln får du stegvisa anvisningar för att skapa ett huvudnamn för tjänsten.</span><span class="sxs-lookup"><span data-stu-id="f4e65-107">This article runs you through the steps for creating a service principal.</span></span>
 
-> [!NOTE]
-> <span data-ttu-id="66e98-107">Du kan också skapa ett huvudnamn för tjänsten via Azure Portal.</span><span class="sxs-lookup"><span data-stu-id="66e98-107">You can also create a service principal through the Azure portal.</span></span>
-> <span data-ttu-id="66e98-108">Läs [Använd portalen för att skapa Active Directory-program och ett huvudnamn för tjänsten som får åtkomst till resurser](/azure/azure-resource-manager/resource-group-create-service-principal-portal) för mer information.</span><span class="sxs-lookup"><span data-stu-id="66e98-108">Read [Use portal to create Active Directory application and service principal that can access resources](/azure/azure-resource-manager/resource-group-create-service-principal-portal) for more details.</span></span>
+## <a name="create-the-service-principal"></a><span data-ttu-id="f4e65-108">Skapa huvudnamn för tjänsten</span><span class="sxs-lookup"><span data-stu-id="f4e65-108">Create the service principal</span></span>
 
-## <a name="what-is-a-service-principal"></a><span data-ttu-id="66e98-109">Vad är ett huvudnamn för tjänsten?</span><span class="sxs-lookup"><span data-stu-id="66e98-109">What is a 'service principal'?</span></span>
+<span data-ttu-id="f4e65-109">Skapa ett huvudnamn för tjänsten med kommandot [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac).</span><span class="sxs-lookup"><span data-stu-id="f4e65-109">Use the [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) command to create a service principal.</span></span> <span data-ttu-id="f4e65-110">Tjänstens huvudnamn inte är kopplat till ett befintligt program eller användarnamn.</span><span class="sxs-lookup"><span data-stu-id="f4e65-110">The Service Principal's name isn't tied to any existing application or user name.</span></span> <span data-ttu-id="f4e65-111">Du kan skapa ett huvudnamn för tjänsten med alla typer av autentisering.</span><span class="sxs-lookup"><span data-stu-id="f4e65-111">You can create a service principal with your choice of authentication type.</span></span>
 
-<span data-ttu-id="66e98-110">Ett huvudnamn för Azure-tjänsten är en säkerhetsidentitet som används av appar som skapats av användare, tjänster och automatiseringsverktyg för att få åtkomst till specifika Azure-resurser.</span><span class="sxs-lookup"><span data-stu-id="66e98-110">An Azure service principal is a security identity used by user-created apps, services, and automation tools to access specific Azure resources.</span></span> <span data-ttu-id="66e98-111">Se det som en användaridentitet (inloggning och lösenord eller certifikat) med en viss roll och väl kontrollerad behörighet att komma åt dina resurser.</span><span class="sxs-lookup"><span data-stu-id="66e98-111">Think of it as a 'user identity' (login and password or certificate) with a specific role, and tightly controlled permissions to access your resources.</span></span> <span data-ttu-id="66e98-112">Den behöver bara kunna utföra vissa åtgärder, till skillnad från en allmän användaridentitet.</span><span class="sxs-lookup"><span data-stu-id="66e98-112">It only needs to be able to do specific things, unlike a general user identity.</span></span> <span data-ttu-id="66e98-113">Det ger bättre säkerhet om du bara ger den lägsta behörighetsnivån som krävs för att den ska kunna utföra sina administrativa uppgifter.</span><span class="sxs-lookup"><span data-stu-id="66e98-113">It improves security if you only grant it the minimum permissions level needed to perform its management tasks.</span></span>
+* <span data-ttu-id="f4e65-112">`--password` används för lösenordsbaserad autentisering.</span><span class="sxs-lookup"><span data-stu-id="f4e65-112">`--password` is used for password-based authentication.</span></span> <span data-ttu-id="f4e65-113">Se till att du skapar ett starkt lösenord genom att följa [reglerna och begränsningarna för Azure Active Directory-lösenord](/azure/active-directory/active-directory-passwords-policy).</span><span class="sxs-lookup"><span data-stu-id="f4e65-113">Make sure that you create a strong password by following the [Azure Active Directory password rules and restrictions](/azure/active-directory/active-directory-passwords-policy).</span></span> <span data-ttu-id="f4e65-114">Om du inte anger något lösenord skapas ett automatiskt.</span><span class="sxs-lookup"><span data-stu-id="f4e65-114">If you don't specify a password, one is created for you.</span></span>
 
-<span data-ttu-id="66e98-114">Azure CLI 2.0 har stöd för att skapa lösenordsbaserade autentiseringsuppgifter och autentiseringsuppgifter för certifikat.</span><span class="sxs-lookup"><span data-stu-id="66e98-114">Azure CLI 2.0 supports the creation of password-based authentication credentials and certificate credentials.</span></span> <span data-ttu-id="66e98-115">Det här avsnittet handlar om båda typerna av autentiseringsuppgifter.</span><span class="sxs-lookup"><span data-stu-id="66e98-115">In this topic, we cover both types of credentials.</span></span>
+  ```azurecli
+  az ad sp create-for-rbac --name ServicePrincipalName --password PASSWORD
+  ```
 
-## <a name="verify-your-own-permission-level"></a><span data-ttu-id="66e98-116">Kontrollera din egen behörighetsnivå</span><span class="sxs-lookup"><span data-stu-id="66e98-116">Verify your own permission level</span></span>
+* <span data-ttu-id="f4e65-115">`--cert` används för certifikatbaserad autentisering för ett befintligt certifikat, antingen som en offentlig PEM- eller DER-sträng eller `@{file}` för att läsa in en fil.</span><span class="sxs-lookup"><span data-stu-id="f4e65-115">`--cert` is used for certificate-based authentication for an existing certificate, either as a PEM or DER public string, or `@{file}` to load a file.</span></span>
 
-<span data-ttu-id="66e98-117">Först måste du ha tillräcklig behörighet i Azure Active Directory och Azure-prenumerationen.</span><span class="sxs-lookup"><span data-stu-id="66e98-117">First, you must have sufficient permissions in both your Azure Active Directory and your Azure subscription.</span></span> <span data-ttu-id="66e98-118">Du måste specifikt kunna skapa en app i Active Directory och tilldela en roll till tjänstens huvudnamn.</span><span class="sxs-lookup"><span data-stu-id="66e98-118">Specifically, you must be able to create an app in the Active Directory, and assign a role to the service principal.</span></span>
+  ```azurecli
+  az ad sp create-for-rbac --name ServicePrincipalName --cert {CertStringOrFile} 
+  ```
 
-<span data-ttu-id="66e98-119">Det enklaste sättet att kontrollera om kontot har tillräcklig behörighet är via portalen.</span><span class="sxs-lookup"><span data-stu-id="66e98-119">The easiest way to check whether your account has adequate permissions is through the portal.</span></span> <span data-ttu-id="66e98-120">Se [Kontrollera behörighet som krävs i portalen](/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions).</span><span class="sxs-lookup"><span data-stu-id="66e98-120">See [Check required permission in portal](/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions).</span></span>
+  <span data-ttu-id="f4e65-116">Argumentet `--keyvault` kan läggas till för att visa att certifikatet lagras i Azure Key Vault.</span><span class="sxs-lookup"><span data-stu-id="f4e65-116">The `--keyvault` argument can be added to indicate the cert is stored in Azure Key Vault.</span></span> <span data-ttu-id="f4e65-117">I det här fallet refererar värdet `--cert` till namnet på certifikatet i Key Vault.</span><span class="sxs-lookup"><span data-stu-id="f4e65-117">In this case, the `--cert` value refers to the name of the certificate in Key Vault.</span></span>
 
-## <a name="create-a-service-principal-for-your-application"></a><span data-ttu-id="66e98-121">Skapa ett huvudnamn för tjänsten för programmet</span><span class="sxs-lookup"><span data-stu-id="66e98-121">Create a service principal for your application</span></span>
+* <span data-ttu-id="f4e65-118">`--create-cert` skapar ett _självsignerat_ certifikat för autentisering.</span><span class="sxs-lookup"><span data-stu-id="f4e65-118">`--create-cert` creates a _self-signed_ certificate for authentication.</span></span> <span data-ttu-id="f4e65-119">Argumentet `--keyvault` kan läggas till för att lagra certifikatet i Azure Key Vault.</span><span class="sxs-lookup"><span data-stu-id="f4e65-119">The `--keyvault` argument can be added to store the certificate in Azure Key Vault.</span></span>
 
-<span data-ttu-id="66e98-122">Du måste ha något av följande för att identifiera appen du vill skapa tjänstens huvudnamn för:</span><span class="sxs-lookup"><span data-stu-id="66e98-122">You must have one of the following to identify the app you want to create a service principal for:</span></span>
+  ```azurecli
+  az ad sp create-for-rbac --name ServicePrincipalName --create-cert
+  ```
 
-  * <span data-ttu-id="66e98-123">Det unika namnet eller URI:n för den distribuerade appen (t.ex. "MyDemoWebApp" i följande exempel), eller</span><span class="sxs-lookup"><span data-stu-id="66e98-123">The unique name or URI of your deployed app (such as "MyDemoWebApp" in the examples), or</span></span>
-  * <span data-ttu-id="66e98-124">program-ID, unikt GUID som är kopplat till den distribuerade appen, tjänsten eller objektet</span><span class="sxs-lookup"><span data-stu-id="66e98-124">the Application ID, the unique GUID associated with your deployed app, service, or object</span></span>
+<span data-ttu-id="f4e65-120">Om ett argument som anger autentiseringstypen inte ingår används `--password` som standard.</span><span class="sxs-lookup"><span data-stu-id="f4e65-120">If an argument indicating the authentication type isn't included, `--password` is used by default.</span></span>
 
-<span data-ttu-id="66e98-125">Värdena identifierar ditt program när du skapar ett namn på huvudtjänsten.</span><span class="sxs-lookup"><span data-stu-id="66e98-125">These values identify your application when creating a service principal.</span></span>
-
-### <a name="get-information-about-your-application"></a><span data-ttu-id="66e98-126">Hämta information om programmet</span><span class="sxs-lookup"><span data-stu-id="66e98-126">Get information about your application</span></span>
-
-<span data-ttu-id="66e98-127">Hämta identietsinformation om ditt program med `az ad app list`.</span><span class="sxs-lookup"><span data-stu-id="66e98-127">Get identity information about your application with the `az ad app list`.</span></span>
-
-[!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
-
-```azurecli-interactive
-az ad app list --display-name MyDemoWebApp
-```
+<span data-ttu-id="f4e65-121">Kommandot `create-for-rbac` ger utdata i följande format:</span><span class="sxs-lookup"><span data-stu-id="f4e65-121">The output of the `create-for-rbac` command is in the following format:</span></span>
 
 ```json
 {
-    "appId": "a487e0c1-82af-47d9-9a0b-af184eb87646d",
-    "appPermissions": null,
-    "availableToOtherTenants": false,
-    "displayName": "MyDemoWebApp",
-    "homepage": "http://MyDemoWebApp.azurewebsites.net",
-    "identifierUris": [
-      "http://MyDemoWebApp"
-    ],
-    "objectId": "bd07205b-629f-4a2e-945e-1ee5dadf610b9",
-    "objectType": "Application",
-    "replyUrls": []
-  }
-```
-
-<span data-ttu-id="66e98-128">Alternativet `--display-name` filtrerar den returnerade listan med appar för att vissa att dem med `displayName` börjar med MyDemoWebApp.</span><span class="sxs-lookup"><span data-stu-id="66e98-128">The `--display-name` option filters the returned list of apps to show those with `displayName` starting with MyDemoWebApp.</span></span>
-
-### <a name="create-a-service-principal-with-a-password"></a><span data-ttu-id="66e98-129">Skapa ett huvudnamn för tjänsten med ett lösenord</span><span class="sxs-lookup"><span data-stu-id="66e98-129">Create a service principal with a password</span></span>
-
-<span data-ttu-id="66e98-130">Använd [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) och parametern `--password` för att skapa tjänstens huvudnamn med ett lösenord.</span><span class="sxs-lookup"><span data-stu-id="66e98-130">Use [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) and the `--password` parameter to create the service principal with a password.</span></span> <span data-ttu-id="66e98-131">Om du inte anger någon roll eller något omfång så blir standardinställningen rollen **Deltagare** för den aktuella prenumerationen.</span><span class="sxs-lookup"><span data-stu-id="66e98-131">When you do not provide a role or scope, it defaults to the **Contributor** role for the current subscription.</span></span> <span data-ttu-id="66e98-132">Om du skapar ett huvudnamn för tjänsten utan att använda vare sig `--password` eller parametern `--cert` används lösenordsautentisering och ett lösenord skapas för dig.</span><span class="sxs-lookup"><span data-stu-id="66e98-132">If you create a service principal without using either the `--password` or `--cert` parameter, password authentication is used and a password is generated for you.</span></span>
-
-```azurecli-interactive
-az ad sp create-for-rbac --name {appName} --password "{strong password}"
-```
-
-```json
-{
-  "appId": "a487e0c1-82af-47d9-9a0b-af184eb87646d",
-  "displayName": "MyDemoWebApp",
-  "name": "http://MyDemoWebApp",
-  "password": {strong password},
+  "appId": "APP_ID",
+  "displayName": "ServicePrincipalName",
+  "name": "http://ServicePrincipalName",
+  "password": ...,
   "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 }
 ```
 
- > [!WARNING]
- > <span data-ttu-id="66e98-133">Skapa inte ett osäkert lösenord.</span><span class="sxs-lookup"><span data-stu-id="66e98-133">Don't create an insecure password.</span></span>  <span data-ttu-id="66e98-134">Följ vägledningen med [regler för lösenord och begränsningar i Azure AD](/azure/active-directory/active-directory-passwords-policy).</span><span class="sxs-lookup"><span data-stu-id="66e98-134">Follow the [Azure AD password rules and restrictions](/azure/active-directory/active-directory-passwords-policy) guidance.</span></span>
-
-### <a name="create-a-service-principal-with-a-self-signed-certificate"></a><span data-ttu-id="66e98-135">Skapa ett huvudnamn för tjänsten med ett självsignerat certifikat</span><span class="sxs-lookup"><span data-stu-id="66e98-135">Create a service principal with a self-signed certificate</span></span>
-
-<span data-ttu-id="66e98-136">Använd [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) och parametern `--create-cert` för att skapa ett självsignerat certifikat.</span><span class="sxs-lookup"><span data-stu-id="66e98-136">Use [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) and the `--create-cert` parameter to create a self-signed certificate.</span></span>
-
-```azurecli-interactive
-az ad sp create-for-rbac --name {appName} --create-cert
-```
-
-```json
-{
-  "appId": "c495db57-82e0-4e2e-9369-069dff176858",
-  "displayName": "azure-cli-2017-10-12-22-15-38",
-  "fileWithCertAndPrivateKey": "<path>/<file-name>.pem",
-  "name": "http://MyDemoWebApp",
-  "password": null,
-  "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-}
-```
-
-<span data-ttu-id="66e98-137">Kopiera värdet för svaret `fileWithCertAndPrivateKey`.</span><span class="sxs-lookup"><span data-stu-id="66e98-137">Copy the value of the `fileWithCertAndPrivateKey` response.</span></span> <span data-ttu-id="66e98-138">Det här är certifikatfilen som kommer att användas för autentisering.</span><span class="sxs-lookup"><span data-stu-id="66e98-138">This is the certificate file which will be used for authentication.</span></span>
-
-<span data-ttu-id="66e98-139">I [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac) finns fler alternativ när du använder certifikat.</span><span class="sxs-lookup"><span data-stu-id="66e98-139">For more options when using certificates, see [az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac).</span></span>
-
-### <a name="get-information-about-the-service-principal"></a><span data-ttu-id="66e98-140">Hämta information om tjänstens huvudnamn</span><span class="sxs-lookup"><span data-stu-id="66e98-140">Get information about the service principal</span></span>
-
-```azurecli-interactive
-az ad sp show --id {appID}
-```
-
-```json
-{
-  "appId": "a487e0c1-82af-47d9-9a0b-af184eb87646d",
-  "displayName": "MyDemoWebApp",
-  "objectId": "0ceae62e-1a1a-446f-aa56-2300d176659bde",
-  "objectType": "ServicePrincipal",
-  "servicePrincipalNames": [
-    "http://MyDemoWebApp",
-    "a487e0c1-82af-47d9-9a0b-af184eb87646d"
-  ]
-}
-```
-
-### <a name="sign-in-using-the-service-principal"></a><span data-ttu-id="66e98-141">Logga in med tjänstens huvudnamn</span><span class="sxs-lookup"><span data-stu-id="66e98-141">Sign in using the service principal</span></span>
-
-<span data-ttu-id="66e98-142">Du kan nu logga in som det nya huvudnamnet för tjänsten för appen med *appId* från `az ad sp show` och antingen *lösenordet* eller sökvägen till det skapade certifikatet.</span><span class="sxs-lookup"><span data-stu-id="66e98-142">You can now log in as the new service principal for your app using the *appId* from `az ad sp show`, and either the *password* or the path to the created certificate.</span></span>  <span data-ttu-id="66e98-143">Ange *klientvärdet* från resultatet av `az ad sp create-for-rbac`.</span><span class="sxs-lookup"><span data-stu-id="66e98-143">Supply the *tenant* value from the results of `az ad sp create-for-rbac`.</span></span>
-
-```azurecli-interactive
-az login --service-principal -u {appID} --password {password-or-path-to-cert} --tenant {tenant}
-```
-
-<span data-ttu-id="66e98-144">Dessa utdata visas efter en lyckad inloggning:</span><span class="sxs-lookup"><span data-stu-id="66e98-144">You will see this output after a successful sign-on:</span></span>
-
-```json
-[
-  {
-    "cloudName": "AzureCloud",
-    "id": "a487e0c1-82af-47d9-9a0b-af184eb87646d",
-    "isDefault": true,
-    "state": "Enabled",
-    "tenantId": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-    "user": {
-      "name": "https://MyDemoWebApp",
-      "type": "servicePrincipal"
-    }
-  }
-]
-```
-
-<span data-ttu-id="66e98-145">Använd värdena `id`, `password` och `tenant` som autentiseringsuppgifter för att köra din app.</span><span class="sxs-lookup"><span data-stu-id="66e98-145">Use the `id`, `password`, and `tenant` values as the credentials for running your app.</span></span>
-
-## <a name="managing-roles"></a><span data-ttu-id="66e98-146">Hantera roller</span><span class="sxs-lookup"><span data-stu-id="66e98-146">Managing roles</span></span>
+<span data-ttu-id="f4e65-122">Värdena `appId`, `tenant` och `password` används för autentisering.</span><span class="sxs-lookup"><span data-stu-id="f4e65-122">The `appId`, `tenant`, and `password` values are used for authentication.</span></span> <span data-ttu-id="f4e65-123">`displayName` används när du söker efter ett befintligt huvudnamn för tjänsten.</span><span class="sxs-lookup"><span data-stu-id="f4e65-123">The `displayName` is used when searching for an existing service principal.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="66e98-147">Rollbaserad åtkomst i Azure (RBAC) är en modell för att definiera och hantera roller för användar- och säkerhetsobjekt.</span><span class="sxs-lookup"><span data-stu-id="66e98-147">Azure Role-Based Access Control (RBAC) is a model for defining and managing roles for user and service principals.</span></span>
-> <span data-ttu-id="66e98-148">Rollerna är kopplade till en uppsättning med behörigheter, som avgör vilka resurser en princip kan läsa, få åtkomst till, skriva till eller hantera.</span><span class="sxs-lookup"><span data-stu-id="66e98-148">Roles have sets of permissions associated with them, which determine the resources a principal can read, access, write, or manage.</span></span>
-> <span data-ttu-id="66e98-149">Mer information om RBAC och roller finns i [RBAC: inbyggda roller](/azure/active-directory/role-based-access-built-in-roles).</span><span class="sxs-lookup"><span data-stu-id="66e98-149">For more information on RBAC and roles, see [RBAC: Built-in roles](/azure/active-directory/role-based-access-built-in-roles).</span></span>
+> <span data-ttu-id="f4e65-124">Om ditt konto inte har rätt behörigheter för att skapa ett huvudnamn för tjänsten så visas ett felmeddelande om att du inte har rätt behörigheter för att slutföra åtgärden.</span><span class="sxs-lookup"><span data-stu-id="f4e65-124">If your account does not have sufficient permissions to create a service principal, you see an error message containing "Insufficient privileges to complete the operation."</span></span> <span data-ttu-id="f4e65-125">Kontakta Azure Active Directory-administratören om du vill skapa ett huvudnamn för tjänsten.</span><span class="sxs-lookup"><span data-stu-id="f4e65-125">Contact your Azure Active Directory admin to create a service principal.</span></span>
 
-<span data-ttu-id="66e98-150">Azure CLI 2.0 tillhandahåller följande kommandon för att hantera rolltilldelningar:</span><span class="sxs-lookup"><span data-stu-id="66e98-150">The Azure CLI 2.0 provides the following commands to manage role assignments:</span></span>
+## <a name="manage-service-principal-roles"></a><span data-ttu-id="f4e65-126">Hantera roller för tjänstens huvudnamn</span><span class="sxs-lookup"><span data-stu-id="f4e65-126">Manage service principal roles</span></span> 
 
-* [<span data-ttu-id="66e98-151">az-rolltilldelningslista</span><span class="sxs-lookup"><span data-stu-id="66e98-151">az role assignment list</span></span>](/cli/azure/role/assignment#list)
-* [<span data-ttu-id="66e98-152">skapa az-rolltilldelning</span><span class="sxs-lookup"><span data-stu-id="66e98-152">az role assignment create</span></span>](/cli/azure/role/assignment#create)
-* [<span data-ttu-id="66e98-153">ta bort az-rolltilldelning</span><span class="sxs-lookup"><span data-stu-id="66e98-153">az role assignment delete</span></span>](/cli/azure/role/assignment#delete)
+<span data-ttu-id="f4e65-127">Azure CLI 2.0 tillhandahåller följande kommandon för att hantera rolltilldelningar.</span><span class="sxs-lookup"><span data-stu-id="f4e65-127">The Azure CLI 2.0 provides the following commands to manage role assignments.</span></span>
 
-<span data-ttu-id="66e98-154">Standardrollen för tjänstens huvudnamn är **Deltagare**.</span><span class="sxs-lookup"><span data-stu-id="66e98-154">The default role for a service principal is **Contributor**.</span></span> <span data-ttu-id="66e98-155">Det kanske inte är det bästa valet för appens interaktioner med Azure-tjänster, med tanke på dess breda behörighet.</span><span class="sxs-lookup"><span data-stu-id="66e98-155">It may not be the best choice for an app's interactions with Azure services, given its broad permissions.</span></span> <span data-ttu-id="66e98-156">Rollen **Läsare** är mer begränsad och kan vara ett bra val för skrivskyddade appar.</span><span class="sxs-lookup"><span data-stu-id="66e98-156">The **Reader** role is more restrictive and is a good choice for read-only access.</span></span> <span data-ttu-id="66e98-157">Du kan visa information om rollspecifik behörighet eller skapa anpassad behörighet via Azure Portal.</span><span class="sxs-lookup"><span data-stu-id="66e98-157">You can view details on role-specific permissions or create custom ones through the Azure portal.</span></span>
+* [<span data-ttu-id="f4e65-128">az-rolltilldelningslista</span><span class="sxs-lookup"><span data-stu-id="f4e65-128">az role assignment list</span></span>](/cli/azure/role/assignment#list)
+* [<span data-ttu-id="f4e65-129">skapa az-rolltilldelning</span><span class="sxs-lookup"><span data-stu-id="f4e65-129">az role assignment create</span></span>](/cli/azure/role/assignment#create)
+* [<span data-ttu-id="f4e65-130">ta bort az-rolltilldelning</span><span class="sxs-lookup"><span data-stu-id="f4e65-130">az role assignment delete</span></span>](/cli/azure/role/assignment#delete)
 
-<span data-ttu-id="66e98-158">I det här exemplet lägger vi till rollen **Läsare** i vårt tidigare exempel och tar bort rollen **Deltagare**:</span><span class="sxs-lookup"><span data-stu-id="66e98-158">In this example, add the **Reader** role to our prior example, and delete the **Contributor** one:</span></span>
+<span data-ttu-id="f4e65-131">Standardrollen för tjänstens huvudnamn är **Deltagare**.</span><span class="sxs-lookup"><span data-stu-id="f4e65-131">The default role for a service principal is **Contributor**.</span></span> <span data-ttu-id="f4e65-132">Den här rollen har fullständiga behörigheter att läsa och skriva till ett Azure-konto och är vanligtvis inte lämplig för program.</span><span class="sxs-lookup"><span data-stu-id="f4e65-132">This role has full permissions to read and write to an Azure account, and is usually not appropriate for applications.</span></span> <span data-ttu-id="f4e65-133">Rollen **Läsare** är mer begränsad och tillhandahåller endast åtkomst för att läsa.</span><span class="sxs-lookup"><span data-stu-id="f4e65-133">The **Reader** role is more restrictive, providing read-only access.</span></span>  <span data-ttu-id="f4e65-134">Mer information om rollbaserad åtkomstkontroll (RBAC) och roller finns i [RBAC: inbyggda roller](/azure/active-directory/role-based-access-built-in-roles).</span><span class="sxs-lookup"><span data-stu-id="f4e65-134">For more information on Role-Based Access Control (RBAC) and roles, see [RBAC: Built-in roles](/azure/active-directory/role-based-access-built-in-roles).</span></span>
 
-```azurecli-interactive
-az role assignment create --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d --role Reader
-az role assignment delete --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d --role Contributor
+<span data-ttu-id="f4e65-135">I det här exemplet lägger vi till rollen **Läsare** och tar bort rollen **Deltagare**.</span><span class="sxs-lookup"><span data-stu-id="f4e65-135">This example adds the **Reader** role and deletes the **Contributor** one.</span></span>
+
+```azurecli
+az role assignment create --assignee APP_ID --role Reader
+az role assignment delete --assignee APP_ID --role Contributor
 ```
 
-<span data-ttu-id="66e98-159">Bekräfta ändringarna genom att ange de roller som är tilldelade för närvarande:</span><span class="sxs-lookup"><span data-stu-id="66e98-159">Verify the changes by listing the currently assigned roles:</span></span>
+<span data-ttu-id="f4e65-136">När en roll läggs till ändras _inte_ eventuella tidigare tilldelade behörigheter.</span><span class="sxs-lookup"><span data-stu-id="f4e65-136">Adding a role does _not_ change any previously assigned permissions.</span></span> <span data-ttu-id="f4e65-137">När du begränsar behörigheter för tjänstens huvudnamn bör rollen __Deltagare__ alltid tas bort.</span><span class="sxs-lookup"><span data-stu-id="f4e65-137">When restricting a service principal's permissions, the __Contributor__ role should always be removed.</span></span>
 
-```azurecli-interactive
-az role assignment list --assignee a487e0c1-82af-47d9-9a0b-af184eb87646d
+<span data-ttu-id="f4e65-138">Ändringarna kan bekräftas genom att ange de roller som är tilldelade.</span><span class="sxs-lookup"><span data-stu-id="f4e65-138">The changes can be verified by listing the assigned roles.</span></span>
+
+```azurecli
+az role assignment list --assignee APP_ID
 ```
 
-```json
-{
-    "id": "/subscriptions/34345f33-0398-4a99-a42b-f6613d1664ac/providers/Microsoft.Authorization/roleAssignments/c27f78a7-9d3b-404b-ab59-47818f9af9ac",
-    "name": "c27f78a7-9d3b-404b-ab59-47818f9af9ac",
-    "properties": {
-      "principalId": "790525226-46f9-4051-b439-7079e41dfa31",
-      "principalName": "http://MyDemoWebApp",
-      "roleDefinitionId": "/subscriptions/34345f33-0398-4a99-a42b-f6613d1664ac/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
-      "roleDefinitionName": "Reader",
-      "scope": "/subscriptions/34345f33-0398-4a99-a42b-f6613d1664ac"
-    },
-    "type": "Microsoft.Authorization/roleAssignments"
-}
+> [!NOTE] 
+> <span data-ttu-id="f4e65-139">Om ditt konto inte har behörigheter att tilldela en roll så visas ett felmeddelande om att ditt konto "inte har behörighet att utföra åtgärden "Microsoft.Authorization/roleAssignments/write" för omfånget "/subscriptions/{guid}". Kontakta Azure Active Directory-administratören om du vill hantera roller.</span><span class="sxs-lookup"><span data-stu-id="f4e65-139">If your account doesn't have the permissions to assign a role, you see an error message that your account "does not have authorization to perform action 'Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/{guid}'." Contact your Azure Active Directory admin to manage roles.</span></span>
+
+## <a name="log-in-using-the-service-principal"></a><span data-ttu-id="f4e65-140">Logga in med tjänstens huvudnamn</span><span class="sxs-lookup"><span data-stu-id="f4e65-140">Log in using the service principal</span></span>
+
+<span data-ttu-id="f4e65-141">Du kan testa inloggningen för den nya tjänstens huvudnamn och dess behörigheter genom att logga in med den i Azure CLI.</span><span class="sxs-lookup"><span data-stu-id="f4e65-141">You can test the new service principal's login and permissions by logging in under it within the Azure CLI.</span></span> <span data-ttu-id="f4e65-142">Logga in med det nya huvudnamnet för tjänsten med hjälp av `appId`, `tenant` och autentiseringsuppgifterna.</span><span class="sxs-lookup"><span data-stu-id="f4e65-142">Log in as the new service principal using the `appId`, `tenant`, and credentials values.</span></span> <span data-ttu-id="f4e65-143">Autentiseringsinformationen som du anger ändras beroende på om du har valt att skapa tjänstens huvudnamn med ett lösenord eller med ett certifikat.</span><span class="sxs-lookup"><span data-stu-id="f4e65-143">The authentication information you provide changes based on whether you chose to create the service principal with a password, or a certificate.</span></span>
+
+<span data-ttu-id="f4e65-144">Om du vill logga in med ett lösenord anger du det som en parameter i argumentet.</span><span class="sxs-lookup"><span data-stu-id="f4e65-144">To log in with a password, provide it as an argument parameter.</span></span>
+
+```azurecli
+az login --service-principal --username APP_ID --password PASSWORD --tenant TENANT_ID
 ```
 
-> [!NOTE]
-> <span data-ttu-id="66e98-160">Om kontot inte har tillräcklig behörighet för att tilldela en roll får du ett felmeddelanden.</span><span class="sxs-lookup"><span data-stu-id="66e98-160">If your account does not have sufficient permissions to assign a role, you see an error message.</span></span>
-> <span data-ttu-id="66e98-161">Meddelandet anger att ditt konto ”inte har behörighet att utföra åtgärden ”Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/{guid}”.</span><span class="sxs-lookup"><span data-stu-id="66e98-161">The message states your account "does not have authorization to perform action 'Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/{guid}'."</span></span>
+<span data-ttu-id="f4e65-145">Om du vill logga in med ett certifikat så måste det vara tillgängligt lokalt som en PEM- eller DER-fil.</span><span class="sxs-lookup"><span data-stu-id="f4e65-145">To log in with a certificate, it must be available locally as a PEM or DER file.</span></span>
 
-## <a name="change-the-credentials-of-a-security-principal"></a><span data-ttu-id="66e98-162">Ändra autentiseringsuppgifter för säkerhetsobjektet</span><span class="sxs-lookup"><span data-stu-id="66e98-162">Change the credentials of a security principal</span></span>
-
-<span data-ttu-id="66e98-163">Det är en bra säkerhetsrutin att granska behörigheter och uppdatera lösenordet regelbundet.</span><span class="sxs-lookup"><span data-stu-id="66e98-163">It's a good security practice to review permissions and update passwords regularly.</span></span> <span data-ttu-id="66e98-164">Du kanske också vill hantera och ändra säkerhetsreferenser när appen förändras.</span><span class="sxs-lookup"><span data-stu-id="66e98-164">You may also want to manage and modify the security credentials as your app changes.</span></span>
-
-### <a name="reset-a-service-principal-password"></a><span data-ttu-id="66e98-165">Återställa lösenord för tjänstens huvudnamn</span><span class="sxs-lookup"><span data-stu-id="66e98-165">Reset a service principal password</span></span>
-
-<span data-ttu-id="66e98-166">Återställ det aktuella lösenordet för tjänstens huvudnamn med `az ad sp reset-credentials`.</span><span class="sxs-lookup"><span data-stu-id="66e98-166">Use `az ad sp reset-credentials` to reset the current password for the service principal.</span></span>
-
-```azurecli-interactive
-az ad sp reset-credentials --name 20bce7de-3cd7-49f4-ab64-bb5b443838c3 --password {new-password}
+```azurecli
+az login --service-principal --username APP_ID --tenant TENANT_ID --password PATH_TO_CERT
 ```
+## <a name="reset-credentials"></a><span data-ttu-id="f4e65-146">Återställ autentiseringsuppgifter</span><span class="sxs-lookup"><span data-stu-id="f4e65-146">Reset credentials</span></span>
 
-```json
-{
-  "appId": "a487e0c1-82af-47d9-9a0b-af184eb87646d",
-  "name": "a487e0c1-82af-47d9-9a0b-af184eb87646d",
-  "password": {new-password},
-  "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-}
+<span data-ttu-id="f4e65-147">Om du glömmer bort autentiseringsuppgifterna för ett huvudnamn för tjänsten så kan de återställas med kommandot [az ad sp reset-credentials](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az_ad_sp_reset_credentials).</span><span class="sxs-lookup"><span data-stu-id="f4e65-147">In the event that you forget the credentials for a service principal, they can be reset with the [az ad sp reset-credentials](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az_ad_sp_reset_credentials) command.</span></span> <span data-ttu-id="f4e65-148">Samma begränsningar och alternativ för att skapa ett nytt huvudnamn för tjänsten gäller även här.</span><span class="sxs-lookup"><span data-stu-id="f4e65-148">The same restrictions and options for creating a new service principal also apply here.</span></span>
+
+```azurecli
+az ad sp reset-credentials --name APP_ID --password NEW_PASSWORD
 ```
-
-<span data-ttu-id="66e98-167">CLI genererar ett säkert lösenord om du hoppar över alternativet `--password`.</span><span class="sxs-lookup"><span data-stu-id="66e98-167">The CLI generates a secure password if you leave out the `--password` option.</span></span>
