@@ -10,17 +10,17 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: 4076fefb902a324f77f97bc042b9f5ba3e787734
-ms.sourcegitcommit: b93a19222e116d5880bbe64c03507c64e190331e
+ms.openlocfilehash: 840e5e7d6531fe92d30235f621e381589266d1d3
+ms.sourcegitcommit: f82774a6f92598c41da9956284f563757f402774
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 02/15/2018
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="install-azure-cli-20-with-apt"></a>Installera Azure CLI 2.0 med apt
 
 Om du kör en distribution där `apt` ingår, till exempel Ubuntu eller Debian, så finns det ett 64-bitars paket tillgängligt för Azure CLI. Det här paketet har testats med:
 
-* Ubuntu wheezy, xenial och artful
+* Ubuntu trusty, xenial och artful
 * Debian wheezy, jessie och stretch
 
 ## <a name="install"></a>Installera
