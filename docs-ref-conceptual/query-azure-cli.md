@@ -1,166 +1,128 @@
 ---
 title: "Frågekommandoutdata med Azure CLI 2.0"
 description: "Lär dig hur du utför JMESPath-frågor för utdata för Azure CLI 2.0-kommandon."
-author: rloutlaw
-ms.author: routlaw
-manager: douge
-ms.date: 02/27/2017
+author: sptramer
+ms.author: sttramer
+manager: carmonm
+ms.date: 02/22/2018
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: 98bc35c1e8136231011a2303901f42c68c9a7758
-ms.sourcegitcommit: b93a19222e116d5880bbe64c03507c64e190331e
+ms.openlocfilehash: 2a0cdc34bbaf0864885588ecaddff725c744c90e
+ms.sourcegitcommit: 5a4c7205087d2f6c4800cf25178f0543a6157d99
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 02/15/2018
+ms.lasthandoff: 02/24/2018
 ---
 # <a name="use-jmespath-queries-with-azure-cli-20"></a>Använda JMESPath-frågor med Azure CLI 2.0
 
-Azure CLI 2.0 använder parametern `--query` för att genomföra en [JMESPath-fråga](http://jmespath.org) på resultatet från `az`-kommandot. JMESPath är ett kraftfullt frågespråk för JSON-utdata.  Om du inte är bekant med JMESPath-frågor finns det en självstudie på [JMESPath.org/tutorial](http://JMESPath.org/tutorial.html).
+Azure CLI 2.0 använder argumentet `--query` för att utföra en [JMESPath-fråga](http://jmespath.org) på resultaten från kommandon. JMESPath är ett frågespråk för JSON som ger dig möjlighet att välja och visa data från CLI-utdata. De här frågorna körs på JSON-utdata innan någon annan visningsformatering utförs.
 
-Parametern `Query` stöds av alla resurstyper (behållartjänster, webbappar, VM etc.) i Azure CLI 2.0 och kan användas i många olika syften.  Vi har angett flera exempel nedan.
+Argumentet `--query` stöds av alla kommandon i Azure CLI. Exemplen i den här artikeln beskriver vanliga användarsituationer och visar hur du använder funktionerna för JMESPath.
 
-## <a name="select-simple-properties"></a>Välja enkla egenskaper
+## <a name="work-with-dictionary-output"></a>Arbeta med ordlisteutdata
 
-Det enkla kommandot `list` med `table`-utdataformat returnerar en granskad uppsättning av de vanligaste enkla egenskaperna för varje resurstyp i ett lättläst tabellformat.
+Kommandon som returnerar en JSON-ordlista kan endast undersökas efter nyckelnamn. Nyckelsökvägen använder `.`-tecken som avgränsare. I följande exempel hämtas en lista över de offentliga SSH-nycklar som kan ansluta till en virtuell Linux-dator:
 
-```azurecli-interactive
-az vm list --out table
+```azurecli
+az vm show -g QueryDemo -n TestVM --query osProfile.linuxConfiguration.ssh.publicKeys
 ```
 
-```
-Name         ResourceGroup    Location
------------  ---------------  ----------
-DemoVM010    DEMORG1          westus
-demovm212    DEMORG1          westus
-demovm213    DEMORG1          westus
-KBDemo001VM  RGDEMO001        westus
-KBDemo020    RGDEMO001        westus
+Du kan även få flera värden genom att placera dem i en sorterad matris. Matrisen har inte någon viktig information men ordningen för matrisens element matchar ordningen på de efterfrågade nycklarna. Följande exempel visar hur du hämtar erbjudandenamnet för Azure-avbildningen och storleken på operativsystemdisken:
+
+```azurecli
+az vm show -g QueryDemo -n TestVM --query 'storageProfile.[imageReference.offer, osDisk.diskSizeGb]'
 ```
 
-Du kan använda parametern `--query` för att endast visa resursgruppnamnet och VM-namnet för alla virtuella maskiner i din prenumeration.
-
-```azurecli-interactive
-az vm list \
-  --query "[].[name, resourceGroup]" --out table
+```json
+[
+  "UbuntuServer",
+  30
+]
 ```
 
-```
-Column1     Column2
----------   -----------
-DemoVM010   DEMORG1
-demovm111   DEMORG1
-demovm211   DEMORG1
-demovm212   DEMORG1
-demovm213   DEMORG1
-demovm214   DEMORG1
-demovm222   DEMORG1
-KBDemo001VM RGDEMO001
-KBDemo020   RGDEMO001
+Om du vill använda nycklar i dina utdata kan du använda en annan syntax för ordlistan. Många elementval i en ordlista använder formatet `{displayKey:keyPath, ...}` för att filtrera på JMESPath-uttrycket `keyPath`. Det här visas i utdata som `{displayKey: value}`. Nästa exempel tar det senaste exemplets fråga och gör den tydligare genom att tilldela nycklar till dess utdata:
+
+```azurecli
+az vm show -g QueryDemo -n TestVM --query 'storageProfile.{image:imageReference.offer, diskSize:osDisk.diskSizeGb}'
 ```
 
-I föregående exempel ser du att kolumnrubrikerna är "Column1" och "Column2".  Du kan också lägga till egna etiketter eller namn på egenskaperna.  I följande exempel vi har lagt till etiketterna "VMName" och "RGName" till de valda egenskaperna ”name" och "resourceGroup".
-
-
-```azurecli-interactive
-az vm list \
-  --query "[].{RGName:resourceGroup, VMName:name}" --out table
+```json
+{
+  "diskSize": 30,
+  "image": "UbuntuServer"
+}
 ```
 
-```
-RGName     VMName
----------  -----------
-DEMORG1    DemoVM010
-DEMORG1    demovm111
-DEMORG1    demovm211
-DEMORG1    demovm212
-DEMORG1    demovm213
-DEMORG1    demovm214
-DEMORG1    demovm222
-RGDEMO001  KBDemo001VM
-RGDEMO001  KBDemo020
-```
+När du visar informationen i utdataformatet `table` är ordlistevyn särskilt användbar. Det här gör det möjligt att ställa in egna kolumnrubriker och gör det ännu enklare att läsa utdata. Mer information om utdataformat finns i [Utdataformat för Azure CLI 2.0-kommandon](/cli/azure/format-output-azure-cli).
 
-## <a name="select-complex-nested-properties"></a>Välja komplexa kapslade egenskaper
+> [!NOTE]
+> Vissa nycklar filtreras bort och skrivs inte ut i tabellvyn. De här nycklarna är `id`, `type` och `etag`. Om du behöver se den här informationen kan du ändra nyckelnamnet och undvika filtrering.
+>
+> ```azurecli
+> az vm show -g QueryDemo -n TestVM --query "{objectID:id}" -o table
+> ```
 
-Om den egenskap du vill välja ligger djupt kapslad i JSON-utdata måste du ange den fullständiga sökvägen till den kapslade egenskapen. Följande exempel visar hur du väljer den virtuella datorns namn och operativsystemtyp från kommandot för listan över virtuella datorer.
+## <a name="work-with-list-output"></a>Arbeta med utdata från lista
 
-```azurecli-interactive
-az vm list \
-  --query "[].{VMName:name, OSType:storageProfile.osDisk.osType}" --out table
+CLI-kommandon som kan returnera fler än ett värde returnerar alltid en matris. Matrisernas element kan användas av index, men det finns aldrig en ordningsgaranti från CLI. Det bästa sättet att fråga en matris med värden är att platta ut dem med operatorn `[]`. Operatorn skrivs efter nyckeln för matrisen eller som det första elementet i uttrycket. Genom att platta ut körs frågan efter den mot varje enskilt element i matrisen och resultatvärdena placeras i en ny matris. Följande exempel skriver ut namnet och operativsystemet som körs på varje virtuell dator i en resursgrupp. 
+
+```azurecli
+az vm list -g QueryDemo --query '[].{name:name, image:storageProfile.imageReference.offer}'
 ```
 
-```
-VMName       OSType
------------  --------
-DemoVM010    Linux
-demovm111    Linux
-demovm211    Linux
-demovm212    Linux
-demovm213    Linux
-demovm214    Linux
-demovm222    Linux
-KBDemo001VM  Linux
-KBDemo020    Linux
-```
-
-## <a name="filter-with-the-contains-function"></a>Filtrera med contains-funktionen
-
-Du kan använda JMESPath-funktionen `contains` för att förfina resultatet som returneras i frågan.
-I följande exempel väljer kommandot endast virtuella datorer som har texten "RGD" i sina namn.
-
-```azurecli-interactive
-az vm list \
-  --query "[?contains(resourceGroup, 'RGD')].{ resource: resourceGroup, name: name }" --out table
-```
-
-```
-Resource    VMName
-----------  -----------
-RGDEMO001   KBDemo001VM
-RGDEMO001   KBDemo020
+```json
+[
+  {
+    "image": "CentOS",
+    "name": "CentBox"
+  },
+  {
+    "image": "openSUSE-Leap",
+    "name": "SUSEBox"
+  },
+  {
+    "image": "UbuntuServer",
+    "name": "TestVM"
+  },
+  {
+    "image": "UbuntuServer",
+    "name": "Test2"
+  },
+  {
+    "image": "WindowsServer",
+    "name": "WinServ"
+  }
+]
 ```
 
-Med nästa exempel visar resultaten de virtuella datorer som har vmSize ”Standard_DS1”.
+Matriser som ingår i en nyckelsökväg kan också plattas ut. Det här exemplet visar en fråga som hämtar ID för Azure-objekt för de nätverkskort som en virtuell dator är ansluten till.
 
-```azurecli-interactive
-az vm list \
-  --query "[?contains(hardwareProfile.vmSize, 'Standard_DS1')]" --out table
+```azurecli
+az vm show -g QueryDemo -n TestVM --query 'networkProfile.networkInterfaces[].id'
 ```
 
-```
-ResourceGroup    VMName     VmId                                  Location    ProvisioningState
----------------  ---------  ------------------------------------  ----------  -------------------
-DEMORG1          DemoVM010  cbd56d9b-9340-44bc-a722-25f15b578444  westus      Succeeded
-DEMORG1          demovm111  c1c024eb-3837-4075-9117-bfbc212fa7da  westus      Succeeded
-DEMORG1          demovm211  95eda642-417f-4036-9475-67246ac0f0d0  westus      Succeeded
-DEMORG1          demovm212  4bdac85d-c2f7-410f-9907-ca7921d930b4  westus      Succeeded
-DEMORG1          demovm213  2131c664-221a-4b7f-9653-f6d542fbfa34  westus      Succeeded
-DEMORG1          demovm214  48f419af-d27a-4df0-87f3-9481007c2e5a  westus      Succeeded
-DEMORG1          demovm222  e0f59516-1d69-4d54-b8a2-f6c4a5d031de  westus      Succeeded
+## <a name="filter-array-output-with-predicates"></a>Filtrera matrisutdata med predikat
+
+JMESPath erbjuder [filtreringsuttryck](http://jmespath.org/specification.html#filterexpressions) för att filtrera bort de data som visas. De här uttrycken är kraftfulla, särskilt när de kombineras med [inbyggda JMESPath-funktioner](http://jmespath.org/specification.html#built-in-functions) för att utföra delmatchningar eller ändra data till ett standardformat. Det går endast att filtrera uttryck på matrisdata och när metoden används i andra fall returneras värdet `null`. Du kan till exempel ta utdata från kommandon som `vm list` och filtrera på dem för att söka efter specifika typer av virtuella datorer. Följande exempel utvecklar det tidigare exemplet genom att filtrera bort VM-typen för att endast visa virtuella Windows-datorer och skriva ut deras namn.
+
+```azurecli
+az vm list --query '[?osProfile.windowsConfiguration!=null].name'
 ```
 
-## <a name="filter-with-grep"></a>Filtrera med grep
-
-Utdataformatet `tsv` är tabbavgränsad text utan rubriker. De kan skickas till kommandon som `grep` och `cut` för att ytterligare parsa specifika värden från `list`-utdata. I följande exempel väljer kommandot `grep` endast virtuella datorer som har texten "RGD" i sina namn.  Kommandot `cut` väljer endast att visa det åttonde fältvärdet (tabbavgränsat) i utdata.
-
-```azurecli-interactive
-az vm list --out tsv | grep RGD | cut -f8
+```json
+[
+  "WinServ"
+]
 ```
 
-```
-KBDemo001VM
-KBDemo020
-```
+## <a name="experiment-with-queries-interactively"></a>Experimentera med frågor interaktivt
 
-## <a name="explore-with-jpterm"></a>Utforska med jpterm
-
-Du kan också skicka kommandoutdata till [JMESPath-terminalen](https://github.com/jmespath/jmespath.terminal) och experimentera med din JMESPath-fråga där.
+Om du vill experimentera med JMESPath-uttryck kanske du vill arbeta på ett sätt där du snabbt kan redigera frågor och inspektera utdata. Med [JMESPath-terminalens](https://github.com/jmespath/jmespath.terminal) Python-paket får du en interaktiv miljö där du kan dirigera data som indata och sedan skriva frågor i programmet för att extrahera data.
 
 ```bash
 pip install jmespath-terminal
 az vm list | jpterm
 ```
-

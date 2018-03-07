@@ -3,20 +3,80 @@ title: Viktig information om Azure CLI 2.0
 description: "Lär dig mer om de senaste uppdateringarna till Azure CLI 2.0"
 author: sptramer
 ms.author: sttramer
-manager: routlaw
-ms.date: 02/13/2018
+manager: carmonm
+ms.date: 02/27/2018
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: 480b646b7230c8fb22f10b28a9204287cd0acc19
-ms.sourcegitcommit: b93a19222e116d5880bbe64c03507c64e190331e
+ms.openlocfilehash: 01078b7a3665f563f0a6b1d809c9a41f18d136d6
+ms.sourcegitcommit: f3ab5da6019083ef2482b62c7355817e6170dcfb
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 02/15/2018
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="azure-cli-20-release-notes"></a>Viktig information om Azure CLI 2.0
+
+## <a name="february-27-2018"></a>27 februari 2018
+
+Version 2.0.28
+
+### <a name="core"></a>Kärna
+
+* [#5184](https://github.com/Azure/azure-cli/issues/5184) har korrigerats: Installationsproblem för Homebrew
+* Stöd för tilläggstelemetri med anpassade nycklar har lagts till
+* HTTP-loggar för `--debug` har lagts till
+
+### <a name="acs"></a>ACS
+
+* Helm-diagrammet `virtual-kubelet-for-aks` för `aks install-connector` har ändrats så att det används som standard
+* Åtgärdat problem: Problem med otillräckliga behörigheter för tjänstens huvudnamn för att skapa ACI-behållargrupp
+* Parametrarna `--aci-container-group`, `--location` och `--image-tag` har lagts till i `aks install-connector`
+* Utfasningsmeddelande har tagits bort från `aks get-versions`
+
+### <a name="appservice"></a>App Service
+
+* Uppdateringar för ny SDK-version (azure-mgmt-web 0.35.0)
+* [#5538](https://github.com/Azure/azure-cli/issues/5538) har korrigerats: `Free` rapporterad som ogiltig SKU
+
+### <a name="cognitive-services"></a>Cognitive Services
+
+* ”Meddelandet” när du skapar ett nytt Cognitive Services-konto har uppdaterats
+
+### <a name="consumption"></a>Förbrukning
+
+* Nya kommandon har lagts till för prisdokument-API
+* De befintliga formaten för användningsinformation och information om reservation har uppdaterats
+
+### <a name="container"></a>Behållare
+
+* Argumenten `--secrets` och `--secrets-mount-path` har lagts till i `container create` för att använda hemligheter i ACI
+
+### <a name="network"></a>Nätverk
+
+* [#5559](https://github.com/Azure/azure-cli/issues/5559) har åtgärdats: Klient saknas i `network vnet-gateway vpn-client generate`
+
+### <a name="resource"></a>Resurs
+
+* `group deployment export` har ändrats för att visa en delmall och felmeddelanden vid fel
+
+### <a name="role"></a>Roll
+
+* `role assignment list-changelogs` har lagts till för att möjliggöra granskning av roller för tjänstens huvudnamn
+
+### <a name="sql"></a>SQL
+
+* Stöd för zonredundans har lagts till för databaser och elastiska pooler vid skapande och uppdatering
+
+### <a name="storage"></a>Lagring
+
+* Stöd för att ange mål-sökväg/prefix för `storage blob [upload-batch|download-batch]` har lagts till
+
+### <a name="vm"></a>Virtuell dator
+
+* Stöd för att koppla/koppla från diskar på en enda VMSS-instans har lagts till
+
 
 ## <a name="february-13-2018"></a>13 februari 2018
 
