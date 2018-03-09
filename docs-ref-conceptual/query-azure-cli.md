@@ -10,11 +10,11 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: 2a0cdc34bbaf0864885588ecaddff725c744c90e
-ms.sourcegitcommit: 5a4c7205087d2f6c4800cf25178f0543a6157d99
+ms.openlocfilehash: 96092c0cced4e0f88aa8898525bc3dd348550407
+ms.sourcegitcommit: 29d7366a0902488f4f4d39c2cb0e89368d5186ea
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 02/24/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="use-jmespath-queries-with-azure-cli-20"></a>Använda JMESPath-frågor med Azure CLI 2.0
 
@@ -124,5 +124,5 @@ Om du vill experimentera med JMESPath-uttryck kanske du vill arbeta på ett sät
 
 ```bash
 pip install jmespath-terminal
-az vm list | jpterm
+az vm list --output json | jpterm
 ```

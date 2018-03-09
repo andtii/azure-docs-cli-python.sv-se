@@ -11,11 +11,11 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: d60ede5b971ee2489482fb5a72bde9bf5389d37c
-ms.sourcegitcommit: 8606f36963e8daa6448d637393d1e4ef2c9859a0
+ms.openlocfilehash: a85824cfcd1eb4176c7675a6e38327eccb390ca0
+ms.sourcegitcommit: 29d7366a0902488f4f4d39c2cb0e89368d5186ea
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 02/01/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="azure-cli-20-configuration"></a>Azure CLI 2.0-konfiguration
 
@@ -29,7 +29,7 @@ Konfigurationsvärden som används av CLI utvärderas med följande prioritet, d
 
 ## <a name="cli-configuration-with-az-configure"></a>CLI-konfiguration med az configure
 
-Du anger standardvärden för CLI med kommandot [az configure](/cli/azure/?view=azure-cli-latest#az_configure).
+Du anger standardvärden för CLI med kommandot [az configure](/cli/azure/reference-index#az_configure).
 Det här kommandot tar ett argument, `--defaults`, vilket är en blankstegsavgränsad lista över `key=value`-par. De angivna värdena används av CLI istället för obligatoriska argument.
 
 Följande är en lista över tillgängliga nycklar som du kan använda.
@@ -52,7 +52,7 @@ az configure --defaults "location=westus2 group=MyResourceGroup"
 
 ## <a name="cli-configuration-file"></a>CLI-konfigurationsfil
 
-CLI-konfigurationsfilen innehåller övriga inställningar som används för att hantera CLI-beteende. Själva konfigurationsfilen finns på `$AZURE_CONFIG_DIR/config`. Standardvärdet för `AZURE_CONFIG_DIR` är `$HOME/.azure/config` på Linux and macOS, och `%USERPROFILE%\.azure\config` för Windows.
+CLI-konfigurationsfilen innehåller övriga inställningar som används för att hantera CLI-beteende. Själva konfigurationsfilen finns på `$AZURE_CONFIG_DIR/config`. Standardvärdet för `AZURE_CONFIG_DIR` är `$HOME/.azure` på Linux and macOS, och `%USERPROFILE%\.azure` för Windows.
 
 Konfigurationsfiler skrivs i INI-format. De här filerna består av avsnitt som börjar med en `[section-name]`-rubrik följd av en lista över `key=value`-poster. Avsnittsnamn är skiftlägeskänsliga, men nyckelnamnen är inte det.
 Kommentarer är alla rader som börjar med `#` eller `;`. Infogade kommentarer tillåts inte. Booleska värden är skiftlägeskänsliga och representeras av följande värden.
