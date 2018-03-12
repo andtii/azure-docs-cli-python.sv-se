@@ -10,11 +10,11 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: azurecli
 ms.service: multiple
-ms.openlocfilehash: a140f8f54ad72f7f3b5e2d63e2300d0aa2c061ac
-ms.sourcegitcommit: b93a19222e116d5880bbe64c03507c64e190331e
+ms.openlocfilehash: 92c96b7e969de686689ef02bf068392b9f565698
+ms.sourcegitcommit: 29d7366a0902488f4f4d39c2cb0e89368d5186ea
 ms.translationtype: HT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 02/15/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="log-in-with-azure-cli-20"></a>Logga in med Azure CLI 2.0
 
@@ -42,6 +42,14 @@ Ange dina autentiseringsuppgifter på kommandoraden.
 az login -u <username> -p <password>
 ```
 
+## <a name="log-in-with-a-specific-tenant"></a>Logga in med en specifik klient
+
+Om du arbetar med flera olika klienter kan du välja vilken klient som ska användas för inloggning med argumentet `--tenant`. Argumentets värde kan antingen vara en `.onmicrosoft.com`-domän eller objekt-ID:t för Azure för klienten. Du kan logga in interaktivt eller ange dina autentiseringsuppgifter med argumenten `--user` och `--password`. 
+
+```
+az login --tenant <tenant>
+```
+
 ## <a name="logging-in-with-a-service-principal"></a>Logga in med ett huvudnamn för tjänsten
 
 Tjänstens huvudnamn är konton som är inte kopplade till en viss användare och som kan ha behörigheter som tilldelats via fördefinierade roller. Det bästa sättet att skriva säkra skript eller program är att autentisera med ett huvudnamn för tjänsten eftersom du då kan använda både behörighetsbegränsningar och lokalt lagrade statiska autentiseringsuppgifter. Läs mer om tjänstens huvudnamn i informationen om att [skapa ett huvudnamn för tjänsten i Azure med Azure CLI](create-an-azure-service-principal-azure-cli.md).
@@ -52,10 +60,9 @@ Om du vill logga in med tjänstens huvudnamn anger du användarnamn, lösenord e
 az login --service-principal -u <user> -p <password-or-cert> --tenant <tenant>
 ```
 
-Klientvärdet är den Azure Active Directory-klient som är associerad med tjänstens huvudnamn. Det kan antingen vara en .onmicrosoft.com-domän eller klientens objekt-ID i Azure.
+Klientvärdet är den Azure Active Directory-klient som är associerad med tjänstens huvudnamn. Detta kan antingen vara en `.onmicrosoft.com`-domän eller objekt-ID:t för Azure för klienten.
 Du kan skaffa klientens objekt-ID för din aktuella inloggning med följande kommando:
 
 ```azurecli
 az account show --query 'tenantId' -o tsv
 ```
-
